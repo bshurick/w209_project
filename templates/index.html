@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="row">
+<div class="col-xs-12 col-md-offset-2 col-md-8">
+
+{% include "index_headline.html" %}
+{% include "index_headline_subtext.html" %}
+
+</div> <!-- col -->
+</div> <!-- row -->
+
+
+<div class="row">
+<div class="col-xs-12 col-md-offset-2 col-md-8">
+
+<h1 id=nav class=page-header>Contribute</h1>
+
+{% include "index_video.html" %}
+
+</div> <!-- col -->
+</div> <!-- row -->
+
+<div class="row">
+<div class="col-xs-12 col-md-offset-2 col-md-8">
+<h1 id=nav class=page-header>Responses</h1>
+
+{% include "index_mapcharts.html" %}
+
+</div> <!-- col -->
+</div> <!-- row -->
+
+<div class="row">
+<div class="col-xs-12 col-md-offset-2 col-md-8">
+
+<h1 id=nav class=page-header>Analysis</h1>
+
+{% include "index_analysis.html" %}
+
+</div> <!-- col -->
+</div> <!-- row -->
+
+{% endblock %}

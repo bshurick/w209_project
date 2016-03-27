@@ -1,0 +1,85 @@
+
+function zeroifnull(x) {
+	if (typeof x == 'undefined') {
+		return 0	
+	} else {
+		return x
+	}
+}
+
+var resultmap_q1 = new Datamap({
+  scope: 'usa',
+  element: document.getElementById('resultmap_q1'),
+  geographyConfig: {
+    highlightBorderColor: '#bada55',
+	popupTemplate: function(geography, data) {
+      	return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong>' +
+          '<br />Strongly Agree: ' + zeroifnull(data.stronglyAgree) + 
+          '<br />Agree: ' + zeroifnull(data.agree) + 
+          '<br />Somewhat agree: ' + zeroifnull(data.somewhatAgree) +
+          '<br />Neither agree nor disagree: ' + zeroifnull(data.neitherAgreeNorDisagree) +
+          '<br />Somewhat disagree: ' + zeroifnull(data.somewhatDisagree) +
+          '<br />Disagree: ' + zeroifnull(data.disagree) +
+          '<br />Strongly disagree: ' + zeroifnull(data.stronglyDisagree) +
+          '<br />Refused: ' + zeroifnull(data.refused) + ' </div>'
+    },
+    highlightBorderWidth: 3
+  },
+
+  fills: {
+    {{ fillkey|safe }}
+},data:{{ map1data|safe }} 
+});
+resultmap_q1.labels();
+
+
+var resultmap_q2 = new Datamap({
+  scope: 'usa',
+  element: document.getElementById('resultmap_q2'),
+  geographyConfig: {
+    highlightBorderColor: '#bada55',
+    popupTemplate: function(geography, data) {
+	return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong>' +
+          '<br />Strongly Agree: ' + zeroifnull(data.stronglyAgree) +
+          '<br />Agree: ' + zeroifnull(data.agree) +
+          '<br />Somewhat agree: ' + zeroifnull(data.somewhatAgree) +
+          '<br />Neither agree nor disagree: ' + zeroifnull(data.neitherAgreeNorDisagree) +
+          '<br />Somewhat disagree: ' + zeroifnull(data.somewhatDisagree) +
+          '<br />Disagree: ' + zeroifnull(data.disagree) +
+          '<br />Strongly disagree: ' + zeroifnull(data.stronglyDisagree) +
+          '<br />Refused: ' + zeroifnull(data.refused) + ' </div>'
+          },
+    highlightBorderWidth: 3
+  },
+  fills: {
+	{{ fillkey|safe }}
+    },data: {{ map2data|safe }}
+});
+resultmap_q2.labels();
+
+
+var resultmap_q3 = new Datamap({
+  scope: 'usa',
+  element: document.getElementById('resultmap_q3'),
+  geographyConfig: {
+    highlightBorderColor: '#bada55',
+    popupTemplate: function(geography, data) {
+	return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong>' +
+          '<br />Strongly Agree: ' + zeroifnull(data.stronglyAgree) +
+          '<br />Agree: ' + zeroifnull(data.agree) +
+          '<br />Somewhat agree: ' + zeroifnull(data.somewhatAgree) +
+          '<br />Neither agree nor disagree: ' + zeroifnull(data.neitherAgreeNorDisagree) +
+          '<br />Somewhat disagree: ' + zeroifnull(data.somewhatDisagree) +
+          '<br />Disagree: ' + zeroifnull(data.disagree) +
+          '<br />Strongly disagree: ' + zeroifnull(data.stronglyDisagree) +
+          '<br />Refused: ' + zeroifnull(data.refused) + ' </div>'
+          },
+    highlightBorderWidth: 3
+  },
+
+   fills: {
+	{{ fillkey|safe }}
+    }, data:{{ map3data|safe }}
+});
+resultmap_q3.labels();
+

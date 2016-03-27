@@ -1,0 +1,36 @@
+
+<p class="lead">
+Participate in our research. 
+</p>
+<p>
+To participate in our morality research, watch 
+the below video and answer our survey questions. 
+</p>
+
+<p>Watch the video below, and then click 'Go to survey'
+to fill out a short 5-minute questionnaire about morality.
+Your responses will automatically be added to the visualizations
+on this page.</p>
+<p>We appreciate your participation!</p>
+
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="{{ video }}" allowfullscreen></iframe>
+</div>
+
+{% if watched_video %}
+
+<br/>
+<div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Thanks!</strong> Your response was recorded.
+</div>
+
+{% else %}
+
+<br/>
+<a href="{% url 'surveys:survey' %}" class='btn btn-primary'>Go to survey</a>
+
+{% endif %}
+
