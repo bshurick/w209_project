@@ -16,3 +16,14 @@ python manage.py makemigrations surveys
 python manage.py migrate
 
 sudo apt-get install nginx
+
+sudo mkdir /var/www
+sudo mkdir /var/www/morality
+sudo ln -st /var/www/morality /home/ubuntu/w209_project/*
+
+sudo chown -R www-data:www-data /var/www/morality
+
+gunicorn -D -w4 -blocalhost:8000 morality.wsgi
+sudo ln -s /home/ubuntu/w209_project/deploy/nginx.conf /etc/nginx/sites-enabled/morality.conf
+service nginx restart
+
