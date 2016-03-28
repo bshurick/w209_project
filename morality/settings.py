@@ -24,8 +24,10 @@ SECRET_KEY = 'i3rgp1l5u7t^nauj@rn9nphf5w@c(_rl69tk0pzkxqi^$c2f6v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if not DEBUG:
+    BASE_DIR = '/var/www/morality'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-54-213-150-174.us-west-2.compute.amazonaws.com']
 
 # Application definition
 
@@ -122,7 +124,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
