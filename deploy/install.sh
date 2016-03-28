@@ -9,6 +9,8 @@ sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython
 sudo pip install django gunicorn
 
 sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install libpq-dev
+sudo pip install psycopg2
 sudo -u postgres createdb morality
 sudo -u postgres createuser -P morality
 
