@@ -8,6 +8,10 @@ sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython
 
 sudo pip install django gunicorn
 
+sudo apt-get install postgresql postgresql-contrib
+sudo -u postgres createdb morality
+sudo -u postgres createuser -P morality
+
 sudo apt-get install git
 
 git clone https://github.com/bshurick/w209_project.git
