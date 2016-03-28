@@ -25,7 +25,7 @@ sudo apt-get install nginx
 
 sudo mkdir /var/www
 sudo mkdir /var/www/morality
-sudo ln -st /var/www/morality /home/ubuntu/w209_project/*
+sudo ln -s /home/ubuntu/w209_project /var/www/morality
 
 sudo chown -R www-data:www-data /var/www/morality
 
