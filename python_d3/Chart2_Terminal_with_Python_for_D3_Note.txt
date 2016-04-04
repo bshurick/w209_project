@@ -1,0 +1,13 @@
+http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_terminal_with_python
+To run a Python web server:
+Open up a new terminal window.
+Via the command line, navigate into the directory that you want served. For example, if your project folder is in your Desktop folder on your Mac, you could type: cd ~/Desktop/project-folder.
+Enter python -m SimpleHTTPServer 8888 &.
+(This will work with Python version 2.x, but in Python versions 3.0 and newer, SimpleHTTPServer has been removed. For Python 3.x, just replace SimpleHTTPServer with http.server in the command.)
+
+This will activate the server on port 8888. Switch back to your web browser and visit the following URL: http://localhost:8888/. 
+
+# example commands in terminal (to run sortable bar chart):
+
+cd downloads/w209_project/python_d3
+python -m SimpleHTTPServer 8888 &.
