@@ -23,11 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'i3rgp1l5u7t^nauj@rn9nphf5w@c(_rl69tk0pzkxqi^$c2f6v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 if not DEBUG:
     BASE_DIR = '/var/www/morality'
 
-ALLOWED_HOSTS = ['ec2-54-213-150-174.us-west-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-54-201-246-214.us-west-2.compute.amazonaws.com']
+ADMINS = [('Brandon', 'bshur2008@gmail.com')]
 
 # Application definition
 
