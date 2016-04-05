@@ -26,3 +26,4 @@ class Survey(models.Model):
 	parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams = models.CharField(max_length=2, choices=Q1, db_column='empower_children')
 	moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person = models.CharField(max_length=2, choices=Q3, db_column='individualistic_morals')
 	video_choice = models.CharField(max_length=10, blank=True, null=True)
+	weight = models.IntegerField(default=1, blank=True, null=True)
