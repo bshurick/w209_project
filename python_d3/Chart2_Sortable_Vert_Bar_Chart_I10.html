@@ -2,12 +2,6 @@
 <meta charset="utf-8">
 <style>
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: relative;
-  width: 960px;
-}
-
 .axis text {
   font: 10px sans-serif;
 }
@@ -19,36 +13,53 @@ body {
   shape-rendering: crispEdges;
 }
 
-.bar {
-  fill: green;
-  fill-opacity: .9;
-}
-
 .x.axis path {
   display: none;
 }
 
-label {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.bar_chart2 {
+  fill: green;
+  fill-opacity: .9;
 }
 
 </style>
-<label><input type="checkbox"> Sort values</label>
-
-<body>
 
 <p>Percent who consider themselves Spiritual or Very Spiritual.</p> 
 
-</body>
+<input type="checkbox"> Sort values</input>
+<div class="chart2"></div>
 
-<script src="d3.js"></script>
 <script>
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+  function change() {
+    clearTimeout(sortTimeout);
+
+    // Copy-on-write since tweens are evaluated after a delay.
+    var x0 = x.domain(data.sort(this.checked
+        ? function(a, b) { return b.Weighted_Pct - a.Weighted_Pct; }
+        : function(a, b) { return d3.ascending(a.Category, b.Category); })
+        .map(function(d) { return d.Category; }))
+        .copy();
+
+    svg.selectAll(".bar_chart2")
+        .sort(function(a, b) { return x0(a.Category) - x0(b.Category); });
+
+    var transition = svg.transition().duration(750),
+        delay = function(d, i) { return i * 50; };
+
+    transition.selectAll(".bar_chart2")
+        .delay(delay)
+        .attr("x", function(d) { return x0(d.Category); });
+
+    transition.select(".x.axis")
+        .call(xAxis)
+      .selectAll("g")
+        .delay(delay);
+  }
+
+var margin = {top: 20, right: 20, bottom: 20, left: 30},
+    width = 800- margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
 
 var formatPercent = d3.format(".0%");
 
@@ -67,13 +78,22 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .tickFormat(formatPercent);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".chart2").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("PPREG4_PPGENDER_I10_concat.csv", function(error, data) {
+  data = [
+	{'Category':'Midwest: Female','Weighted_Pct':'0.611653375'},
+	{'Category':'Midwest: Male','Weighted_Pct':'0.454777884'},
+	{'Category':'Northeast: Female','Weighted_Pct':'0.453469822'},
+	{'Category':'Northeast: Male','Weighted_Pct':'0.367262941'},
+	{'Category':'South: Female','Weighted_Pct':'0.622016388'},
+	{'Category':'South: Male','Weighted_Pct':'0.428303965'},
+	{'Category':'West: Female','Weighted_Pct':'0.463243092'},
+	{'Category':'West: Male','Weighted_Pct':'0.373072187'},
+  ]
 
   data.forEach(function(d) {
     d.Weighted_Pct = +d.Weighted_Pct;
@@ -97,10 +117,10 @@ d3.csv("PPREG4_PPGENDER_I10_concat.csv", function(error, data) {
       .style("text-anchor", "end")
       .text("Weighted_Pct");
 
-  svg.selectAll(".bar")
+  svg.selectAll(".bar_chart2")
       .data(data)
     .enter().append("rect")
-      .attr("class", "bar")
+      .attr("class", "bar_chart2")
       .attr("x", function(d) { return x(d.Category); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.Weighted_Pct); })
@@ -111,32 +131,5 @@ d3.csv("PPREG4_PPGENDER_I10_concat.csv", function(error, data) {
   var sortTimeout = setTimeout(function() {
     d3.select("input").property("checked", true).each(change);
   }, 2000);
-
-  function change() {
-    clearTimeout(sortTimeout);
-
-    // Copy-on-write since tweens are evaluated after a delay.
-    var x0 = x.domain(data.sort(this.checked
-        ? function(a, b) { return b.Weighted_Pct - a.Weighted_Pct; }
-        : function(a, b) { return d3.ascending(a.Category, b.Category); })
-        .map(function(d) { return d.Category; }))
-        .copy();
-
-    svg.selectAll(".bar")
-        .sort(function(a, b) { return x0(a.Category) - x0(b.Category); });
-
-    var transition = svg.transition().duration(750),
-        delay = function(d, i) { return i * 50; };
-
-    transition.selectAll(".bar")
-        .delay(delay)
-        .attr("x", function(d) { return x0(d.Category); });
-
-    transition.select(".x.axis")
-        .call(xAxis)
-      .selectAll("g")
-        .delay(delay);
-  }
-});
 
 </script>
