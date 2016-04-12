@@ -29,7 +29,7 @@ var make_chart = function(scores, location) {
 		.classed('img-fluid',true);
 
 	var projection = d3.geo.albersUsa()
-			.scale(300);
+				.scale(300);
 	var path = d3.geo.path(projection);
 	
 	var graticule = d3.geo.graticule()
