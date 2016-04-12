@@ -9,7 +9,7 @@ function zeroifnull(x) {
 }
 
 function make_table(prop) {
-	var string = '<h3><strong>' + prop.NAME + ': </strong></h3>';
+	var string = '<h3>' + prop.NAME + '</h3>';
 	string += '<p><strong>Strongly Agree: </strong>' + prop.stronglyAgree + '</p>';
 	string += '<p><strong>Agree: </strong>' + prop.agree + '</p>';
 	string += '<p><strong>Somewhat Agree: </strong>' + prop.somewhatAgree + '</p>';
@@ -21,15 +21,24 @@ function make_table(prop) {
 }
 
 var make_chart = function(scores, location) {
-	var projection = d3.geo.albersUsa();
-	var path = d3.geo.path(projection);
-
+	var h = 500, w = 700;
 	var svg = d3.select(location)
-			.append("svg")
-			.attr('height','100%')
-			.attr('width','100%')
-			.classed('img-fluid',true);
+		.append("svg")
+		.attr('height','100%')
+		.attr('width','100%')
+		.classed('img-fluid',true);
 
+	var projection = d3.geo.albersUsa().scale(300);
+	var path = d3.geo.path(projection);
+	
+	var graticule = d3.geo.graticule()
+	    .step([5, 5]);
+      	svg.append('rect')
+		.datum(graticule)
+		.attr("class", "background")
+		.classed('img-fluid',true);
+	var g = svg.append('g');
+		 
 	var color = d3.scale.quantize()
 			    .range(["rgb(237,248,233)", "rgb(186,228,179)",
 			     "rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"]);
@@ -75,15 +84,27 @@ var make_chart = function(scores, location) {
 		    }
 		}
 	    }
-	
-	   svg.selectAll("path")
+
+	   var fillfunc = function(d) {
+                        //Get data value
+                        var value = d.properties.score;
+                        if (value) {
+                                //If value exists…
+                                return color(value);
+                        } else {
+                                //If value is undefined…
+                                return "#ccc";
+                        }			
+	   }
+	   g.append('g')
+		.selectAll("path")
 		   .data(json.features)
 		   .enter()
 		   .append("path")
 		   .attr("d", path)
 		   .on('mouseover', function(d){
 			d3.select(this)
-			  .attr('fill','orange');
+			  .attr('fill','orange'); 
 			var prop = d.properties;
 			string = make_table(prop);						
 		       d3.select(location+'_textbox')
@@ -91,17 +112,12 @@ var make_chart = function(scores, location) {
 			.append("text")
 			.html(string);
 		})
-		.style("fill", function(d) {
-			//Get data value
-			var value = d.properties.score;
-			if (value) {
-				//If value exists…
-				return color(value);
-			} else {
-				//If value is undefined…
-				return "#ccc";
-			}
-		  });
+		.on('mouseout', function(d){
+			d3.select(this)
+			  .attr('fill', fillfunc);
+		})
+		.attr("opacity", 0.9)
+		.attr("fill", fillfunc);
 
 	}); // end json
 }
