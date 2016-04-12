@@ -126,9 +126,9 @@ def do_calculation(matches):
 		if v[1]>0:
 		    if v[1] not in scores:
 		        scores[g[0]][v[1]] = 0
-	            scores[g[0]][v[1]] += 1
+	            scores[g[0]][v[1]] += 1.0*v[2]
 	for state in scores:
-	    output[state] = round(sum(x*y for x,y in scores[state].iteritems())*1.0/sum(scores[state].values()),4)
+	    output[state] = round(sum(x*y for x,y in scores[state].iteritems())*1.0/len(scores[state].values()),4)
 	return [
 		{
 		 'state':str(STATES[s])
@@ -196,17 +196,20 @@ def get_geodata_scores(question):
 	if question == '1':
 		matches = sorted([
 			   (str(m.state)
-			    , int(float(m.i_develop_strong_emotions_toward_people_i_can_rely_on)))
+			    , int(float(m.i_develop_strong_emotions_toward_people_i_can_rely_on))
+			    , float(m.weight) )
 			   for m in Survey.objects.all() ])
 	elif question == '2':
 		matches = sorted([
                            (str(m.state)
-                            , int(float(m.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams)))
+                            , int(float(m.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams))
+			    , float(m.weight) )
                            for m in Survey.objects.all() ])
 	elif question == '3':
 		matches = sorted([
                            (str(m.state)
-                            , REVERSE[int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person))])
+                            , REVERSE[int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person))]
+			    , float(m.weight) )
                            for m in Survey.objects.all() ])
 	else:
 		raise Exception('Question needs to be 1-3')
