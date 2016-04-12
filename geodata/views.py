@@ -129,7 +129,14 @@ def do_calculation(matches):
 	            scores[g[0]][v[1]] += 1
 	for state in scores:
 	    output[state] = round(sum(x*y for x,y in scores[state].iteritems())*1.0/sum(scores[state].values()),4)
-	return [{'state':str(STATES[s]),'score':v} for s,v in output.iteritems()]
+	return [
+		{
+		 'state':str(STATES[s])
+		 ,'abbr':str(s)
+		 ,'score':v
+		} 
+		for s,v in output.iteritems()
+	]
 
 def add_fillkey(output):
 	''' add a fillkey attribute for top response '''
@@ -180,7 +187,7 @@ def get_geodata(question):
         else:
                 raise Exception('Question needs to be 1-3')
         output = do_grouping(matches)
-        output = add_fillkey(output)
+        # output = add_fillkey(output)
 	return output
 
 def get_geodata_scores(question):
@@ -204,6 +211,10 @@ def get_geodata_scores(question):
 	else:
 		raise Exception('Question needs to be 1-3')
 	output = do_calculation(matches)
+	groupings = get_geodata(question)
+	for i, s in enumerate(output):
+		d = groupings[s['abbr']]
+		output[i].update(d)
 	return output
 
 def get_fillkey():
