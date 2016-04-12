@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.template import loader
 
 import random, requests
-from geodata.views import get_geodata, get_fillkey
+from geodata.views import get_geodata_scores
 
 def index(request):
 	videos = {
@@ -25,10 +25,9 @@ def index(request):
 	c = {
 		'video':video
 		,'watched_video':watched_video
-		,'fillkey':get_fillkey()
-		,'map1data':get_geodata(1)
-		,'map2data':get_geodata(2)
-		,'map3data':get_geodata(3)
+		,'q1_scores':get_geodata_scores(1)
+		,'q2_scores':get_geodata_scores(2)
+		,'q3_scores':get_geodata_scores(3)
 	}
 	return HttpResponse(tmp.render(c,request))
 

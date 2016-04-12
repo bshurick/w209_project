@@ -3,6 +3,66 @@ from django.http import HttpResponse
 from surveys.models import Survey
 from itertools import groupby 
 
+STATES = {u'AK': u'Alaska',
+ u'AL': u'Alabama',
+ u'AR': u'Arkansas',
+ u'AS': u'American Samoa',
+ u'AZ': u'Arizona',
+ u'CA': u'California',
+ u'CO': u'Colorado',
+ u'CT': u'Connecticut',
+ u'DC': u'District of Columbia',
+ u'DE': u'Delaware',
+ u'DK': u'Dakota',
+ u'FL': u'Florida',
+ u'GA': u'Georgia',
+ u'GU': u'Guam',
+ u'HI': u'Hawaii',
+ u'IA': u'Iowa',
+ u'ID': u'Idaho',
+ u'IL': u'Illinois',
+ u'IN': u'Indiana',
+ u'KS': u'Kansas',
+ u'KY': u'Kentucky',
+ u'LA': u'Louisiana',
+ u'MA': u'Massachusetts',
+ u'MD': u'Maryland',
+ u'ME': u'Maine',
+ u'MI': u'Michigan',
+ u'MN': u'Minnesota',
+ u'MO': u'Missouri',
+ u'MP': u'Northern Mariana Islands',
+ u'MS': u'Mississippi',
+ u'MT': u'Montana',
+ u'NC': u'North Carolina',
+ u'ND': u'North Dakota',
+ u'NE': u'Nebraska',
+ u'NH': u'New Hampshire',
+ u'NJ': u'New Jersey',
+ u'NM': u'New Mexico',
+ u'NV': u'Nevada',
+ u'NY': u'New York',
+ u'OH': u'Ohio',
+ u'OK': u'Oklahoma',
+ u'OL': u'Orleans',
+ u'OR': u'Oregon',
+ u'PA': u'Pennsylvania',
+ u'PI': u'Philippine Islands',
+ u'PR': u'Puerto Rico',
+ u'RI': u'Rhode Island',
+ u'SC': u'South Carolina',
+ u'SD': u'South Dakota',
+ u'TN': u'Tennessee',
+ u'TX': u'Texas',
+ u'UT': u'Utah',
+ u'VA': u'Virginia',
+ u'VI': u'Virgin Islands',
+ u'VT': u'Vermont',
+ u'WA': u'Washington',
+ u'WI': u'Wisconsin',
+ u'WV': u'West Virginia',
+ u'WY': u'Wyoming'}
+
 DPES11_DICT = {-1:'Refused'
                 ,1: 'Strongly disagree'
                 ,2: 'Disagree'
@@ -44,6 +104,22 @@ def do_grouping(matches):
 		    output[g[0]][v[1]] = 0 
 		output[g[0]][v[1]] += 1
 	return output
+
+def do_calculation(matches):
+	''' sum together responses and take average '''
+	scores = {}; output = {}
+	groups = [ (k[0],list(g)) for k, g in groupby(matches) ]
+	for g in groups:
+	    if g[0] not in scores:
+		scores[g[0]] = {}
+	    for v in g[1]:
+		if v[1]>0:
+		    if v[1] not in scores:
+		        scores[g[0]][v[1]] = 0
+	            scores[g[0]][v[1]] += 1
+	for state in scores:
+	    output[state] = round(sum(x*y for x,y in scores[state].iteritems())*1.0/sum(scores[state].values()),4)
+	return [{'state':str(STATES[s]),'score':v} for s,v in output.iteritems()]
 
 def add_fillkey(output):
 	''' add a fillkey attribute for top response '''
@@ -95,6 +171,29 @@ def get_geodata(question):
                 raise Exception('Question needs to be 1-3')
         output = do_grouping(matches)
         output = add_fillkey(output)
+	return output
+
+def get_geodata_scores(question):
+	output = {}
+	question = str(question)
+	if question == '1':
+		matches = sorted([
+			   (str(m.state)
+			    , int(float(m.i_develop_strong_emotions_toward_people_i_can_rely_on)))
+			   for m in Survey.objects.all() ])
+	elif question == '2':
+		matches = sorted([
+                           (str(m.state)
+                            , int(float(m.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams)))
+                           for m in Survey.objects.all() ])
+	elif question == '3':
+		matches = sorted([
+                           (str(m.state)
+                            , int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person)))
+                           for m in Survey.objects.all() ])
+	else:
+		raise Exception('Question needs to be 1-3')
+	output = do_calculation(matches)
 	return output
 
 def get_fillkey():

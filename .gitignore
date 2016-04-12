@@ -1,3 +1,5 @@
 db*
 *.pyc
 surveys/migrations
+*.swp
+*.DS_Store

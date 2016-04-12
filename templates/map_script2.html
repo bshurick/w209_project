@@ -1,0 +1,61 @@
+{% load staticfiles %}
+
+var make_chart = function(scores, location) {
+	var projection = d3.geo.albersUsa();
+	var path = d3.geo.path(projection);
+
+	var svg = d3.select(location)
+			.append("svg")
+			.attr('height','100%')
+			.attr('width','100%')
+			.classed('img-fluid',true);
+
+	var color = d3.scale.quantize()
+			    .range(["rgb(237,248,233)", "rgb(186,228,179)",
+			     "rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"]);
+
+	color.domain([
+			d3.min(scores, function(d) { return d.score; }),
+			d3.max(scores, function(d) { return d.score; })
+		]);
+
+	d3.json("{% static 'us-states.json' %}", function(json) {
+	    for (var i=0; i < scores.length; i++) {
+		var dataState = scores[i].state;
+		var dataValue = parseFloat(q1_scores[i].score);
+		for (var j=0; j < json.features.length; j++) {
+		    var jsonState = json.features[j].properties.NAME;
+		    if (dataState == jsonState) {
+			json.features[j].properties.value = dataValue;
+			break;	
+		    }
+		}
+	    }
+
+	   svg.selectAll("path")
+		   .data(json.features)
+		   .enter()
+		   .append("path")
+		   .attr("d", path)
+		   .style("fill", function(d) {
+			//Get data value
+			var value = d.properties.value;
+			if (value) {
+				//If value exists…
+				return color(value);
+			} else {
+				//If value is undefined…
+				return "#ccc";
+			}
+		  });
+
+	});
+}
+
+q1_scores = {{ q1_scores|safe }};
+q2_scores = {{ q2_scores|safe }};
+q3_scores = {{ q3_scores|safe }};
+make_chart(q1_scores, '#resultmap_q1');
+make_chart(q2_scores, '#resultmap_q2');
+make_chart(q3_scores, '#resultmap_q3');
+
