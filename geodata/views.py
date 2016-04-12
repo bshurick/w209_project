@@ -80,6 +80,16 @@ EPQ1_DICT = {-1:'Refused'
                 ,5: 'Somewhat disagree'
                 ,6: 'Disagree'
                 ,7: 'Strongly disagree'}
+REVERSE = {
+	-1:-1
+	, 7:1
+	, 6:2
+ 	, 5:3
+	, 4:4
+	, 3:5
+	, 2:6
+	, 1:7
+}
 
 KEY = {
     'Strongly agree':'stronglyAgree'
@@ -189,7 +199,7 @@ def get_geodata_scores(question):
 	elif question == '3':
 		matches = sorted([
                            (str(m.state)
-                            , int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person)))
+                            , REVERSE[int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person))])
                            for m in Survey.objects.all() ])
 	else:
 		raise Exception('Question needs to be 1-3')
