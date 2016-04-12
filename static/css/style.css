@@ -32,7 +32,7 @@
 }
 
 .bar:hover {
-  fill: red;
+  fill: orange;
 }
 
 .axis path,
@@ -40,6 +40,11 @@
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+
+.axis text {
+  font: 10px sans-serif;
+  fill: black;
 }
 
 .background {
@@ -52,5 +57,18 @@
   stroke: #777;
   stroke-width: .5;
   stroke-opacity: .7;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.bar_chart2 {
+  fill: green;
+  fill-opacity: .9;
+}
+
+.x.axis path {
+  display: none;
 }
 

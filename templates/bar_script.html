@@ -30,12 +30,12 @@ var barchart = function(data, target) {
 	var formatPercent = d3.format(".0%");
 
 	// eventually read data automatically via .csv function
-	var chartWidth       = 300,
+	var chartWidth       = 275,
 	    barHeight        = 20,
 	    groupHeight      = barHeight * data.series.length,
 	    gapBetweenGroups = 10,
-	    spaceForLabels   = 150,
-	    spaceForLegend   = 150;
+	    spaceForLabels   = 100,
+	    spaceForLegend   = 100;
 
 	// Zip the series data together (first values, second values, etc.)
 	var zippedData = [];
