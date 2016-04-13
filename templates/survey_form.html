@@ -59,6 +59,12 @@ Please fill out our survey to add your perspective.
 		{{ form.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities.errors }}
 	</div>
 
+	<div class="form-group">
+		<label for="{{ form.spiritually_i_consider_myself.id_for_label }}">Spiritually I consider myself: </label>
+		{{ form.spiritually_i_consider_myself}}
+		{{ form.spiritually_i_consider_myself.errors }}
+	</div>
+
     <input class="btn btn-primary" type="submit" value="Submit" />
     <a href="{% url 'main:index' %}" class='btn btn-default'>Back</a>
 </form>
