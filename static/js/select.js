@@ -1,5 +1,10 @@
 
 $(document).ready(function() {
+	$('#q1').show();
+        $('#q2').hide();
+        $('#q3').hide();
+        $('#q4').hide();
+        $('#q5').hide();
 	$('#q1_select').click(function() {
 		$('#q1').show();	
 		$('#q2').hide();	
