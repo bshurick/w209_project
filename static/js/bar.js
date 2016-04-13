@@ -1,31 +1,3 @@
-var q4_data = {
-  labels: [
-    'Midwest', 'Northeast', 'South', 'West'],
-  series: [
-    {
-      label: 'Female',
-      values: [0.78676601, 0.64049559, 0.729892427, 0.724759136]
-    },
-    {
-      label: 'Male',
-      values: [0.728253968, 0.640359168, 0.656529647, 0.641322314]
-    },]
-};
-
-var q1_data = {
-  labels: [
-    'Midwest', 'Northeast', 'South', 'West'],
-  series: [
-    {
-      label: 'Female',
-      values: [0.583526889, 0.552757713, 0.573984083, 0.556000478]
-    },
-    {
-      label: 'Male',
-      values: [0.390161639, 0.410238095, 0.433704491, 0.408441558]
-    },]
-};
-
 var barchart = function(data, target) {
 	var formatPercent = d3.format(".0%");
 
@@ -135,4 +107,3 @@ var barchart = function(data, target) {
 	    .attr('y', legendRectSize - legendSpacing)
 	    .text(function (d) { return d.label; });
 }
-barchart(q1_data, '#barchart_q1');

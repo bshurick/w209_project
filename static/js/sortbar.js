@@ -1,17 +1,6 @@
 
 // eventually read data automatically via .csv function
 
-q5_sortbar_data = [
-        {'Category':'Midwest: Female','Weighted_Pct':'0.611653375'},
-        {'Category':'Midwest: Male','Weighted_Pct':'0.454777884'},
-        {'Category':'Northeast: Female','Weighted_Pct':'0.453469822'},
-        {'Category':'Northeast: Male','Weighted_Pct':'0.367262941'},
-        {'Category':'South: Female','Weighted_Pct':'0.622016388'},
-        {'Category':'South: Male','Weighted_Pct':'0.428303965'},
-        {'Category':'West: Female','Weighted_Pct':'0.463243092'},
-        {'Category':'West: Male','Weighted_Pct':'0.373072187'},
-  ]
-
 var sortbar = function(data, location) {
 
   function change() {
@@ -105,4 +94,3 @@ var svg = d3.select(location).append("svg")
   }, 2000);
 
 }
-sortbar(q5_sortbar_data, '#sortbar_q1');
