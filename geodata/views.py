@@ -1,8 +1,11 @@
 import json 
 from django.http import HttpResponse
+from django.db import connection
 from surveys.models import Survey
+
 from itertools import groupby 
 import re
+import pandas as pd
 
 REGIONS = {'AK': 'West',
  'AL': 'South',
@@ -336,6 +339,24 @@ def get_fillkey():
 	  defaultFill: '{def}'
 	'''.format(**colors)
 	return FILLKEY
+
+def get_spirituality_by_region():
+	sql = '''
+		select 
+		region
+		,gender
+		,sum(weight*case when cast(spirituality as integer) in (1,2) 
+			then 1 else 0 end)
+		/sum(weight) result 
+		from surveys_survey 
+		group by 1,2;
+	'''
+	results = pd.read_sql(sql, connection)
+	results['concat'] = results['region']+': '+results['gender']
+	#  {'Category':'West: Male','Weighted_Pct':'0.373072187'},
+	output = [ {'Category':str(s),'Weighted_Pct':str(r)}
+		    for s,r in zip(results['concat'],results['result']) ]
+	return output
 
 def geodata(request):
 	question = request.GET.get('question')

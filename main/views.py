@@ -3,7 +3,9 @@ from django.shortcuts import render
 from django.template import loader
 
 import random, requests
-from geodata.views import get_geodata_scores
+from geodata.views import \
+	  get_geodata_scores \
+	, get_spirituality_by_region
 
 def index(request):
 	videos = {
@@ -28,6 +30,7 @@ def index(request):
 		,'q1_scores':get_geodata_scores(1)
 		,'q2_scores':get_geodata_scores(2)
 		,'q3_scores':get_geodata_scores(3)
+		,'q5_sortbar':get_spirituality_by_region()
 	}
 	return HttpResponse(tmp.render(c,request))
 
