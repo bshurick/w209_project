@@ -29,34 +29,42 @@ Please fill out our survey to add your perspective.
 		{{ form.state.errors }}
 	</div>
 	
-	{{ form.non_field_errors }}
 	<div class="form-group">
 		<label for="{{ form.gender.id_for_label }}">Gender: </label>
 		{{ form.gender }}
 		{{ form.gender.errors }}
 	</div>
   	
-	{{ form.non_field_errors }}
 	<div class="form-group">
 		<label for="{{ form.i_develop_strong_emotions_toward_people_i_can_rely_on.id_for_label }}">I develop strong emotions toward people I can rely on: </label>
 		{{ form.i_develop_strong_emotions_toward_people_i_can_rely_on }}
 		{{ form.i_develop_strong_emotions_toward_people_i_can_rely_on.errors }}
 	</div>
 	 
-	{{ form.non_field_errors }}
 	<div class="form-group">
 		<label for="{{ form.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams.id_for_label }}">Parents should empower children as much as possible so that they may follow their dreams: </label>
 		{{ form.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams }}
 		{{ form.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams.errors }}
 	</div>
 	
-	{{ form.non_field_errors }}
 	<div class="form-group">
 		<label for="{{ form.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person.id_for_label }}">Moral standards should be seen as individualistic - <br/>What one person considers to be moral may be judged as immoral by another person: </label>
 		{{ form.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person }}
 		{{ form.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person.errors }}
 	</div>
 	
+	<div class="form-group">
+		<label for="{{ form.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities.id_for_label }}">If one believes something is right, one must stand by it even if it means losing friends or missing out on profitable opportunities.</label>
+		{{ form.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities}}
+		{{ form.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities.errors }}
+	</div>
+
+	<div class="form-group">
+		<label for="{{ form.spiritually_i_consider_myself.id_for_label }}">Spiritually I consider myself: </label>
+		{{ form.spiritually_i_consider_myself}}
+		{{ form.spiritually_i_consider_myself.errors }}
+	</div>
+
     <input class="btn btn-primary" type="submit" value="Submit" />
     <a href="{% url 'main:index' %}" class='btn btn-default'>Back</a>
 </form>

@@ -4,6 +4,7 @@ from django.db import models
 
 class Survey(models.Model):
 	STATES = [('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'), ('CA', 'CA'), ('CO', 'CO'), ('CT', 'CT'), ('DE', 'DE'), ('DC', 'DC'), ('FL', 'FL'), ('GA', 'GA'), ('HI', 'HI'), ('ID', 'ID'), ('IL', 'IL'), ('IN', 'IN'), ('IA', 'IA'), ('KS', 'KS'), ('KY', 'KY'), ('LA', 'LA'), ('ME', 'ME'), ('MD', 'MD'), ('MA', 'MA'), ('MI', 'MI'), ('MN', 'MN'), ('MS', 'MS'), ('MO', 'MO'), ('MT', 'MT'), ('NE', 'NE'), ('NV', 'NV'), ('NH', 'NH'), ('NJ', 'NJ'), ('NM', 'NM'), ('NY', 'NY'), ('NC', 'NC'), ('ND', 'ND'), ('OH', 'OH'), ('OK', 'OK'), ('OR', 'OR'), ('PA', 'PA'), ('RI', 'RI'), ('SC', 'SC'), ('SD', 'SD'), ('TN', 'TN'), ('TX', 'TX'), ('UT', 'UT'), ('VT', 'VT'), ('VA', 'VA'), ('WA', 'WA'), ('WV', 'WV'), ('WI', 'WI'), ('WY', 'WY')]
+	REGIONS = [('West', 'West'), ('Northeast', 'Northeast'), ('Midwest', 'Midwest'), ('South', 'South')]
 	Q1  = (('-1','Refused')
                 ,('1', 'Strongly disagree')
                 ,('2', 'Disagree')
@@ -20,10 +21,26 @@ class Survey(models.Model):
                 ,('5', 'Somewhat disagree')
                 ,('6', 'Disagree')
                 ,('7', 'Strongly disagree'))
+	Q4 = (('-1', 'Refused')
+                ,('1', 'Strongly disagree')
+                ,('2', 'Disagree')
+                ,('3', 'Neither agree nor disagree')
+                ,('4', 'Agree')
+                ,('5', 'Strongly agree'))
+	Q5 = (('-1','Refused',)
+		,('1','Very spiritual')
+		,('2','Spiritual')
+		,('3','Somewhat spiritual')
+		,('4','Not spiritual')
+		,('5','Anti-spiritual'))
 	state = models.CharField(max_length=2, choices=STATES)
+	region = models.CharField(max_length=10, choices=REGIONS)
 	gender = models.CharField(max_length=6, choices=(('Male','Male'),('Female','Female')))
 	i_develop_strong_emotions_toward_people_i_can_rely_on = models.CharField(max_length=2, choices=Q1, db_column='strong_emotions')
 	parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams = models.CharField(max_length=2, choices=Q1, db_column='empower_children')
 	moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person = models.CharField(max_length=2, choices=Q3, db_column='individualistic_morals')
+	if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities = models.CharField(max_length=2, choices=Q4, db_column='losing_friends')
+	spiritually_i_consider_myself = models.CharField(max_length=2, choices=Q5, db_column='spirituality')
 	video_choice = models.CharField(max_length=10, blank=True, null=True)
 	weight = models.DecimalField(default=1,decimal_places=2,blank=True, null=True, max_digits=5)
+

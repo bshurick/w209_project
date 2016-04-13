@@ -1,0 +1,126 @@
+{% load staticfiles %}
+
+function zeroifnull(x) {
+	if (typeof x == 'undefined') {
+		return 0	
+	} else {
+		return x
+	}
+}
+
+function make_table(prop) {
+	var string = '<h3>' + prop.NAME + '</h3>';
+	var total = parseFloat(prop.agree)
+			+parseFloat(prop.disagree)
+			+parseFloat(prop.refused)
+			+parseFloat(prop.neitherAgreeNorDisagree);
+	string += '<p>Number of responses in agreement: <br/>'+prop.agree +' out of ';
+	string += total;
+	string += ', or <strong>'+ Math.round(prop.agree*100 / total) + '%</strong></p>';
+	return string
+}
+
+var make_chart = function(scores, location) {
+	var h = 500, w = 700;
+	var svg = d3.select(location)
+		.append("svg")
+		.attr('height','100%')
+		.attr('width','100%')
+		.classed('img-fluid',true);
+
+	var projection = d3.geo.albersUsa()
+				.scale(300);
+	var path = d3.geo.path(projection);
+	
+	var graticule = d3.geo.graticule()
+	    .step([5, 5]);
+      	svg.append('rect')
+		.datum(graticule)
+		.attr("class", "background")
+		.classed('img-fluid',true);
+	var g = svg.append('g');
+		 
+	var color = d3.scale.quantize()
+			    .range(["rgb(237,248,233)", "rgb(186,228,179)",
+			     "rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"]);
+
+	color.domain([
+			d3.min(scores, function(d) { return d.score; }),
+			d3.max(scores, function(d) { return d.score; })
+		]);
+
+	d3.json("{% static 'us-states.json' %}", function(json) {
+	    for (var i=0; i < scores.length; i++) {
+		var dataState = scores[i].state;
+		var dataScore = parseFloat(scores[i].score);
+		var somewhatAgree = zeroifnull(scores[i].somewhatAgree);
+		var agree = zeroifnull(scores[i].agree);
+		var stronglyAgree = zeroifnull(scores[i].stronglyAgree);
+		var neitherAgreeNorDisagree = zeroifnull(scores[i].neitherAgreeNorDisagree);
+		var somewhatDisagree = zeroifnull(scores[i].somewhatDisagree);
+		var stronglyDisagree = zeroifnull(scores[i].stronglyDisagree);
+		var disagree = zeroifnull(scores[i].disagree);
+		var refused = zeroifnull(scores[i].refused);
+		
+		for (var j=0; j < json.features.length; j++) {
+		    var jsonState = json.features[j].properties.NAME;
+		    if (dataState == jsonState) {
+			json.features[j].properties.score = dataScore;
+			json.features[j].properties.somewhatAgree = somewhatAgree;
+			json.features[j].properties.agree = agree;
+			json.features[j].properties.stronglyAgree = stronglyAgree;
+			json.features[j].properties.neitherAgreeNorDisagree = neitherAgreeNorDisagree;
+			json.features[j].properties.somewhatDisagree = somewhatDisagree;
+			json.features[j].properties.stronglyDisagree = stronglyDisagree;
+			json.features[j].properties.disagree = disagree;
+			json.features[j].properties.refused = refused;
+			if (dataState == 'Alaska') {
+				string = make_table(json.features[j].properties);
+		       		d3.select(location+'_textbox')
+				.html("")
+				.append("text")
+				.html(string);
+			} 
+			break;	
+		    }
+		}
+	    }
+
+	   var fillfunc = function(d) {
+                        //Get data value
+                        var value = d.properties.score;
+                        if (value) {
+                                //If value exists…
+                                return color(value);
+                        } else {
+                                //If value is undefined…
+                                return "#ccc";
+                        }			
+	   }
+	   g.append('g')
+		.selectAll("path")
+		   .data(json.features)
+		   .enter()
+		   .append("path")
+		   .attr("d", path)
+		   .on('mouseover', function(d){
+			d3.select(this)
+			  .attr('fill','orange'); 
+			var prop = d.properties;
+			string = make_table(prop);						
+		       d3.select(location+'_textbox')
+			.html("")
+			.append("text")
+			.html(string);
+		})
+		.on('mouseout', function(d){
+			d3.select(this)
+			  .attr('fill', fillfunc);
+		})
+		.attr("opacity", 0.9)
+		.attr("fill", fillfunc);
+
+	}); // end json
+}
+
+
