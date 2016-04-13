@@ -276,7 +276,7 @@ def get_geodata(question):
         elif question == '5':
                 matches = sorted([
                         (str(m.state)
-                        , KEY[I10_DICT[int(float(m.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities))]])
+                        , KEY[I10_DICT[int(float(m.spiritually_i_consider_myself))]])
                         for m in Survey.objects.all()
                 ])
         else:
