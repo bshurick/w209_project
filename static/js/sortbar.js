@@ -1,7 +1,7 @@
 
 // eventually read data automatically via .csv function
 
-var sortbar = function(data, location) {
+var sortbar = function(data, location, button) {
 
   function change() {
     clearTimeout(sortTimeout);
@@ -78,7 +78,7 @@ var svg = d3.select(location).append("svg")
       .style("text-anchor", "end")
       .text("Weighted_Pct");
 
-  svg.selectAll('.bar_chart2')
+  svg.selectAll(location)
       .data(data)
     .enter().append("rect")
       .attr("class", "bar_chart2")
@@ -87,10 +87,10 @@ var svg = d3.select(location).append("svg")
       .attr("y", function(d) { return y(d.Weighted_Pct); })
       .attr("height", function(d) { return height - y(d.Weighted_Pct); });
 
-  d3.select("input").on("change", change);
+  d3.select(button).on("change", change);
 
   var sortTimeout = setTimeout(function() {
-    d3.select("input").property("checked", true).each(change);
+    d3.select(button).property("checked", true).each(change);
   }, 2000);
 
 }
