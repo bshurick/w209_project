@@ -14,10 +14,10 @@ function make_table(prop) {
 			+parseFloat(prop.disagree)
 			+parseFloat(prop.refused)
 			+parseFloat(prop.neitherAgreeNorDisagree);
-	string += '<p>Respondents in agreement: <br/>'+prop.agree +' out of ';
+	string += '<p>Respondents in <strong style="color: green">agreement: </strong><br/>'+prop.agree +' out of ';
 	string += total;
 	string += ', or <strong>'+ Math.round(prop.agree*100 / total) + '%</strong></p>';
-	string += '<p>Respondents in disagreement: <br/>'+prop.disagree +' out of ';
+	string += '<p>Respondents in <strong style="color: red">disagreement: </strong><br/>'+prop.disagree +' out of ';
 	string += total;
 	string += ', or <strong>'+ Math.round(prop.disagree*100 / total) + '%</strong></p>';
 	string += '<p>Respondents who neither agree nor disagree: <br/>'+prop.neitherAgreeNorDisagree+' out of ';
