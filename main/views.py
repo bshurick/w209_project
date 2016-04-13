@@ -35,7 +35,7 @@ def index(request):
 		,'q2_scores':get_geodata_scores(2)
 		,'q3_scores':get_geodata_scores(3)
 		,'q4_scores':get_geodata_scores(4)
-		# add q5
+		,'q5_scores':get_geodata_scores(5)
 		,'q1_bar':get_q1_agree_byregion()
 		,'q2_bar':get_q2_agree_byregion()
 		,'q3_bar':get_q3_agree_byregion()

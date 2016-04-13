@@ -175,6 +175,11 @@ KEY = {
    , 'Disagree':'disagree'
    , 'Strongly disagree':'disagree'
    , 'Refused':'refused'
+   , 'Somewhat spiritual':'agree'
+   , 'Very spiritual':'agree'
+   , 'Spiritual':'agree'
+   , 'Not spiritual':'disagree'
+   , 'Anti-spiritual':'disagree'
 }
 
 get_agreed = lambda x, d: 1 if re.match(r'agree',KEY.get(d.get(x,''),'')) else 0
@@ -268,8 +273,14 @@ def get_geodata(question):
                         , KEY[IS6_DICT[int(float(m.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities))]])
                         for m in Survey.objects.all()
                 ])
+        elif question == '5':
+                matches = sorted([
+                        (str(m.state)
+                        , KEY[I10_DICT[int(float(m.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities))]])
+                        for m in Survey.objects.all()
+                ])
         else:
-                raise Exception('Question needs to be 1-4')
+                raise Exception('Question needs to be 1-5')
         output = do_grouping(matches)
         # output = add_fillkey(output)
 	return output
@@ -306,8 +317,15 @@ def get_geodata_scores(question):
 			       # * float(m.weight) 
 			   )
                            for m in Survey.objects.all() ])
+	elif question == '5':
+		matches = sorted([
+                           (str(m.state)
+                            , get_agreed(int(float(m.spiritually_i_consider_myself)), I10_DICT)
+			       # * float(m.weight) 
+			   )
+                           for m in Survey.objects.all() ])
 	else:
-		raise Exception('Question needs to be 1-4')
+		raise Exception('Question needs to be 1-5')
 	output = do_calculation(matches)
 	groupings = get_geodata(question)
 	for i, s in enumerate(output):
