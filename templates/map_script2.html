@@ -10,13 +10,13 @@ function zeroifnull(x) {
 
 function make_table(prop) {
 	var string = '<h3>' + prop.NAME + '</h3>';
-	string += '<p><strong>Strongly Agree: </strong>' + prop.stronglyAgree + '</p>';
-	string += '<p><strong>Agree: </strong>' + prop.agree + '</p>';
-	string += '<p><strong>Somewhat Agree: </strong>' + prop.somewhatAgree + '</p>';
-	string += '<p><strong>Neither Agree nor Disagree: </strong>' + prop.neitherAgreeNorDisagree+ '</p>';
-	string += '<p><strong>Somewhat Disagree: </strong>' + prop.somewhatDisagree+ '</p>';
-	string += '<p><strong>Disagree: </strong>' + prop.disagree + '</p>';
-	string += '<p><strong>Refused: </strong>' + prop.refused + '</p>';
+	var total = parseFloat(prop.agree)
+			+parseFloat(prop.disagree)
+			+parseFloat(prop.refused)
+			+parseFloat(prop.neitherAgreeNorDisagree);
+	string += '<p>Number of responses in agreement: <br/>'+prop.agree +' out of ';
+	string += total;
+	string += ', or <strong>'+ Math.round(prop.agree*100 / total) + '%</strong></p>';
 	return string
 }
 

@@ -2,6 +2,7 @@ import json
 from django.http import HttpResponse
 from surveys.models import Survey
 from itertools import groupby 
+import re
 
 REGIONS = {'AK': 'Pacific',
  'AL': 'East-South Central',
@@ -132,6 +133,25 @@ EPQ1_DICT = {-1:'Refused'
                 ,5: 'Somewhat disagree'
                 ,6: 'Disagree'
                 ,7: 'Strongly disagree'}
+
+IS6_DICT = {
+    -1:'Refused'
+    , 1:'Strongly disagree'
+    , 2:'Disagree'
+    , 3:'Neither agree nor disagree'
+    , 4:'Agree'
+    , 5:'Strongly agree'
+}
+
+I10_DICT = {
+    -1:'Refused'
+    , 1:'Very spiritual'
+    , 2:'Spiritual'
+    , 3:'Somewhat spiritual'
+    , 4:'Not spiritual'
+    , 5:'Anti-spiritual'
+}
+
 REVERSE = {
 	-1:-1
 	, 7:1
@@ -144,15 +164,17 @@ REVERSE = {
 }
 
 KEY = {
-    'Strongly agree':'stronglyAgree'
+    'Strongly agree':'agree'
    , 'Agree':'agree'
-   , 'Somewhat agree':'somewhatAgree'
+   , 'Somewhat agree':'agree'
    , 'Neither agree nor disagree':'neitherAgreeNorDisagree'
-   , 'Somewhat disagree':'somewhatDisagree'
+   , 'Somewhat disagree':'disagree'
    , 'Disagree':'disagree'
-   , 'Strongly disagree':'stronglyDisagree'
+   , 'Strongly disagree':'disagree'
    , 'Refused':'refused'
 }
+
+get_agreed = lambda x, d: 1 if re.match(r'agree',KEY.get(d.get(x,''),'')) else 0
 
 def do_grouping(matches):
 	''' group together responses for each state '''
@@ -175,12 +197,13 @@ def do_calculation(matches):
 	    if g[0] not in scores:
 		scores[g[0]] = {}
 	    for v in g[1]:
-		if v[1]>0:
-		    if v[1] not in scores:
-		        scores[g[0]][v[1]] = 0
-	            scores[g[0]][v[1]] += 1.0*v[2]
+		if v[1] not in scores[g[0]]:
+		    scores[g[0]][v[1]] = 0
+	        scores[g[0]][v[1]] += 1.0
 	for state in scores:
-	    output[state] = round(sum(x*y for x,y in scores[state].iteritems())*1.0/len(scores[state].values()),4)
+	    cnt = sum(scores[state].values())
+	    output[state] = round(sum(x*y for x,y in scores[state].iteritems())*1.0/cnt,4) \
+				if cnt > 0 else 0.0
 	return [
 		{
 		 'state':str(STATES[s])
@@ -236,8 +259,14 @@ def get_geodata(question):
                         , KEY[EPQ1_DICT[int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person))]])
                         for m in Survey.objects.all()
                 ])
+        elif question == '4':
+                matches = sorted([
+                        (str(m.state)
+                        , KEY[IS6_DICT[int(float(m.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities))]])
+                        for m in Survey.objects.all()
+                ])
         else:
-                raise Exception('Question needs to be 1-3')
+                raise Exception('Question needs to be 1-4')
         output = do_grouping(matches)
         # output = add_fillkey(output)
 	return output
@@ -248,23 +277,34 @@ def get_geodata_scores(question):
 	if question == '1':
 		matches = sorted([
 			   (str(m.state)
-			    , int(float(m.i_develop_strong_emotions_toward_people_i_can_rely_on))
-			    , float(m.weight) )
+			    , get_agreed(int(float(m.i_develop_strong_emotions_toward_people_i_can_rely_on))	
+				, DPES11_DICT)
+			       # * float(m.weight) 
+			   )
 			   for m in Survey.objects.all() ])
 	elif question == '2':
 		matches = sorted([
                            (str(m.state)
-                            , int(float(m.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams))
-			    , float(m.weight) )
+                            , get_agreed(int(float(m.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams)), DPES11_DICT)
+			      # * float(m.weight) 
+			   )
                            for m in Survey.objects.all() ])
 	elif question == '3':
 		matches = sorted([
                            (str(m.state)
-                            , REVERSE[int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person))]
-			    , float(m.weight) )
+                            , get_agreed(int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person)), EPQ1_DICT)
+			      # * float(m.weight) 
+			   )
+                           for m in Survey.objects.all() ])
+	elif question == '4':
+		matches = sorted([
+                           (str(m.state)
+                            , get_agreed(int(float(m.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities)), IS6_DICT)
+			       # * float(m.weight) 
+			   )
                            for m in Survey.objects.all() ])
 	else:
-		raise Exception('Question needs to be 1-3')
+		raise Exception('Question needs to be 1-4')
 	output = do_calculation(matches)
 	groupings = get_geodata(question)
 	for i, s in enumerate(output):
