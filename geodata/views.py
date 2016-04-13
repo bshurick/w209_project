@@ -340,7 +340,26 @@ def get_fillkey():
 	'''.format(**colors)
 	return FILLKEY
 
-def get_spirituality_by_region():
+def get_sortbar_by_regions(sql):
+	results = pd.read_sql(sql, connection)
+        results['concat'] = results['region']+': '+results['gender']
+        #  {'Category':'West: Male','Weighted_Pct':'0.373072187'},
+        output = [ {'Category':str(s),'Weighted_Pct':str(r)}
+                    for s,r in zip(results['concat'],results['result']) ]
+	return output
+
+def get_question_by_regions(sql):
+	regions = ['Midwest', 'Northeast', 'South', 'West']
+	results = pd.read_sql(sql, connection)
+	female = []
+	male = []
+	for r in regions:
+    	    female.append(results.loc[(results['region']==r) & (results['gender']=='Female'),'result' ].iloc[0])
+    	    male.append(results.loc[(results['region']==r) & (results['gender']=='Male'),'result' ].iloc[0])
+	out = { 'labels':regions, 'series':[{'label':'Female', 'values':female},{'label':'Male', 'values':male} ]}
+	return out
+
+def get_spirituality_by_region(sortbar=False):
 	sql = '''
 		select 
 		region
@@ -349,14 +368,77 @@ def get_spirituality_by_region():
 			then 1 else 0 end)
 		/sum(weight) result 
 		from surveys_survey 
-		group by 1,2;
+		group by 1,2
+		order by 3 desc;
 	'''
-	results = pd.read_sql(sql, connection)
-	results['concat'] = results['region']+': '+results['gender']
-	#  {'Category':'West: Male','Weighted_Pct':'0.373072187'},
-	output = [ {'Category':str(s),'Weighted_Pct':str(r)}
-		    for s,r in zip(results['concat'],results['result']) ]
-	return output
+	if sortbar:
+		return get_sortbar_by_regions(sql)
+	else:
+		return get_question_by_regions(sql)
+
+def get_q1_agree_byregion(sortbar=False):
+	sql = '''
+                select
+                gender
+                , region
+                , sum(weight*case when cast(strong_emotions as integer) in (5,6,7)
+                        then 1 else 0 end)/sum(weight) result
+                from surveys_survey
+                group by 1,2
+                order by 3 desc;
+        '''
+	if sortbar:
+		return get_sortbar_by_regions(sql)
+	else:
+		return get_question_by_regions(sql)
+
+def get_q2_agree_byregion(sortbar=False):
+        sql = '''
+                select
+                gender
+                , region
+                , sum(weight*case when cast(empower_children as integer) in (5,6,7)
+                        then 1 else 0 end)/sum(weight) result
+                from surveys_survey
+                group by 1,2
+                order by 3 desc;
+        '''
+	if sortbar:
+		return get_sortbar_by_regions(sql)
+	else:
+		return get_question_by_regions(sql)
+
+def get_q3_agree_byregion(sortbar=False):
+        sql = '''
+                select
+                gender
+                , region
+                , sum(weight*case when cast(individualistic_morals as integer) in (1,2,3)
+                        then 1 else 0 end)/sum(weight) result
+                from surveys_survey
+                group by 1,2
+                order by 3 desc;
+        '''
+	if sortbar:
+		return get_sortbar_by_regions(sql)
+	else:
+		return get_question_by_regions(sql)
+
+def get_q4_agree_byregion(sortbar=False):
+        sql = '''
+                select
+                gender
+                , region
+                , sum(weight*case when cast(losing_friends as integer) in (4,5)
+                        then 1 else 0 end)/sum(weight) result
+                from surveys_survey
+                group by 1,2
+                order by 3 desc;
+        '''
+	if sortbar:
+		return get_sortbar_by_regions(sql)
+	else:
+		return get_question_by_regions(sql)
 
 def geodata(request):
 	question = request.GET.get('question')
