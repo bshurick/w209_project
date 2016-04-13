@@ -4,6 +4,7 @@ from django.db import models
 
 class Survey(models.Model):
 	STATES = [('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'), ('CA', 'CA'), ('CO', 'CO'), ('CT', 'CT'), ('DE', 'DE'), ('DC', 'DC'), ('FL', 'FL'), ('GA', 'GA'), ('HI', 'HI'), ('ID', 'ID'), ('IL', 'IL'), ('IN', 'IN'), ('IA', 'IA'), ('KS', 'KS'), ('KY', 'KY'), ('LA', 'LA'), ('ME', 'ME'), ('MD', 'MD'), ('MA', 'MA'), ('MI', 'MI'), ('MN', 'MN'), ('MS', 'MS'), ('MO', 'MO'), ('MT', 'MT'), ('NE', 'NE'), ('NV', 'NV'), ('NH', 'NH'), ('NJ', 'NJ'), ('NM', 'NM'), ('NY', 'NY'), ('NC', 'NC'), ('ND', 'ND'), ('OH', 'OH'), ('OK', 'OK'), ('OR', 'OR'), ('PA', 'PA'), ('RI', 'RI'), ('SC', 'SC'), ('SD', 'SD'), ('TN', 'TN'), ('TX', 'TX'), ('UT', 'UT'), ('VT', 'VT'), ('VA', 'VA'), ('WA', 'WA'), ('WV', 'WV'), ('WI', 'WI'), ('WY', 'WY')]
+	REGIONS = [('West', 'West'), ('Northeast', 'Northeast'), ('Midwest', 'Midwest'), ('South', 'South')]
 	Q1  = (('-1','Refused')
                 ,('1', 'Strongly disagree')
                 ,('2', 'Disagree')
@@ -33,6 +34,7 @@ class Survey(models.Model):
 		,('4','Not spiritual')
 		,('5','Anti-spiritual'))
 	state = models.CharField(max_length=2, choices=STATES)
+	region = models.CharField(max_length=10, choices=REGIONS)
 	gender = models.CharField(max_length=6, choices=(('Male','Male'),('Female','Female')))
 	i_develop_strong_emotions_toward_people_i_can_rely_on = models.CharField(max_length=2, choices=Q1, db_column='strong_emotions')
 	parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams = models.CharField(max_length=2, choices=Q1, db_column='empower_children')
@@ -41,3 +43,4 @@ class Survey(models.Model):
 	spiritually_i_consider_myself = models.CharField(max_length=2, choices=Q5, db_column='spirituality')
 	video_choice = models.CharField(max_length=10, blank=True, null=True)
 	weight = models.DecimalField(default=1,decimal_places=2,blank=True, null=True, max_digits=5)
+

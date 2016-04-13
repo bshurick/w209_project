@@ -4,12 +4,23 @@ from django.template import loader
 
 from .models import Survey
 from .forms import SurveyForm
+from geodata.views import REGIONS 
 
 def survey(request):
 	if request.method == 'POST':
-		video = request.session.get('video')
+		# edit the post data
 		postdata = request.POST.copy()
+		
+		# which video did they watch	
+		video = request.session.get('video')
 		postdata['video_choice'] = video
+	
+		# which region are they from	
+		state = postdata['state']
+		region = REGIONS.get(state, 'Unknown')
+		postdata['region'] = region
+		
+		# save data if valid
 		f = SurveyForm(postdata)
 		if f.is_valid():
 			f.save()
