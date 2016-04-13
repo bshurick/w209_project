@@ -30,10 +30,27 @@
 
 </body>
 <script>
+
+{% include "data_script.html" %}
 {% include "map_script2.html" %}
-{% include "bar_script.html" %}
-{% include "sortbar_script.html" %}
+
 </script>
+
+<script src="{% static "js/sortbar.js" %}"></script>
+<script src="{% static "js/bar.js" %}"></script>
+
+<script>
+
+barchart(q1_data, '#barchart_q1');
+
+sortbar(q5_sortbar_data, '#sortbar_q1');
+
+make_chart(q1_scores, '#resultmap_q1');
+make_chart(q2_scores, '#resultmap_q2');
+make_chart(q3_scores, '#resultmap_q3');
+
+</script>
+
 </html>
 
 
