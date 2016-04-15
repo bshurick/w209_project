@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--- utf-8 important for D3 -->
+<meta charset="utf-8">
+<style>
+
+/*<!--- HTML: language for describing documents, says what you want to render (e.g., just says headline, but not size) -->*/
+/*<!--- CSS: style of elements (e.g., headline has big font, bold), says how you want to render -->*/
+
+/*<!--- this rule applies to elements of type body, list font in order of priority based on what is intalled in clients web browser -->*/
+/*<!--- position relative to other elements -->*/
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: relative;
+  width: 960px;
+}
+
+/*<!--- . in front of word means you want to apply to elements of that particular class, not the tag -->*/
+/*<!--- apply to elements of type text that are in class axis -->*/
+.axis text {
+  font: 10px sans-serif;
+}
+
+/*<!--- apply rule that match either of path or line class -->*/
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+/*<!--- apply to elements of class bar -->*/
+.bar {
+  fill: green;
+  fill-opacity: .9;
+}
+/*<!--- apply rule to elements of type path that are nested inside class x and class axis
+nothing in JS that hides these elements, this is entirely CSS that hides it 
+in many cases, it doesn't matter what you choose for a particular element, CSS or JS
+-->*/
+.x.axis path {
+  display: none;
+}
+/*<!--- apply to elements of type label, name of tag is label -->*/
+label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+/*<!--- the above tells the document, any element that matches, apply these queries -->*/
+/*<!--- CSS selector before curly, D3 uses the same type of selector -->*/
+
+/*--- have input element of type checkout, named Sort Values -->*/
+</style>
+
+<!--- anything in the actual doc, not metadata, should be in the body -->
+
+<body>
+
+<label><input type="checkbox"> Sort values</label>
+
+<p>Percent who consider themselves Spiritual or Very Spiritual.</p> 
+
+</body>
+
+<!--- loads the d3.js library, link to API on webpage talks about what is used in the script -->
+<!--- useful to read source code if need more sophisticated stuff or things don't work -->
+<script src="d3.js"></script>
+
+<!--- separate JS code that uses D3, can be used because it is now loaded -->
+<script>
+
+//<!--- object vs. variable -->
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+// helper function to format with no decimal places, name d3.format is a function inside d3, formatPercent is now a function, given a number, will return correctly formatted string -->
+var formatPercent = d3.format(".0%");
+
+// defines a scale (way to map input to output values, usually numbers in data space into screen space, 0-100 data displayed to height of visualization on screen) 
+// give the function a number, and scale does it for you, allows for dynamic coding
+// defines ordinal scale (x axis with different categories)
+// all range functions specify output domain, rangeRoundBands says we want a range for each bar
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1, 1);
+
+// SVG coordinates are the opposite of expected, 0 is at the top, not bottom
+// d3.scale.linear() is one name for one function, d3.library, the scale module, and within that module, the linear function
+// just convention that we separate with .
+// we call with no args, and it returns a function. y is now a function
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+// axis component. scales give you functions to map input to output, but no visual components
+// so we use the axis component, .scale(x) tells the axis to use and where things should be. Here is a scale, and we want an axis.
+// call the axis function, call scale function on that, and so on (method chaining: call a function, immediately call another function on it)
+// they implement internal modifications, but all return the chained axis component
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+// formatPercent is passed as the function, telling the axis function this is what should be called every time you want a tick value
+// D3 places the value through the function and displays the result
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(formatPercent);
+
+// sets up the svg container for the entire visualization
+// selects DOM element of body (main part of html doc), and appending svg
+// svg is a DOM based format as well as text-based image, very similar to html, nesting elements inside it
+// think if svg as the source code, interpreted by the web browser as text-based image format, especially instructions for what the renderer should do
+// html here's some text, svg says here's where a line should be
+// below, we're writing similar to what we had above, nesting elements in each other
+// this js does the same thing, but dynamically
+// setting up the document
+// important to note the body must already exist, this JS must come after body has been defined
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+// g stands for group, way to group things together in SVG
+// anything that comes after that will appended afterward, will be nested in this g element, and will have the same transformation applied
+  .append("g")
+// this group element, apply a translation, which is the translation, now shift the g element to right and bottom
+// so wide margins on top and left
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// pattern we commonly see, static part and then dynamic part
+// we've done all the static part above, independent of any data we want to show
+// we've defined the size of the output, scales, axes, height, and width, and strux of SVG
+
+// d3.csv function with two args, the name of function, and then the callback function to give back the data
+// in JS, and you want to load additional stuff, you can call AJAX (async javascript requests)
+// browser fires a request to get the data, and immediately returns with execution without waiting for data
+// the callback says as soon as you get back the request, call this function on whatever you get back
+// the entire rest of the code is part of the callback function
+
+// any requests that rely on data to be returned, needs to occur in the callback function
+// callback has two args, error is usually null is data is ok and loaded, data is set to actual data (see API documentation)
+d3.csv("PPREG4_PPGENDER_I10_concat.csv", function(error, data) {
+
+// this data needs to be post-processed, csv doesn't define data types, so you need to define them
+// json does allow you to define data types
+
+// data is an array, one element per row
+// set data and interpret field as a number, that is what the + does
+// if interpret as strings, then 1, 10, 2, . . .
+  data.forEach(function(d) {
+    d.Weighted_Pct = +d.Weighted_Pct;
+  });
+
+// we are finishing the set up of the scales
+// now we tell it what the input looks like
+// for each element, takes the category value, and says it wants all of these in the domain
+// map function nothing to do with D3, takes a single argument, and takes a single element of array mapping over, and does something with it
+// takes one row of csv, and returning value of category column
+// data is an array of rows with two columns, and map function result is an array of category values
+// and we give to x as the domain
+  x.domain(data.map(function(d) { return d.Category; }));
+// now we do the same for the y scale, but only need to tell the extreme values
+// takes array of two elements, min set to 0, and max value taken from the data
+// d3.max takes the array, and computes the max over the entire array (also in API documentation)
+  y.domain([0, d3.max(data, function(d) { return d.Weighted_Pct; })]);
+
+// now D3 knows how to map input to output values
+
+// appending another g element, giving two classes
+// this is important because CSS defines particular styles for class
+// set attribute of name class (special in that browser knows it) to this value 'x axis'
+
+// translate moves to g element to where we want the xAxis to appear
+// call the xAxis component on this element, and put the xAxis component on this element
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      // no transformation necessary as it already starts where we want in the top left
+      .call(yAxis)
+      // remaining code adds a label to the axis
+      // append text element
+      // place in the right position, rotate by 90%, set y and dy (delta y) attributes, dy is the offet from the position
+      // in practice don't need to set both separately, but either works though only dy is necessary
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      // unit em is the width, and .71em is taking 71% of the width
+      .attr("dy", ".71em")
+      // right rather than left aligns the text
+      .style("text-anchor", "end")
+      .text("Weighted_Pct");
+
+// block of code now draws the actual bars, using the very common D3 selection pattern
+// on an abstract conceptual level, selections work by
+// first step is selection of DOM elements, second step is the binding of the data
+// enter, update, and exit selection
+// enter selection is present in the data but not in the DOM (so nothing to represent it yet)
+// update selection contains the things for which we have both data and elements in the DOM (for the representation that can be updated)
+// exit selection contains the things for which we have DOM elements but no data (exit from visualization bec present in SVG but no data for them, so don't show anymore
+// this selection stuff is core to D3 (lot of tutorials) 
+
+// 3 little circles tutorial on selection stuff (high level with illustrations) 
+
+// you have drawn the bar chart, now you need to update the bars, if you have new data
+
+// select all the elements of class bar of which to start with there will be none
+// first time this was run the selection will be empty 
+  svg.selectAll(".bar")
+// 2nd step is to take the variable data (an array) and bind the elements to the selection
+// takes each element in array and tries to match to one element in the DOM selection, but won't be match because no DOM elements
+// so thus we will be in the enter selection
+      .data(data)
+// now give me the enter selection (as we know both the update and exit functions will be empty
+// once you've done one function call, you can't get the other elements from update and exit selections
+// we have nothing on the page, so we want to add or append DOM elements now
+// it appends a single rect element for each data element in the array (think of D3 as a selection or array of elements)
+    .enter().append("rect")
+// it just sets the class attribute to bar, and tells browser see if anything to apply to those elements (doesn't apply any styles itself)
+      .attr("class", "bar")
+// now we are operating on the array, this is true after we call .enter
+// now determine the position of the x
+// take the category value, place in the x scale, and return what comes out of it as the position or x-coordinate
+      .attr("x", function(d) { return x(d.Category); })
+// width of the bars are set to all the same, and number of bands is determined by number of categories we told it before
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.Weighted_Pct); })
+// bars are defined in y position, y-coordinate is set at the top of the bar
+// we're telling SVG where the bar ends, not where it starts, so we compute the height accordingly so it ends at exactly 0
+      .attr("height", function(d) { return height - y(d.Weighted_Pct); });
+
+// the rest of the code is to sort the bars
+
+// selecting the input element, and telling D3 when this changes, call the change function
+// on is function that installs event handlers, passing change as a function, not calling the function
+  d3.select("input").on("change", change);
+
+// calls setTimeout function to install a callback after 2000ms, call this function 
+  var sortTimeout = setTimeout(function() {
+    d3.select("input").property("checked", true).each(change);
+  }, 2000);
+
+// change function clears the timeout
+  function change() {
+    clearTimeout(sortTimeout);
+
+    // Copy-on-write since tweens are evaluated after a delay.
+
+	// set up a new x.domain, changing the x position of the bars
+	// does in a clever way by modifying the x-scale
+	// you just use the scale, and depending how you want to sort, the underlying scale is changed
+	// the category show first, appears on far left, and so on
+	// takes orig data, and sorts it, because changing order of data, then changing order of categories, so changing order of bars
+    // calls sort JS function on data, it takes a callback, 
+    // this.checked is the condition that is checked, is the radio button checked
+    var x0 = x.domain(data.sort(this.checked
+    	// sorts bars based on height 
+    	// if this.checked is true, then ? line is used
+    	// we want to sort data, which depends on the checked
+        ? function(a, b) { return b.Weighted_Pct - a.Weighted_Pct; }
+        // if this.checked is false, then : line is used
+        // this is shorter way of writing if/else
+        : function(a, b) { return d3.ascending(a.Category, b.Category); })
+        // then the result, the sorted array is mapped to a function that extracts the category
+        .map(function(d) { return d.Category; }))
+        // changing existing scale and copying the entire scale object so we don't overwrite 
+        // anything about x can be changed without changing the orig x scale
+        // copy is not necessary
+        .copy();
+
+// D3 showreel
+// more selections on the data might be easier to program
+// just a bunch of check boxes to select subsets of the data rather than interactive
+// step from updating and animating is relatively small
+
+// to tell this coherent story, use feature X, Y, etc.
+
+// select all the elements of class bar and sort the DOM elements, not the original data items
+    svg.selectAll(".bar")
+    // taking existing elements with data bound to it, sorting based on the new x0 scale we defined, which give us the new positions of the bars
+	// these are the rect type but we are selecting the class (rect.bar would have the same effect, or selectAll("rect") works too
+	// SVG elements are kind of generic, so class is helpful to use to avoid confusion to distinguish from other things
+        .sort(function(a, b) { return x0(a.Category) - x0(b.Category); });
+	// 280-284 isn't necessary, not changing the position, this is just swapping the elements around in the document
+	// order shown in SVG determines order they are shown, only matters if overlap each other
+	
+	// defining a transition, D3 speak for animation between two different states, moving the bars around
+	// transition on svg, duration will be 750ms, delay is between start and end, and depends on the index
+	// d is the data bound to element, and 2nd ard is the index.
+    var transition = svg.transition().duration(750),
+        delay = function(d, i) { return i * 50; };
+	
+	// selecting all rects, all elements of class bar, applying the delay
+	// then setting the new x attribute through the new x0 scale we've defined
+	// this is everything we need for the animation
+	// in existing state, bars are already there, here's the final value, D3 will interpret the start and end state
+    transition.selectAll(".bar")
+        .delay(delay)
+        .attr("x", function(d) { return x0(d.Category); });
+
+	// this does the same for the x-axis
+	// x.axis component has changed, and being called on transition, so need to animate this
+    transition.select(".x.axis")
+        .call(xAxis)
+    // not all the tick labels move immediately
+      .selectAll("g")
+        .delay(delay);
+  }
+});
+
+</script>
+
+// apply dynamic filtering based on their answers
+// so you change what is shown, have zoom move states
+// drive interactivity
+// usually Bostock examples
+// Google for D3 that is most important
+// go back to drawing board, what you need, then tutorials and examples that align
+// but some things relevant regardless

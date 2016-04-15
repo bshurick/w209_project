@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: A bar chart whose data updates with new data (labels, too)</title>
+		<script type="text/javascript" src="d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */
+
+			/* to style a class, use a . identifier */
+
+			.button {
+				background: yellow;
+				color: black;
+				padding: 5px;
+				margin: 5px;
+				display: inline-block;
+			}
+
+		</style>
+
+		<h4>Percent agreed: "If one believes something is right, one must stand by it, even if it means losing friends
+			  or missing out on profitable opportunities."</h4>
+		<p>Select results by clicking demographic breakout (default breakout is Gender)</p>
+
+		<script>
+
+		// define helper function to format with no decimal places
+		// d3.format is a function inside d3, formatPercent is now a function, if given a number, it will return a formatted string
+		var formatPercent = d3.format(".0%");
+
+		// now loaded to page, we can use
+		// below is a wrapper function to be executed immediately, and provides private namespace
+		$(function() {
+		// create slider inside the container of the html id slider (# is a CSS idenfifier for id, . is a class),
+		// declare variable and assign it as jQuery slider plugin
+			var $slider = $("#slider").slider({
+
+			// add configuration for the slider
+			// set animate to true to allow slider to slide rather than jump
+        		animate : true,
+
+        		// set min and max range to specify middle steps between start and end
+        		min: 0,
+        		// place datasets in array, then set length below but minus 1 for indices
+        		max: 3,
+						// define slide callback function
+
+        		slide: function( event, ui ) {
+
+        			// determines what dataset to use
+        			var currentDatasetIdentifier = parseInt(ui.value) + 1;
+        			console.log('dataset_' + currentDatasetIdentifier);
+
+        			// convert string to a variable, using window object in JS
+							// finally use the update_dataset function
+        			var currentDataset = window['dataset_' + currentDatasetIdentifier];
+							update_dataset(currentDataset);
+        		}
+	    });
+
+	    });
+
+		</script>
+
+	</head>
+	<body>
+
+		<!---build 3 div tags or elements, use as buttons (controllers to update dataset),
+		that can be styled and visualized. Then connect to D3.
+		in HTML, one type of tag is self-closing, and another is not self-closing (e.g., div tags).
+		for the latter, content can be placed inside.
+		need to connect div to the dataset, thus we need to add an attribute to appropriate dataset.
+		below, class is an attribute, we need an idenifier for the dataset-->
+
+		<!--- set class=button, that class is just an identifier to style the tag.
+		replace dataset name with onclick attribute-->
+
+		<!--- 3 divs are static representations to control the datasets on our charts.
+		they have two attributes, one is class and the other is onclick.
+		class attribute for styling, and onlick for functionality
+		(e.g., calling the updated dataset function with approp dataset) -->
+		<div class="button" onclick="update_dataset(dataset_1)">Gender</div>
+		<div class="button" onclick="update_dataset(dataset_2)">Education Level</div>
+		<div class="button" onclick="update_dataset(dataset_3)">Income Bracket</div>
+		<div class="button" onclick="update_dataset(dataset_4)">Parent Status</div>
+
+		<!---placeholder for id slider, use to build the jQuery slider plugin-->
+		<div id="slider"></div>
+		<script type="text/javascript">
+
+			//Width and height
+			var w = 600;
+			var h = 250;
+
+			// define global variables so that they are available to all functions
+			// when more experienced, don't use global variables to avoid conflicts, etc.
+			// or want to have multiple SVGs
+			var svg,
+				xScale,
+				yScale;
+
+			/*
+			Documentation: Sample Survey Questions
+			DPES11. I develop strong emotions toward people I can rely on
+			EPQ1. Moral standards should be seen as individualistic: what one person considers to be moral
+			IS6. If one believes something is right, one must stand by it, even if it means losing friends
+			     or missing out on profitable opportunities
+			L9. Parents should empower children as much as possible so that they may follow their dreams
+			10. Spiritually, I consider myself
+			*/
+
+			var dataset_1 = [ 0.78676601,
+												0.728253968,
+												0.64049559,
+												0.640359168,
+												0.729892427,
+												0.656529647,
+												0.724759136,
+												0.641322314],
+
+					dataset_2 = [ 0.79819579,
+												0.727282401,
+												0.648991616,
+												0.801235944,
+												0.663421261,
+												0.691527507,
+												0.626865672,
+												0.548569887,
+												0.709327393,
+												0.712382773,
+												0.58770584,
+												0.726768011,
+												0.654044428,
+												0.697712418,
+												0.710843373,
+												0.692802756],
+
+					dataset_3 = [ 0.763168072,
+												0.812225016,
+												0.756099578,
+												0.467501958,
+												0.782866379,
+												0.625447601,
+												0.578030671,
+												0.57780696,
+												0.706170187,
+												0.627578132,
+												0.73161323,
+												0.641127884,
+												0.646141363,
+												0.713728432,
+												0.695746445,
+												0.712368169]
+
+					dataset_4 = [ 0.73736225,
+												0.83398492,
+												0.629298163,
+												0.677853411,
+												0.687607278,
+												0.710120417,
+												0.69021102,
+												0.669246013];
+
+			function build_chart(data) {
+
+				xScale = d3.scale.ordinal()
+								.domain(d3.range(data.length))
+								.rangeRoundBands([0, w], 0.01);
+				yScale = d3.scale.linear()
+								.domain([0, 1])
+								.range([0, h]);
+				//Create SVG element
+				svg = d3.select("body")
+							.append("svg")
+							.attr("width", w)
+							.attr("height", h);
+				//Create bars
+				svg.selectAll("rect")
+				   .data(data)
+				   .enter()
+				   .append("rect")
+				   .attr("x", function(d, i) {
+						return xScale(i);
+				   })
+				   .attr("y", function(d) {
+						return h - yScale(d);
+				   })
+				   .attr("width", xScale.rangeBand())
+				   .attr("height", function(d) {
+						return yScale(d);
+				   })
+				   .attr("fill", function(d) {
+						return "green";
+				   });
+				//Create labels
+				svg.selectAll("text")
+				   .data(data)
+				   .enter()
+				   .append("text")
+				   .text(function(d) {
+						return formatPercent(d);
+				   })
+				   .attr("text-anchor", "middle")
+				   .attr("x", function(d, i) {
+						return xScale(i) + xScale.rangeBand() / 2;
+				   })
+				   .attr("y", function(d) {
+						return h - yScale(d) + 14;
+				   })
+				   .attr("font-family", "sans-serif")
+				   .attr("font-size", "11px")
+				   .attr("fill", "white");
+			}
+
+			// we need to connect the button to the update of datasets
+			function update_dataset(data) {
+
+				console.log(svg, data)
+				//On click, update with new data
+				//div.button informs D3 to select the div with the specific class button
+					svg.selectAll("rect")
+					   .data(data)
+					   .attr("y", function(d) {
+							return h - yScale(d);
+					   })
+					   .attr("height", function(d) {
+							return yScale(d);
+					   })
+					   .attr("fill", function(d) {
+							return "green";
+					   });
+					//Update all labels
+					svg.selectAll("text")
+					   .data(data)
+					   .text(function(d) {
+							return formatPercent(d);
+					   })
+					   .attr("x", function(d, i) {
+							return xScale(i) + xScale.rangeBand() / 2;
+					   })
+					   .attr("y", function(d) {
+							return h - yScale(d) + 14;
+					   });
+			}
+
+			// initialize the chart itself
+			build_chart(dataset_1);
+
+		</script>
+	</body>
+</html>

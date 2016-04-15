@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: A bar chart whose data updates with new data (labels, too)</title>
+		<script type="text/javascript" src="d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */
+
+			/* to style a class, use a . identifier */
+
+			.button {
+				background: yellow;
+				color: black;
+				padding: 5px;
+				margin: 5px;
+				display: inline-block;
+			}
+
+		</style>
+
+		<h4>Q1) I develop strong emotions toward people I can rely on</h4>
+		<h4>Q2) Moral standards should be seen as individualistic: what one person considers to be moral</h4>
+		<h4>Q3) If one believes something is right, one must stand by it, even if it means losing friends
+		        or missing out on profitable opportunities.</h4>
+		<h4>Q4) Parents should empower children as much as possible so that they may follow their dreams</h4>
+		<h4>Q5) Spiritually, I consider myself</h4>
+
+		<p>Scroll results by question (default results are for Q1)</p>
+
+		<!---
+		two dependences: 1) jQuery as a helper for web dev and 2) jQuery UI
+		a sub-library (has JS and CSS files)
+
+		http://jquery.com/
+		jQuery is a fast, small, and feature-rich JavaScript library.
+		It makes things like HTML document traversal and manipulation, event handling, animation,
+		and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.
+
+		http://jqueryui.com/about/
+		jQuery UI is a curated set of user interface interactions, effects, widgets,
+		and themes built on top of the jQuery JavaScript Library.
+		Use to build highly interactive web applications or add a user selection to a form control
+		-->
+
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+		<!--- add jQuery (JS library), used for many things such as out-of-the-box solutions,
+		place the download in our project location -->
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+		<!--- jQuery UI is additional to jQuery (often critical for front-end web dev) -->
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+		<script>
+
+		// define helper function to format with no decimal places
+		// d3.format is a function inside d3, formatPercent is now a function, if given a number, it will return a formatted string
+		var formatPercent = d3.format(".0%");
+
+		// now loaded to page, we can use
+		// below is a wrapper function to be executed immediately, and provides private namespace
+		$(function() {
+		// create slider inside the container of the html id slider (# is a CSS idenfifier for id, . is a class),
+		// declare variable and assign it as jQuery slider plugin
+			var $slider = $("#slider").slider({
+
+			// add configuration for the slider
+			// set animate to true to allow slider to slide rather than jump
+        		animate : true,
+
+        		// set min and max range to specify middle steps between start and end
+        		min: 0,
+        		// place datasets in array, then set length below but minus 1 for indices
+        		max: 4,
+						// define slide callback function
+
+        		slide: function( event, ui ) {
+
+        			// determines what dataset to use
+        			var currentDatasetIdentifier = parseInt(ui.value) + 1;
+        			console.log('dataset_' + currentDatasetIdentifier);
+
+        			// convert string to a variable, using window object in JS
+							// finally use the update_dataset function
+        			var currentDataset = window['dataset_' + currentDatasetIdentifier];
+							update_dataset(currentDataset);
+        		}
+	    });
+
+	    });
+
+		</script>
+
+	</head>
+	<body>
+
+		<!---placeholder for id slider, use to build the jQuery slider plugin-->
+		<div id="slider"></div>
+		<script type="text/javascript">
+
+			//Width and height
+			var w = 600;
+			var h = 250;
+
+			// define global variables so that they are available to all functions
+			// when more experienced, don't use global variables to avoid conflicts, etc.
+			// or want to have multiple SVGs
+			var svg,
+				xScale,
+				yScale;
+
+			/*
+			Documentation: Sample Survey Questions
+			DPES11. I develop strong emotions toward people I can rely on
+			EPQ1. Moral standards should be seen as individualistic: what one person considers to be moral
+			IS6. If one believes something is right, one must stand by it, even if it means losing friends
+				   or missing out on profitable opportunities
+			L9. Parents should empower children as much as possible so that they may follow their dreams
+			10. Spiritually, I consider myself
+			*/
+
+			var dataset_1 = [ 0.583526889,
+												0.390161639,
+												0.552757713,
+												0.410238095,
+												0.573984083,
+												0.433704491,
+												0.556000478,
+												0.408441558],
+					dataset_2 = [ 0.229051267,
+												0.268891323,
+												0.250016834,
+												0.265910523,
+												0.256775883,
+												0.251726925,
+												0.300631458,
+												0.278215377],
+					dataset_3 = [ 0.78676601,
+												0.728253968,
+												0.64049559,
+												0.640359168,
+												0.729892427,
+												0.656529647,
+												0.724759136,
+												0.641322314],
+					dataset_4 = [ 0.056372984,
+												0.034275866,
+												0.013624348,
+												0.028601103,
+												0,
+												0.016789742,
+												0.012511585,
+												0.009768938]
+					dataset_5 = [	0.611653375,
+												0.454777884,
+												0.453469822,
+												0.367262941,
+												0.622016388,
+												0.428303965,
+												0.463243092,
+												0.373072187];
+
+			function build_chart(data) {
+
+				xScale = d3.scale.ordinal()
+								.domain(d3.range(data.length))
+								.rangeRoundBands([0, w], 0.01);
+				yScale = d3.scale.linear()
+								.domain([0, 1])
+								.range([0, h]);
+				//Create SVG element
+				svg = d3.select("body")
+							.append("svg")
+							.attr("width", w)
+							.attr("height", h);
+				//Create bars
+				svg.selectAll("rect")
+				   .data(data)
+				   .enter()
+				   .append("rect")
+				   .attr("x", function(d, i) {
+						return xScale(i);
+				   })
+				   .attr("y", function(d) {
+						return h - yScale(d);
+				   })
+				   .attr("width", xScale.rangeBand())
+				   .attr("height", function(d) {
+						return yScale(d);
+				   })
+				   .attr("fill", function(d) {
+						return "green";
+				   });
+				//Create labels
+				svg.selectAll("text")
+				   .data(data)
+				   .enter()
+				   .append("text")
+				   .text(function(d) {
+						return formatPercent(d);
+				   })
+				   .attr("text-anchor", "middle")
+				   .attr("x", function(d, i) {
+						return xScale(i) + xScale.rangeBand() / 2;
+				   })
+				   .attr("y", function(d) {
+						return h - yScale(d) + 14;
+				   })
+				   .attr("font-family", "sans-serif")
+				   .attr("font-size", "11px")
+				   .attr("fill", "white");
+			}
+
+			// we need to connect the button to the update of datasets
+			function update_dataset(data) {
+
+				console.log(svg, data)
+				//On click, update with new data
+				//div.button informs D3 to select the div with the specific class button
+					svg.selectAll("rect")
+					   .data(data)
+					   .attr("y", function(d) {
+							return h - yScale(d);
+					   })
+					   .attr("height", function(d) {
+							return yScale(d);
+					   })
+					   .attr("fill", function(d) {
+							return "green";
+					   });
+					//Update all labels
+					svg.selectAll("text")
+					   .data(data)
+					   .text(function(d) {
+							return formatPercent(d);
+					   })
+					   .attr("x", function(d, i) {
+							return xScale(i) + xScale.rangeBand() / 2;
+					   })
+					   .attr("y", function(d) {
+							return h - yScale(d) + 14;
+					   });
+			}
+
+			// initialize the chart itself
+			build_chart(dataset_1);
+
+		</script>
+	</body>
+</html>
