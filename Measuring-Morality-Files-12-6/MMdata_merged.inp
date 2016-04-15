@@ -1,0 +1,2926 @@
+Title:
+Mplus file written by Stat/Transfer
+
+!  The following variables were converted:
+!    CaseID : Case ID
+!    weight : Post-stratification weight
+!    tm_start : Interview start time
+!    tm_finish : Interview finish time
+!    duration : Interview duration in minutes
+!    C1 : More needs to be done to restrict foreign influences on American cultur
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Agree
+!        3: Neither/Neutral
+!        4: Disagree
+!        5: Strongly Disagree
+!    C2 : The USA should welcome ideas from foreign cultures
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Agree
+!        3: Neither/Neutral
+!        4: Disagree
+!        5: Strongly Disagree
+!    C3 : The USA should cooperate with other countries only when in its own inte
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Agree
+!        3: Neither/Neutral
+!        4: Disagree
+!        5: Strongly Disagree
+!    I1 : [being a citizen of the United States?] How important to your sense of 
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I2 : [your job?] How important to your sense of identity is...
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I3 : [your home town?] How important to your sense of identity isÂ…
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I4 : [your home state?] How important to your sense of identity isÂ…
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I5 : [your religion?] How important to your sense of identity isÂ…
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I6 : [your social class?] How important to your sense of identity isÂ…
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I7 : [your preferred political party?] How important to your sense of identi
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I8 : [your favorite sports team?] How important to your sense of identity is
+!        -1: Refused
+!        1: Extremely important
+!        2: Very important
+!        3: Somewhat important
+!        4: Not very important
+!        5: Not at all important
+!    I9 : [Religiously, I consider myself] How important to your sense of identit
+!        -1: Refused
+!        1: Very religious
+!        2: Religious
+!        3: Somewhat religious
+!        4: Religious in name only
+!        5: Not religious
+!        6: Anti-religious
+!    I10 : [Spiritually, I consider myself] How important to your sense of identi
+!        -1: Refused
+!        1: Very spiritual
+!        2: Spiritual
+!        3: Somewhat spiritual
+!        4: Not spiritual
+!        5: Anti-spiritual
+!    RFQ1 : [My faith is extremely important to me.] Please indicate to what exte
+!        -1: Refused
+!        1: Strongly agree
+!        2: Agree
+!        3: Somewhat agree
+!        4: Neither agree/disagree
+!        5: Somewhat disagree
+!        6: Disagree
+!        7: Strongly disagree
+!    RFQ2 : [My religious faith impacts many of my decisions.] Please indicate to
+!        -1: Refused
+!        1: Strongly agree
+!        2: Agree
+!        3: Somewhat agree
+!        4: Neither agree/disagree
+!        5: Somewhat disagree
+!        6: Disagree
+!        7: Strongly disagree
+!    RFQ3 : [I look to faith for meaning and purpose in my life.] Please indicate
+!        -1: Refused
+!        1: Strongly agree
+!        2: Agree
+!        3: Somewhat agree
+!        4: Neither agree/disagree
+!        5: Somewhat disagree
+!        6: Disagree
+!        7: Strongly disagree
+!    REI1 : [I prefer my life to be filled with puzzles that I must solve.] Pleas
+!        -1: Refused
+!        1: Definitely not true of myself
+!        2: Somewhat not true of myself
+!        3: Neither true/untrue of myself
+!        4: Somewhat true of myself
+!        5: Definitely true of myself
+!    REI2 : [I believe in trusting my hunches.] Please indicate to what extent ea
+!        -1: Refused
+!        1: Definitely not true of myself
+!        2: Somewhat not true of myself
+!        3: Neither true/untrue of myself
+!        4: Somewhat true of myself
+!        5: Definitely true of myself
+!    REI3 : [I do better when I try to figure out people and situations logically
+!        -1: Refused
+!        1: Definitely not true of myself
+!        2: Somewhat not true of myself
+!        3: Neither true/untrue of myself
+!        4: Somewhat true of myself
+!        5: Definitely true of myself
+!    REI4 : [I think it is worse to be too sentimental than to be too analytic.] 
+!        -1: Refused
+!        1: Definitely not true of myself
+!        2: Somewhat not true of myself
+!        3: Neither true/untrue of myself
+!        4: Somewhat true of myself
+!        5: Definitely true of myself
+!    MR1 : [What is right and wrong is up to each person to decide.] Please indic
+!        -1: Refused
+!        1: Stronglyagree
+!        2: Agree
+!        3: Somewhatagree
+!        4: Neither agree/disagree
+!        5: Somewhatdisagree
+!        6: Disagree
+!        7: Stronglydisagree
+!    MR2 : [Right and wrong should be based on GodÂ’s law.] Please indicate to wh
+!        -1: Refused
+!        1: Stronglyagree
+!        2: Agree
+!        3: Somewhatagree
+!        4: Neither agree/disagree
+!        5: Somewhatdisagree
+!        6: Disagree
+!        7: Stronglydisagree
+!    MR3 : [American children should be raised to believe in God.] Please indicat
+!        -1: Refused
+!        1: Stronglyagree
+!        2: Agree
+!        3: Somewhatagree
+!        4: Neither agree/disagree
+!        5: Somewhatdisagree
+!        6: Disagree
+!        7: Stronglydisagree
+!    EPQ1 : [Moral standards should be seen as individualistic] Please indicate t
+!        -1: Refused
+!        1: Stronglyagree
+!        2: Agree
+!        3: Somewhatagree
+!        4: Neither agree/disagree
+!        5: Somewhatdisagree
+!        6: Disagree
+!        7: Stronglydisagree
+!    EPQ2 : [Question of what is ethical for everyone can never be resolved becau
+!        -1: Refused
+!        1: Stronglyagree
+!        2: Agree
+!        3: Somewhatagree
+!        4: Neither agree/disagree
+!        5: Somewhatdisagree
+!        6: Disagree
+!        7: Stronglydisagree
+!    EPQ3 : [Moral standards are simply personal rules that indicate how a person
+!        -1: Refused
+!        1: Stronglyagree
+!        2: Agree
+!        3: Somewhatagree
+!        4: Neither agree/disagree
+!        5: Somewhatdisagree
+!        6: Disagree
+!        7: Stronglydisagree
+!    L1 : [In order to truly nurture people national authorities need to be empat
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L2 : [People should be empowered by their government so that they can do wha
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L3 : [The government should encourage people to be cooperative rather than c
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L4 : [It's essential that political leaders promote empathy towards each oth
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L5 : [It takes toughness from the part of national authorities to mold peopl
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L6 : [It's very important that citizens are physically clean and not filthy,
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L7 : [Citizens must always behave calmly and orderly in public.] Please indi
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L8 : [People must be disciplined through strict rules in society.] Please in
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L9 : [Parents should empower children as much as possible so that they may f
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L10 : [Children must learn to see the world through other people's eyes.] Pl
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L11 : [In order to truly nurture children, one needs to be empathic.] Please
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L12 : [Children shouldn't feel obligated to care about the well-being of peo
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L13 : [I will not have my child talk back to me.] Please indicate to what ex
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L14 : [Children need to be disciplined in order to build character.] Please 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L15 : [Tough love is required to raise a child right.] Please indicate to wh
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    L16 : [Obedience must be instilled in children.] Please indicate to what ext
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES1 : [I get great pleasure from pursuing my goals.] Think about each stat
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES2 : [I enjoy the feeling of anticipation when IÂ’m looking forward to so
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES3 : [I enjoy getting new things for myself.] Think about each statement 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES4 : [I am generally a contented person.] Think about each statement sepe
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES5 : [When I think about my life I experience a deep feeling of contentme
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES6 : [I feel satisfied more often than most people.] Think about each sta
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES7 : [I take great pride in my achievements.] Think about each statement 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES8 : [It feels good to know that people look up to me.] Think about each 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES9 : [I feel strong positive emotion when I do something well.] Think abo
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES10 : [I enjoy forming emotionally intimate relationships.] Think about e
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES11 : [I develop strong emotions toward people I can rely on.] Think abou
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES12 : [I grow to love people who are kind to me.] Think about each statem
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES13 : [Nurturing others gives me a warm feeling inside.] Think about each
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES14 : [I enjoy being a caregiver in my relationships.] Think about each s
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES15 : [I am a very compassionate person.] Think about each statement sepe
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES16 : [I find humor in almost everything.] Think about each statement sep
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES17 : [Many things are funny to me.] Think about each statement seperatel
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES18 : [There is a lot of humor in my life.] Think about each statement se
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES19 : [I often feel awe.] Think about each statement seperately and decid
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES20 : [I feel wonder almost every day.] Think about each statement sepera
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DPES21 : [My life is full of wonder.] Think about each statement seperately 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Somewhat disagree
+!        4: Neither agree nor disagree
+!        5: Somewhat agree
+!        6: Agree
+!        7: Strongly agree
+!    DIT0 : Should Heinz steal the drug?
+!        -1: Refused
+!        1: Yes, he should steal the drug
+!        2: I can’t decide
+!        3: No, he should not steal the drug
+!    DIT1 : [Whether a communityÂ’s laws are going to be upheld.] Mark how import
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT2 : [IsnÂ’t it only natural for a loving husband to care so much for his 
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT3 : [Is Heinz willing to risk getting shot as a burglar or going to jail 
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT4 : [Whether Heinz is a professional wrestler, or has considerable influe
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT5 : [Whether Heinz is stealing for himself or doing this solely to help s
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT6 : [Whether the druggistÂ’s rights to his invention have to be respected
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT7 : [Whether the essence of living is more encompassing than the terminat
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT8 : [What values are going to be the basis for governing how people act t
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT9 : [Whether the druggist is going to be allowed to hide behind at worthl
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT10 : [Whether the law in this case is getting in the way of the most basi
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT11 : [Whether the druggist deserves to be robbed for being so greedy and 
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    DIT12 : [Would stealing in such a case bring about more total good for the w
+!        -1: Refused
+!        1: Not important
+!        2: Little importance
+!        3: Some importance
+!        4: Much importance
+!        5: Great importance
+!    RANK_DIT1 : [Whether a communityÂ’s laws are going to be upheld.] Ranking of
+!    RANK_DIT2 : [IsnÂ’t it only natural for a loving husband to care so much for
+!    RANK_DIT3 : [Is Heinz willing to risk getting shot as a burglar or going to 
+!    RANK_DIT4 : [Whether Heinz is a professional wrestler, or has considerable i
+!    RANK_DIT5 : [Whether Heinz is stealing for himself or doing this solely to h
+!    RANK_DIT6 : [Whether the druggistÂ’s rights to his invention have to be resp
+!    RANK_DIT7 : [Whether the essence of living is more encompassing than the ter
+!    RANK_DIT8 : [What values are going to be the basis for governing how people 
+!    RANK_DIT9 : [Whether the druggist is going to be allowed to hide behind at w
+!    RANK_DIT10 : [Whether the law in this case is getting in the way of the most
+!    RANK_DIT11 : [Whether the druggist deserves to be robbed for being so greedy
+!    RANK_DIT12 : [Would stealing in such a case bring about more total good for 
+!    MELS1 : [Lying about a test score when reporting performance to a teacher.] 
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS2 : [Faking an injury to collect on insurance.] Please use the following
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS3 : [Parking in a handicapped parking spot when not handicapped.] Please
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS4 : [Using someone elseÂ’s toothbrush without his or her permission.] Pl
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS5 : [Packing for a trip at the last minute.] Please use the following sc
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS6 : [Choosing to wake up late, despite having a busy day ahead.] Please 
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS7 : [Ignoring a woman struggling to carry bags of groceries.] Please use
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS8 : [Ignoring a driver whose car is stuck in the snow.] Please use the f
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS9 : [An 18-year-old girl breaking an abstinence vow to have premarital s
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS10 : [Drinking 10 beers at a party and vomiting several times.] Please u
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS11 : [Defecating, not washing oneÂ’s hands, and then preparing dinner fo
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MELS12 : [Wearing a pair of pants for three weeks without washing them.] Ple
+!        -1: Refused
+!        1: Not at all wrong; has nothing to do with morality1
+!        2: 2
+!        3: 3
+!        4: 4
+!        5: 5
+!        6: 6
+!        7: Very wrong; an extremely immoral action7
+!    MOPS11 : [Issue1]Please indicate which two issues are the MOST important cha
+!        -1: Refused
+!        1: Abortion
+!        2: The unemployment rate
+!        3: Illegal immigration
+!        4: Education
+!        5: Same sex marriage
+!        6: The environment
+!        7: Social security
+!        8: Health care reform
+!        9: The deficit
+!        10: The housing crisis
+!        11: Income inequality
+!        12: Taxes
+!    MOPS12 : [Issue2]Please indicate which two issues are the MOST important cha
+!        -1: Refused
+!        1: Abortion
+!        2: The unemployment rate
+!        3: Illegal immigration
+!        4: Education
+!        5: Same sex marriage
+!        6: The environment
+!        7: Social security
+!        8: Health care reform
+!        9: The deficit
+!        10: The housing crisis
+!        11: Income inequality
+!        12: Taxes
+!    Dov_mops101 : [Abortion] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops102 : [The unemployment rate] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops103 : [Illegal immigration] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops104 : [Education] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops105 : [Same sex marriage] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops106 : [The environment] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops107 : [Social security] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops108 : [Health care reform] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops109 : [The deficit] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops110 : [The housing crisis] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops111 : [Income inequality] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops112 : [Taxes] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    Dov_mops113 : [Refused] Selected in MOPS1
+!        0: No
+!        1: Yes
+!    MOPS21 : Please indicate which two issues are the LEAST important challenges
+!        -1: Refused
+!        1: Abortion
+!        2: The unemployment rate
+!        3: Illegal immigration
+!        4: Education
+!        5: Same sex marriage
+!        6: The environment
+!        7: Social security
+!        8: Health care reform
+!        9: The deficit
+!        10: The housing crisis
+!        11: Income inequality
+!        12: Taxes
+!    MOPS22 : Please indicate which two issues are the LEAST important challenges
+!        -1: Refused
+!        1: Abortion
+!        2: The unemployment rate
+!        3: Illegal immigration
+!        4: Education
+!        5: Same sex marriage
+!        6: The environment
+!        7: Social security
+!        8: Health care reform
+!        9: The deficit
+!        10: The housing crisis
+!        11: Income inequality
+!        12: Taxes
+!    Dov_mops201 : [Abortion] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops202 : [The unemployment rate] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops203 : [Illegal immigration] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops204 : [Education] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops205 : [Same sex marriage] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops206 : [The environment] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops207 : [Social security] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops208 : [Health care reform] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops209 : [The deficit] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops210 : [The housing crisis] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops211 : [Income inequality] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops212 : [Taxes] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops213 : [Refused] Selected in MOPS2
+!        0: No
+!        1: Yes
+!    Dov_mops301 : [Abortion] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops302 : [The unemployment rate] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops303 : [Illegal immigration] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops304 : [Education] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops305 : [Same sex marriage] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops306 : [The environment] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops307 : [Social security] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops308 : [Health care reform] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops309 : [The deficit] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops310 : [The housing crisis] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops311 : [Income inequality] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    Dov_mops312 : [Taxes] Recorded for use in MOPS3
+!        0: No
+!        1: Yes
+!    MOPS3_01 : [Abortion] To what extent is your position on each of the followi
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_02 : [The unemployment rate] To what extent is your position on each o
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_03 : [Illegal immigration] To what extent is your position on each of 
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_04 : [Education] To what extent is your position on each of the follow
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_05 : [Same sex marriage] To what extent is your position on each of th
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_06 : [The environment] To what extent is your position on each of the 
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_07 : [Social security] To what extent is your position on each of the 
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_08 : [Health care reform] To what extent is your position on each of t
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_09 : [The deficit] To what extent is your position on each of the foll
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_10 : [The housing crisis] To what extent is your position on each of t
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_11 : [Income inequality] To what extent is your position on each of th
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MOPS3_12 : [Taxes] To what extent is your position on each of the following 
+!        -1: Refused
+!        1: Not at all
+!        2: Slightly
+!        3: Moderately
+!        4: Much
+!        5: Very much
+!    MFSS1 : [Cheat in a game of cards played for money with some people you donÂ
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS2 : [Throw out a box of ballots, during an election, to help your favore
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS3 : [Sign a secret-but-binding pledge to only hire people of your race i
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS4 : [Say something bad about your nation while calling in, anonymously, 
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS5 : [Break off all communications with your immediate and extended famil
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS6 : [Burn your countryÂ’s flag, in private (nobody else sees you)] To wh
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS7 : [Curse your parents, to their face. (You can apologize and explain o
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS8 : [Make a disrespectful hand gesture to your boss, teacher, or profess
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS9 : [Throw a rotten tomato at a political leader you dislike. (remember,
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS10 : [Sign a piece of paper that says Â“I hereby sell my soul, after my 
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS11 : [Get a blood transfusion of one pint of disease-free, compatible bl
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS12 : [Attend a performance art piece in which all participants (includin
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS13 : [Sit in a bathtub full of ice water for 10 minutes] To what extent 
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS14 : [Wear a sign on your back for one month that says, in large letters
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS15 : [Experience a severe headache for two weeks] To what extent is your
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS16 : [Kick a dog in the head, hard] To what extent is your position on e
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS17 : [Make cruel remarks to an overweight person about his or her appear
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MFSS18 : [Stick a pin into the palm of a child you donÂ’t know] To what exte
+!        -1: Refused
+!        1: $0 (I’d do it for free)
+!        2: $10
+!        3: $100
+!        4: $1,000
+!        5: $10,000
+!        6: $100,000
+!        7: $1 million dollars or more
+!        8: never for any amount of money
+!    MI1 : [It would make me feel good to be a person who has these characteristi
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI2 : [Being someone who has these characteristics is an important part of w
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI3 : [I often wear clothes that identify me as having these characteristics
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI4 : [I would be ashamed to be a person who had these characteristics.] Whe
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI5 : [The types of things I do in my spare time (e.g. hobbies) clearly iden
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI6 : [The kinds of books and magazines that I read identify me as having th
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI7 : [Having these characteristics is not really important to me.] When you
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI8 : [The fact that I have these characteristics is communicated to others 
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI9 : [I am very involved in activities that communicate to others that I ha
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    MI10 : [I strongly desire to have these characteristics.] When you have a cl
+!        -1: Refused
+!        1: Completely Disagree
+!        2: Mostly Disagree
+!        3: Slightly Disagree
+!        4: Neutral
+!        5: Slightly Agree
+!        6: Mostly Agree
+!        7: Completely Agree
+!    CRQ1 : The following are descriptions of four general relationship styles th
+!        -1: Refused
+!        1: It is easy to become emotionally close to others.  I am comfortable d
+!        2: I am uncomfortable getting close to others.  I want emotionally close
+!        3: I want to be completely emotionally intimate with others, but I often
+!        4: I am comfortable without close emotional relationships.  It is very i
+!    CQR2_A : [It is easy to become emotionally close to others.]  Please rate ea
+!        -1: Refused
+!        1: Not atall likeme1
+!        2: 2
+!        3: 3
+!        4: Somewhatlike me4
+!        5: 5
+!        6: 6
+!        7: Very muchlike me7
+!    CQR2_B : [I want emotionally close relationships but I find it difficult to 
+!        -1: Refused
+!        1: Not atall likeme1
+!        2: 2
+!        3: 3
+!        4: Somewhatlike me4
+!        5: 5
+!        6: 6
+!        7: Very muchlike me7
+!    CQR2_C : [I want to be completely emotionally intimate with others, but I of
+!        -1: Refused
+!        1: Not atall likeme1
+!        2: 2
+!        3: 3
+!        4: Somewhatlike me4
+!        5: 5
+!        6: 6
+!        7: Very muchlike me7
+!    CQR2_D : [I am comfortable without close emotional relationships.]  Please r
+!        -1: Refused
+!        1: Not atall likeme1
+!        2: 2
+!        3: 3
+!        4: Somewhatlike me4
+!        5: 5
+!        6: 6
+!        7: Very muchlike me7
+!    IS1 : [It is foolish to tell the truth when big profits can be made by lying
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS2 : [Regardless of concerns about principles, in today's world you have to
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS3 : [The reason it is important to tell the truth is because of what other
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS4 : [The true test of character is a willingness to stand by one's princip
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS5 : [There are no principles worth dying for.] Please rate how much you ag
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS6 : [If one believes something is right, one must stand by it, even if it 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS7 : [Lying is sometimes necessary to accomplish important, worthwhile goal
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS8 : [If done for the right reasons, even lying or cheating are OK.] Please
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS9 : [One's principles should not be compromised regardless of the possible
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    IS10 : [Some transgressions are wrong and cannot be legitimately justified o
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither disagree nor agree
+!        4: Agree
+!        5: Strongly agree
+!    SV1 : [Thinking up new ideas and being creative is important to me. I like t
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV2 : [It is important to me to be rich. I want to have a lot of money and e
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV3 : [I think it is important that every person in the world be treated equ
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV4 : [It's very important to me to show my abilities. I want people to admi
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV5 : [It is important to me to live in secure surroundings.  I avoid anythi
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV6 : [I think it is important to do lots of different things in life.  I al
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV7 : [I believe that people should do what they're told. I think people sho
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV8 : [It is important to me to listen to people who are different from me. 
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV9 : [It's important to me to be humble and modest and not to draw attentio
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV10 : [Having a good time is important to me.  I like to Â“spoilÂ” myself.]
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV11 : [It is important to me to make my own decisions about what I do.  I l
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV12 : [It's very important to me to help the people around me.  I want to c
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV13 : [Being very successful is important to me. I hope people will recogni
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV14 : [It is very important to me that the government ensures my safety aga
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV15 : [I look for adventure and like to take risks.  I want to have an exci
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV16 : [It is important to me to always behave properly. I avoid doing anyth
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV17 : [It is important to me to get respect from others. I want people to d
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV18 : [It is important to me to be loyal to my friends. I want to devote my
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV19 : [I strongly believe that people should care for nature. Looking after
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV20 : [Tradition is important to me.  I try to follow the customs handed do
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    SV21 : [I seek every chance I can to have fun.  It is important to me to do 
+!        -1: Refused
+!        1: Very much like me
+!        2: Like me
+!        3: Somewhat like me
+!        4: A little like me
+!        5: Not like me
+!        6: Not like me at all
+!    TET1 : [Being someone who has these characteristics is an important part of 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET2 : [Other people I know think I have these characteristics.] Please mark
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET3 : [My friends think I have these characteristics.] Please mark the resp
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET4 : [I strongly desire to have these characteristics.] Please mark the re
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET5 : [My family thinks I have these characteristics.] Please mark the resp
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET6 : [Being someone who has these characteristics is an important part of 
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET7 : [Other people I know think I have these characteristics.] Please mark
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET8 : [My friends think I have these characteristics.] Please mark the resp
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET9 : [I strongly desire to have these characteristics.] Please mark the re
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET10 : [My family thinks I have these characteristics.] Please mark the res
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET11 : [Being someone who has these characteristics is an important part of
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET12 : [Other people I know think I have these characteristics.] Please mar
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET13 : [My friends think I have these characteristics.] Please mark the res
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET14 : [I strongly desire to have these characteristics.] Please mark the r
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    TET15 : [My family thinks I have these characteristics.] Please mark the res
+!        -1: Refused
+!        1: Strongly disagree
+!        2: Disagree
+!        3: Neither agree nor disagree
+!        4: Agree
+!        5: Strongly agree
+!    Dov_version : dov_version: records which version was displayed in Block 15
+!        1: Version 1
+!        2: Version 2
+!    Block15 : Trolley Dilemma
+!        -1: Refused
+!        1: Is appropriate
+!        2: Is not appropriate
+!    EVA1 : [I should take responsibility for myself.] What moral values do you t
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA2 : [I should take care of my family.] What moral values do you think are
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA3 : [I should aim for spiritual salvation.] What moral values do you thin
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA4 : [I should be fair to other individuals.] What moral values do you thi
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA5 : [I should aim to live a holy life.] What moral values do you think ar
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA6 : [I should respect other individualsÂ’ rights.] What moral values do y
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA7 : [I should follow GodÂ’s law.] What moral values do you think are impo
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA8 : [I should be cooperative.] What moral values do you think are importa
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA9 : [I should strive for social harmony.] What moral values do you think 
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA10 : [I should try to achieve my personal goals.] What moral values do yo
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA11 : [I should know my place or role in a group.] What moral values do yo
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    EVA12 : [I should strive for spiritual purity.] What moral values do you thi
+!        -1: Refused
+!        1: Not at all Important
+!        2: Slightly Important
+!        3: Moderately Important
+!        4: Very Important
+!        5: Completely Important
+!    Dov_game : dov_version: records which version was displayed in Block 17
+!        1: Show Version 1
+!        2: Show Version 2
+!        3: Pretest Do Not Show
+!    Block17 : How many of your 10 raffle tickets would you like to transfer to t
+!        -1: Refused
+!        1: 0
+!        2: 1
+!        3: 2
+!        4: 3
+!        5: 4
+!        6: 5
+!        7: 6
+!        8: 7
+!        9: 8
+!        10: 9
+!        11: 10
+!    PPAGE : Age
+!        -2: Not asked
+!        -1: refused
+!    ppagecat : Age - 7 Categories
+!        1: 18-24
+!        2: 25-34
+!        3: 35-44
+!        4: 45-54
+!        5: 55-64
+!        6: 65-74
+!        7: 75+
+!        99: Under 18
+!    ppagect4 : Age - 4 Categories
+!        1: 18-29
+!        2: 30-44
+!        3: 45-59
+!        4: 60+
+!        99: Under 18
+!    PPEDUC : Education (Highest Degree Received)
+!        -2: Not asked
+!        -1: refused
+!        1: No formal education
+!        2: 1st, 2nd, 3rd, or 4th grade
+!        3: 5th or 6th grade
+!        4: 7th or 8th grade
+!        5: 9th grade
+!        6: 10th grade
+!        7: 11th grade
+!        8: 12th grade NO DIPLOMA
+!        9: HIGH SCHOOL GRADUATE - high school DIPLOMA or the equivalent (GED)
+!        10: Some college, no degree
+!        11: Associate degree
+!        12: Bachelors degree
+!        13: Masters degree
+!        14: Professional or Doctorate degree
+!    PPEDUCAT : Education (Categorical)
+!        -2: Not asked
+!        -1: refused
+!        1: Less than high school
+!        2: High school
+!        3: Some college
+!        4: Bachelor's degree or higher
+!    PPETHM : Race / Ethnicity
+!        -2: Not asked
+!        -1: refused
+!        1: White, Non-Hispanic
+!        2: Black, Non-Hispanic
+!        3: Other, Non-Hispanic
+!        4: Hispanic
+!        5: 2+ Races, Non-Hispanic
+!    PPGENDER : Gender
+!        -2: Not asked
+!        -1: refused
+!        1: Male
+!        2: Female
+!    PPHHHEAD : Household Head
+!        -2: Not asked
+!        -1: refused
+!        0: No
+!        1: Yes
+!    PPHHSIZE : Household Size
+!        -2: Not asked
+!        -1: refused
+!    PPHOUSE : Housing Type
+!        -2: Not asked
+!        -1: refused
+!        1: A one-family house detached from any other house
+!        2: A one-family house attached to one or more houses
+!        3: A building with 2 or more apartments
+!        4: A mobile home
+!        5: Boat, RV, van, etc.
+!    PPINCIMP : Household Income
+!        -2: Not asked
+!        -1: refused
+!        1: Less than $5,000
+!        2: $5,000 to $7,499
+!        3: $7,500 to $9,999
+!        4: $10,000 to $12,499
+!        5: $12,500 to $14,999
+!        6: $15,000 to $19,999
+!        7: $20,000 to $24,999
+!        8: $25,000 to $29,999
+!        9: $30,000 to $34,999
+!        10: $35,000 to $39,999
+!        11: $40,000 to $49,999
+!        12: $50,000 to $59,999
+!        13: $60,000 to $74,999
+!        14: $75,000 to $84,999
+!        15: $85,000 to $99,999
+!        16: $100,000 to $124,999
+!        17: $125,000 to $149,999
+!        18: $150,000 to $174,999
+!        19: $175,000 or more
+!    PPMARIT : Marital Status
+!        -2: Not asked
+!        -1: refused
+!        1: Married
+!        2: Widowed
+!        3: Divorced
+!        4: Separated
+!        5: Never married
+!        6: Living with partner
+!    PPMSACAT : MSA Status
+!        -2: Not asked
+!        -1: refused
+!        0: Non-Metro
+!        1: Metro
+!    PPREG4 : Region 4 - Based on State of Residence
+!        -2: Not asked
+!        -1: refused
+!        1: Northeast
+!        2: Midwest
+!        3: South
+!        4: West
+!    ppreg9 : Region 9 - Based on State of Residence
+!        1: New England
+!        2: Mid-Atlantic
+!        3: East-North Central
+!        4: West-North Central
+!        5: South Atlantic
+!        6: East-South Central
+!        7: West-South Central
+!        8: Mountain
+!        9: Pacific
+!    PPRENT : Ownership Status of Living Quarters
+!        -2: Not asked
+!        -1: refused
+!        1: Owned or being bought by you or someone in your household
+!        2: Rented for cash
+!        3: Occupied without payment of cash rent
+!    PPSTATEN : State
+!        -2: Not asked
+!        -1: refused
+!        11: me
+!        12: nh
+!        13: vt
+!        14: ma
+!        15: ri
+!        16: ct
+!        21: ny
+!        22: nj
+!        23: pa
+!        31: oh
+!        32: in
+!        33: il
+!        34: mi
+!        35: wi
+!        41: mn
+!        42: ia
+!        43: mo
+!        44: nd
+!        45: sd
+!        46: ne
+!        47: ks
+!        51: de
+!        52: md
+!        53: dc
+!        54: va
+!        55: wv
+!        56: nc
+!        57: sc
+!        58: ga
+!        59: fl
+!        61: ky
+!        62: tn
+!        63: al
+!        64: ms
+!        71: ar
+!        72: la
+!        73: ok
+!        74: tx
+!        81: mt
+!        82: id
+!        83: wy
+!        84: co
+!        85: nm
+!        86: az
+!        87: ut
+!        88: nv
+!        91: wa
+!        92: or
+!        93: ca
+!        94: ak
+!        95: hi
+!        96: as
+!        97: gu
+!        98: pr
+!        99: vi
+!    PPT01 : Presence of Household Members - Children 0-2
+!        -2: Not asked
+!        -1: refused
+!    PPT1317 : Presence of Household Members - Children 13-17
+!        -2: Not asked
+!        -1: refused
+!    PPT18OV : Presence of Household Members - Adults 18+
+!        -2: Not asked
+!        -1: refused
+!    PPT25 : Presence of Household Members - Children 2-5
+!        -2: Not asked
+!        -1: refused
+!    PPT612 : Presence of Household Members - Children 6-12
+!        -2: Not asked
+!        -1: refused
+!    PPWORK : Current Employment Status
+!        -2: Not asked
+!        -1: refused
+!        1: Working - as a paid employee
+!        2: Working - self-employed
+!        3: Not working - on temporary layoff from a job
+!        4: Not working - looking for work
+!        5: Not working - retired
+!        6: Not working - disabled
+!        7: Not working - other
+!    PPNET : HH Internet Access
+!        0: No
+!        1: Yes
+!    CORE_EMP : Empty nest HH
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    core_par : Is R a parent or legal guardian?
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    PPINCCAT : HH income profile and imputed -- 4 categ
+!        -2: Not asked
+!        -1: Refused
+!        1: <$10,000
+!        2: $10-49,999
+!        3: $50-74,999
+!        4: $75,000+
+!    EVER_PAR : Ever a parent
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    PPADOPT2 : I often try new brands because I like va
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree or Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!    ppcu0153 : Q1: Agree that I consider the illegal downloading of movies, musi
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable or Not Familiar
+!    ppfs0681 : Q45: Agree that I am in control of my life
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Disagree
+!        2: Somewhat Disagree
+!        3: Somewhat Agree
+!        4: Strongly Agree
+!    ppfs0682 : Q45: Agree that I have a positive self-image
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Disagree
+!        2: Somewhat Disagree
+!        3: Somewhat Agree
+!        4: Strongly Agree
+!    ppfs0683 : Q45: Agree that I have no idea if I'm managing my money well; I j
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Disagree
+!        2: Somewhat Disagree
+!        3: Somewhat Agree
+!        4: Strongly Agree
+!    ppfs0684 : Q45: Agree that generally, I live from paycheck to paycheck
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Disagree
+!        2: Somewhat Disagree
+!        3: Somewhat Agree
+!        4: Strongly Agree
+!    ppfs0685 : Q45: Agree that I enjoy reading about finances and ways to better
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Disagree
+!        2: Somewhat Disagree
+!        3: Somewhat Agree
+!        4: Strongly Agree
+!    ppfs0686 : Q45: Agree that I am in control of my finances
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Disagree
+!        2: Somewhat Disagree
+!        3: Somewhat Agree
+!        4: Strongly Agree
+!    ppfs0687 : Q45: Agree that I am usually the first of my friends to try new p
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Disagree
+!        2: Somewhat Disagree
+!        3: Somewhat Agree
+!        4: Strongly Agree
+!    ppfs0678 : Q42: Generally, how would you rate the U.S. economy these days?
+!        -2: Not asked
+!        -1: Refused
+!        1: Excellent
+!        2: Good
+!        3: Fair
+!        4: Poor
+!        5: Not sure
+!    ppfs0679 : Q43: How would you rate your own personal finances these days?
+!        -2: Not asked
+!        -1: Refused
+!        1: Excellent
+!        2: Good
+!        3: Fair
+!        4: Poor
+!        5: Not sure
+!    ppfs0680 : Q44: Are your personal finances getting better these days, or wor
+!        -2: Not asked
+!        -1: Refused
+!        1: Better
+!        2: Worse
+!        3: Same
+!        4: Not sure
+!    pph10001 : Q1: In general, would you say your physical health is. . .?
+!        -2: Not asked
+!        -1: Refused
+!        1: Excellent
+!        2: Very good
+!        3: Good
+!        4: Fair
+!        5: Poor
+!    pph10002 : Q4: Have you had a serious or chronic illness, injury, or disabil
+!        -2: Not asked
+!        -1: Refused
+!        1: Yes
+!        2: No
+!    pph10055 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10056 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10057 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10059 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10060 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10061 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10083 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10084 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10085 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10087 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10088 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10089 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10219 : Q35: During an average week, how often do you exercise?
+!        -2: Not asked
+!        -1: Refused
+!        1: Never
+!        2: Less than once a week
+!        3: 1-2 times a week
+!        4: 3-5 times a week
+!        5: 6 or more times a week
+!    pph10220 : Q36: Have you smoked at least 100 cigarettes in your ENTIRE LIFE?
+!        -2: Not asked
+!        -1: Refused
+!        1: Yes
+!        2: No
+!    pph10221 : Q37: Do you NOW smoke cigarettes every day, some days, or not at 
+!        -2: Not asked
+!        -1: Refused
+!        1: Every day
+!        2: Some days
+!        3: Not at all
+!    pph10252 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10253 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10254 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10255 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10256 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph10257 : Q20: What steps are you taking to manage your medical condition? 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph1anxi : Q19: Have you been diagnosed with any of the following medical co
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph1depr : Q19: Have you been diagnosed with any of the following medical co
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph1inso : Q19: Have you been diagnosed with any of the following medical co
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pph1ment : Q19: Have you been diagnosed with any of the following medical co
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pphi0016 : Q3: In what country were you born?
+!        -2: Not asked
+!        -1: Refused
+!        1: Argentina
+!        2: Bolivia
+!        3: Chile
+!        4: Colombia
+!        5: Costa Rica
+!        6: Cuba
+!        7: The Dominican Republic
+!        8: Ecuador
+!        9: El Salvador
+!        10: Guatemala
+!        11: Honduras
+!        12: Mexico
+!        13: Nicaragua
+!        14: Panama
+!        15: Paraguay
+!        16: Peru
+!        17: Puerto Rico
+!        18: Spain
+!        19: United States
+!        20: Uruguay
+!        21: Venezuela
+!        22: Other (SPECIFY)
+!    pphi0018 : Q5: In total, how many years have you lived in the United States?
+!        -2: Not asked
+!        -1: Refused
+!    pphi0041 : Q12: Agree that anyone who comes to this country and intends to s
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Agree
+!        3: Neither Agree nor Disagree
+!        4: Disagree
+!        5: Strongly Disagree
+!    pphi0046 : Q14: How willing to work long hours at the expense of your person
+!        -2: Not asked
+!        -1: Refused
+!        1: Very willing
+!        2: Somewhat willing
+!        3: Not too willing
+!        4: Not willing at all
+!    pphi0047 : Q14: How willing to get along with people of different races and 
+!        -2: Not asked
+!        -1: Refused
+!        1: Very willing
+!        2: Somewhat willing
+!        3: Not too willing
+!        4: Not willing at all
+!    pphi0048 : Q14: How willing to do what is best for yourself rather than what
+!        -2: Not asked
+!        -1: Refused
+!        1: Very willing
+!        2: Somewhat willing
+!        3: Not too willing
+!        4: Not willing at all
+!    ppl10003 : Q1: Agree that no matter how hard I work, I can't seem to get ahe
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10004 : Q1: Agree that I feel good about where my career is headed
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10005 : Q1: Agree that it's getting harder to provide my family with the 
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10007 : Q1: Agree that most of my friends are from the same racial or eth
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10008 : Q1: Agree that life is so busy that I find I have less time to sp
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10009 : Q1: Agree that it is hard for me to find the time to be involved 
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10012 : Q1: Agree that it is becoming increasingly difficult to find the 
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10013 : Q1: Agree that I feel stressed most of the time
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10014 : Q1: Agree that I live a healthy lifestyle
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10017 : Q1: Agree that I love to shop
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10018 : Q1: Agree that I just don't have enough money to live the life I 
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly Agree
+!        2: Somewhat Agree
+!        3: Neither Agree nor Disagree
+!        4: Somewhat Disagree
+!        5: Strongly Disagree
+!        6: Not Applicable
+!    ppl10019 : Q2: In a typical week, about how many hours do you work?
+!        -2: Not asked
+!        -1: Refused
+!    ppl10021 : Q3: In a typical week, about what proportion of your time do you 
+!        -2: Not asked
+!        -1: Refused
+!        1: 0%
+!        2: 1-24%
+!        3: 25-49%
+!        4: 50-74%
+!        5: 75-100%
+!    ppl10055 : Q12: How often did you participate in this activity during the pa
+!        -2: Not asked
+!        -1: Refused
+!        1: Regularly
+!        2: Occasionally
+!        3: Never
+!    pppa0012 : Q11: In general, do you think of yourself as...
+!        -2: Not asked
+!        -1: Refused
+!        1: Extremely liberal
+!        2: Liberal
+!        3: Slightly liberal
+!        4: Moderate, middle of the road
+!        5: Slightly conservative
+!        6: Conservative
+!        7: Extremely conservative
+!    pppa0073 : Q28: Do you actively participate in any of the following types of
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0074 : Q28: Do you actively participate in any of the following types of
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0075 : Q28: Do you actively participate in any of the following types of
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0076 : Q28: Do you actively participate in any of the following types of
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0077 : Q28: Do you actively participate in any of the following types of
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0078 : Q28: Do you actively participate in any of the following types of
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0079 : Q29: How about any of these types of organizations or groups? [Is
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0080 : Q29: How about any of these types of organizations or groups? [No
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0081 : Q29: How about any of these types of organizations or groups? [Sc
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0082 : Q29: How about any of these types of organizations or groups? [Ho
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0083 : Q29: How about any of these types of organizations or groups? [Ne
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0084 : Q29: How about any of these types of organizations or groups? [Gr
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0085 : Q29: How about any of these types of organizations or groups? [No
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0206 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0207 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0208 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0209 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0210 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0211 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0212 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0213 : Q11D: Do you actively participate in any of the following politic
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    Display_time : Display screen timing (sec)
+!    Block7_page_time : Block7_page screen timing (sec)
+!    DIT1_time : DIT1 screen timing (sec)
+!    DIT1_RANK_time : DIT1_RANK screen timing (sec)
+!    Block4_time : Block4 screen timing (sec)
+!    Block9_time : Block9 screen timing (sec)
+!    Block14A_time : Block14A screen timing (sec)
+!    Block8_time : Block8 screen timing (sec)
+!    Block8_MOPS1_time : Block8_MOPS1 screen timing (sec)
+!    Block8_MOPS2_time : Block8_MOPS2 screen timing (sec)
+!    Block8_MOPS3_time : Block8_MOPS3 screen timing (sec)
+!    Block11_CRQ1_time : Block11_CRQ1 screen timing (sec)
+!    Block11_CQR2_time : Block11_CQR2 screen timing (sec)
+!    Block6_time : Block6 screen timing (sec)
+!    Block14B_time : Block14B screen timing (sec)
+!    Block5_time : Block5 screen timing (sec)
+!    Block13_time : Block13 screen timing (sec)
+!    Block10_time : Block10 screen timing (sec)
+!    I9_time : I9 screen timing (sec)
+!    SantaClara_time : SantaClara screen timing (sec)
+!    Block2_time : Block2 screen timing (sec)
+!    I10_time : I10 screen timing (sec)
+!    Block1_time : Block1 screen timing (sec)
+!    Block3_time : Block3 screen timing (sec)
+!    Block14C_time : Block14C screen timing (sec)
+!    Block16_time : Block16 screen timing (sec)
+!    IntroB15_time : IntroB15 screen timing (sec)
+!    Block15_time : Block15 screen timing (sec)
+!    Block12_time : Block12 screen timing (sec)
+!    Q1_time : Q1 screen timing (sec)
+!    Q42_time : Q42 screen timing (sec)
+!    Q43_time : Q43 screen timing (sec)
+!    Q44_time : Q44 screen timing (sec)
+!    Q45_time : Q45 screen timing (sec)
+!    Q1_health_time : Q1_health screen timing (sec)
+!    Q4_time : Q4 screen timing (sec)
+!    Q19_time : Q19 screen timing (sec)
+!    Q35_time : Q35 screen timing (sec)
+!    Q36_time : Q36 screen timing (sec)
+!    Q1_LIFE1_time : Q1_LIFE1 screen timing (sec)
+!    Q1_LIFE2_time : Q1_LIFE2 screen timing (sec)
+!    Q1_LIFE3_time : Q1_LIFE3 screen timing (sec)
+!    Q2_time : Q2 screen timing (sec)
+!    Q3_LIFE_time : Q3_LIFE screen timing (sec)
+!    Q12_LIFE_time : Q12_LIFE screen timing (sec)
+!    FR1_time : FR1 screen timing (sec)
+!    Q20_Loop_2_time : Q20_Loop_2 screen timing (sec)
+!    Q37_time : Q37 screen timing (sec)
+!    Q20_Loop_1_time : Q20_Loop_1 screen timing (sec)
+!    Q20_Loop_4_time : Q20_Loop_4 screen timing (sec)
+!    pppa0233 : Q2: In your opinion, what is the most important issue facing the 
+!        -2: Not asked
+!        -1: Refused
+!        1: Taxes
+!        2: Education
+!        3: Terrorism
+!        4: Economy
+!        5: Moral issues
+!        6: Healthcare
+!        7: Jobs
+!        8: Foreign policy
+!        9: Race relations
+!        10: Environment
+!        11: Immigration
+!        12: Situation in Afghanistan
+!        13: Energy
+!        14: Other (please specify):
+!        15: Federal deficit
+!    pppa0016 : Q12: Please rate your feelings towards Barack Obama. Is your over
+!        -2: Not asked
+!        -1: Refused
+!        1: Favorable
+!        2: Somewhat favorable
+!        3: Neither favorable nor unfavorable
+!        4: Somewhat unfavorable
+!        5: Unfavorable
+!    pppa0017 : Q13: Do you approve or disapprove of the way Barack Obama is hand
+!        -2: Not asked
+!        -1: Refused
+!        1: Strongly approve
+!        2: Approve
+!        3: Neither approve nor disapprove
+!        4: Disapprove
+!        5: Strongly disapprove
+!    pppa0035 : Q16: In general, how interested are you in politics and public af
+!        -2: Not asked
+!        -1: Refused
+!        1: Very interested
+!        2: Somewhat interested
+!        3: Slightly interested
+!        4: Not at all interested
+!    pppa0041 : PIN1: How often does the subject of politics come up in each of t
+!        -2: Not asked
+!        -1: Refused
+!        1: A lot
+!        2: Some
+!        3: Hardly ever
+!        4: Never
+!        5: Does not apply
+!    pppa0042 : PIN1: How often does the subject of politics come up in each of t
+!        -2: Not asked
+!        -1: Refused
+!        1: A lot
+!        2: Some
+!        3: Hardly ever
+!        4: Never
+!        5: Does not apply
+!    pppa0043 : PIN1: How often does the subject of politics come up in each of t
+!        -2: Not asked
+!        -1: Refused
+!        1: A lot
+!        2: Some
+!        3: Hardly ever
+!        4: Never
+!        5: Does not apply
+!    pppa0044 : PIN1: How often does the subject of politics come up in each of t
+!        -2: Not asked
+!        -1: Refused
+!        1: A lot
+!        2: Some
+!        3: Hardly ever
+!        4: Never
+!        5: Does not apply
+!    pppa0045 : PIN1: How often does the subject of politics come up in each of t
+!        -2: Not asked
+!        -1: Refused
+!        1: A lot
+!        2: Some
+!        3: Hardly ever
+!        4: Never
+!        5: Does not apply
+!    pppa0046 : MED1: How often do you get information about politics from each o
+!        -2: Not asked
+!        -1: Refused
+!        1: Every day
+!        2: Three times a week or more
+!        3: Almost every week
+!        4: One to three times a month
+!        5: Less than once a month
+!        6: Never
+!    pppa0047 : MED1: How often do you get information about politics from each o
+!        -2: Not asked
+!        -1: Refused
+!        1: Every day
+!        2: Three times a week or more
+!        3: Almost every week
+!        4: One to three times a month
+!        5: Less than once a month
+!        6: Never
+!    pppa0048 : MED1: How often do you get information about politics from each o
+!        -2: Not asked
+!        -1: Refused
+!        1: Every day
+!        2: Three times a week or more
+!        3: Almost every week
+!        4: One to three times a month
+!        5: Less than once a month
+!        6: Never
+!    pppa0049 : MED1: How often do you get information about politics from each o
+!        -2: Not asked
+!        -1: Refused
+!        1: Every day
+!        2: Three times a week or more
+!        3: Almost every week
+!        4: One to three times a month
+!        5: Less than once a month
+!        6: Never
+!    pppa0050 : MED1: How often do you get information about politics from each o
+!        -2: Not asked
+!        -1: Refused
+!        1: Every day
+!        2: Three times a week or more
+!        3: Almost every week
+!        4: One to three times a month
+!        5: Less than once a month
+!        6: Never
+!    pppa0051 : MED1: How often do you get information about politics from each o
+!        -2: Not asked
+!        -1: Refused
+!        1: Every day
+!        2: Three times a week or more
+!        3: Almost every week
+!        4: One to three times a month
+!        5: Less than once a month
+!        6: Never
+!    pppa0070 : Q26: What is your religion?
+!        -2: Not asked
+!        -1: Refused
+!        1: Baptist-any denomination
+!        2: Protestant (e.g., Methodist, Lutheran, Presbyterian, Episcopal)
+!        3: Catholic
+!        4: Mormon
+!        5: Jewish
+!        6: Muslim
+!        7: Hindu
+!        8: Buddhist
+!        9: Pentecostal
+!        10: Eastern Orthodox
+!        11: Other Christian
+!        12: Other non-Christian, please specify:
+!        13: None
+!    pppa0071 : Q26A: Would you describe yourself as a born-again or evangelical 
+!        -2: Not asked
+!        -1: Refused
+!        1: Yes
+!        2: No
+!    pppa0086 : Q30: In the past 12 months, have you...[Attended a PTA/school gro
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0087 : Q30: In the past 12 months, have you...[Attended a community grou
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0088 : Q30: In the past 12 months, have you...[Donated blood]
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0089 : Q30: In the past 12 months, have you...[Given money to a charity]
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0090 : Q30: In the past 12 months, have you...[Worked for a charity or y
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0092 : Q31: In the past 12 months, have you... [Attended a political pro
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0093 : Q31: In the past 12 months, have you... [Contacted a government o
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0094 : Q31: In the past 12 months, have you... [Volunteered or worked fo
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0095 : Q31: In the past 12 months, have you... [Volunteered or worked fo
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0096 : Q31: In the past 12 months, have you... [Given money to a Preside
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0097 : Q31: In the past 12 months, have you... [Given money to another p
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0098 : Q31: In the past 12 months, have you... [Worked with others in yo
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0099 : Q31: In the past 12 months, have you... [Served on a community bo
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0100 : Q31: In the past 12 months, have you... [Written a 'letter to the
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0101 : Q31: In the past 12 months, have you... [Commented about politics
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    pppa0102 : Q31: In the past 12 months, have you... [Held a publicly elected 
+!        -2: Not asked
+!        -1: Refused
+!        0: No
+!        1: Yes
+!    partyid7 : DERIVED: Political party affiliation (7 categories)
+!        -2: Not asked
+!        -1: Refused
+!        1: Strong Republican
+!        2: Not Strong Republican
+!        3: Leans Republican
+!        4: Undecided/Independent/Other
+!        5: Leans Democrat
+!        6: Not Strong Democrat
+!        7: Strong Democrat
+!    pppa0005 : Q5: Did you happen to vote in the 2008 presidential election?
+!        -2: Not asked
+!        -1: Refused
+!        1: Yes
+!        2: No
+!    pppa0006 : Q6: Which candidate did you vote for in the 2008 Presidential ele
+!        -2: Not asked
+!        -1: Refused
+!        1: Barack Obama (Democrat)
+!        2: John McCain (Republican)
+!        3: Another candidate, please specify:
+!    ppp20072 : Q27: How often do you attend religious services?
+!        -2: Not asked
+!        -1: Refused
+!        1: More than once a week
+!        2: Once a week
+!        3: Once or twice a month
+!        4: A few times a year
+!        5: Once a year or less
+!        6: Never
+
+Data:
+   File is /Users/andrewamiles/Documents/Duke/Morality project/Data files and updates/MMdata_merged.dat ;
+
+Variable:
+   Names are     CaseID      weight      tm_start    tm_finis    duration    C1          
+     C2          C3          I1          I2          I3          I4          
+     I5          I6          I7          I8          I9          I10         
+     RFQ1        RFQ2        RFQ3        REI1        REI2        REI3        
+     REI4        MR1         MR2         MR3         EPQ1        EPQ2        
+     EPQ3        L1          L2          L3          L4          L5          
+     L6          L7          L8          L9          L10         L11         
+     L12         L13         L14         L15         L16         DPES1       
+     DPES2       DPES3       DPES4       DPES5       DPES6       DPES7       
+     DPES8       DPES9       DPES10      DPES11      DPES12      DPES13      
+     DPES14      DPES15      DPES16      DPES17      DPES18      DPES19      
+     DPES20      DPES21      DIT0        DIT1        DIT2        DIT3        
+     DIT4        DIT5        DIT6        DIT7        DIT8        DIT9        
+     DIT10       DIT11       DIT12       RANK_DIT    RANK_DI0    RANK_DI1    
+     RANK_DI2    RANK_DI3    RANK_DI4    RANK_DI5    RANK_DI6    RANK_DI7    
+     RANK_DI8    RANK_DI9    RANK_D00    MELS1       MELS2       MELS3       
+     MELS4       MELS5       MELS6       MELS7       MELS8       MELS9       
+     MELS10      MELS11      MELS12      MOPS11      MOPS12      Dov_mops    
+     Dov_mop0    Dov_mop1    Dov_mop2    Dov_mop3    Dov_mop4    Dov_mop5    
+     Dov_mop6    Dov_mop7    Dov_mop8    Dov_mop9    Dov_mo00    Dov_mo01    
+     MOPS21      MOPS22      Dov_mo02    Dov_mo03    Dov_mo04    Dov_mo05    
+     Dov_mo06    Dov_mo07    Dov_mo08    Dov_mo09    Dov_mo10    Dov_mo11    
+     Dov_mo12    Dov_mo13    Dov_mo14    Dov_mo15    Dov_mo16    Dov_mo17    
+     Dov_mo18    Dov_mo19    Dov_mo20    Dov_mo21    Dov_mo22    Dov_mo23    
+     Dov_mo24    Dov_mo25    Dov_mo26    MOPS3_01    MOPS3_02    MOPS3_03    
+     MOPS3_04    MOPS3_05    MOPS3_06    MOPS3_07    MOPS3_08    MOPS3_09    
+     MOPS3_10    MOPS3_11    MOPS3_12    MFSS1       MFSS2       MFSS3       
+     MFSS4       MFSS5       MFSS6       MFSS7       MFSS8       MFSS9       
+     MFSS10      MFSS11      MFSS12      MFSS13      MFSS14      MFSS15      
+     MFSS16      MFSS17      MFSS18      MI1         MI2         MI3         
+     MI4         MI5         MI6         MI7         MI8         MI9         
+     MI10        CRQ1        CQR2_A      CQR2_B      CQR2_C      CQR2_D      
+     IS1         IS2         IS3         IS4         IS5         IS6         
+     IS7         IS8         IS9         IS10        SV1         SV2         
+     SV3         SV4         SV5         SV6         SV7         SV8         
+     SV9         SV10        SV11        SV12        SV13        SV14        
+     SV15        SV16        SV17        SV18        SV19        SV20        
+     SV21        TET1        TET2        TET3        TET4        TET5        
+     TET6        TET7        TET8        TET9        TET10       TET11       
+     TET12       TET13       TET14       TET15       Dov_vers    Block15     
+     EVA1        EVA2        EVA3        EVA4        EVA5        EVA6        
+     EVA7        EVA8        EVA9        EVA10       EVA11       EVA12       
+     Dov_game    Block17     ppage       ppagecat    ppagect4    ppeduc      
+     ppeducat    ppethm      ppgender    pphhhead    pphhsize    pphouse     
+     ppincimp    ppmarit     ppmsacat    PPREG4      ppreg9      pprent      
+     ppstaten    PPT01       PPT1317     PPT18OV     PPT25       PPT612      
+     ppwork      ppnet       CORE_EMP    core_par    ppinccat    EVER_PAR    
+     PPADOPT2    ppcu0153    ppfs0681    ppfs0682    ppfs0683    ppfs0684    
+     ppfs0685    ppfs0686    ppfs0687    ppfs0678    ppfs0679    ppfs0680    
+     pph10001    pph10002    pph10055    pph10056    pph10057    pph10059    
+     pph10060    pph10061    pph10083    pph10084    pph10085    pph10087    
+     pph10088    pph10089    pph10219    pph10220    pph10221    pph10252    
+     pph10253    pph10254    pph10255    pph10256    pph10257    pph1anxi    
+     pph1depr    pph1inso    pph1ment    pphi0016    pphi0018    pphi0041    
+     pphi0046    pphi0047    pphi0048    ppl10003    ppl10004    ppl10005    
+     ppl10007    ppl10008    ppl10009    ppl10012    ppl10013    ppl10014    
+     ppl10017    ppl10018    ppl10019    ppl10021    ppl10055    pppa0012    
+     pppa0073    pppa0074    pppa0075    pppa0076    pppa0077    pppa0078    
+     pppa0079    pppa0080    pppa0081    pppa0082    pppa0083    pppa0084    
+     pppa0085    pppa0206    pppa0207    pppa0208    pppa0209    pppa0210    
+     pppa0211    pppa0212    pppa0213    Display0    Block7_p    DIT1_tim    
+     DIT1_RAN    Block4_t    Block9_t    Block14A    Block8_t    Block8_M    
+     Block8_0    Block8_1    Block110    Block111    Block6_t    Block14B    
+     Block5_t    Block130    Block100    I9_time     SantaCla    Block2_t    
+     I10_time    Block1_t    Block3_t    Block14C    Block160    IntroB15    
+     Block150    Block120    Q1_time     Q42_time    Q43_time    Q44_time    
+     Q45_time    Q1_healt    Q4_time     Q19_time    Q35_time    Q36_time    
+     Q1_LIFE1    Q1_LIFE2    Q1_LIFE3    Q2_time     Q3_LIFE0    Q12_LIFE    
+     FR1_time    Q20_Loop    Q37_time    Q20_Loo0    Q20_Loo1    pppa0233    
+     pppa0016    pppa0017    pppa0035    pppa0041    pppa0042    pppa0043    
+     pppa0044    pppa0045    pppa0046    pppa0047    pppa0048    pppa0049    
+     pppa0050    pppa0051    pppa0070    pppa0071    pppa0086    pppa0087    
+     pppa0088    pppa0089    pppa0090    pppa0092    pppa0093    pppa0094    
+     pppa0095    pppa0096    pppa0097    pppa0098    pppa0099    pppa0100    
+     pppa0101    pppa0102    partyid7    pppa0005    pppa0006    ppp20072  ; 
+   Missing are . ;
+
+Analysis:
+   Type = basic;
