@@ -197,43 +197,6 @@ def get_response_key(x, q):
 	answer = key[int(float(x))]
 	return KEY[answer]
 
-def do_grouping(matches):
-	''' group together responses for each state '''
-	output = {}
-	groups = [ (k[0],list(g)) for k, g in groupby(matches) ]
-	for g in groups:
-	    if g[0] not in output:
-		output[g[0]] = {}
-	    for v in g[1]:
-		if v[1] not in output[g[0]]:
-		    output[g[0]][v[1]] = 0 
-		output[g[0]][v[1]] += 1
-	return output
-
-def do_calculation(matches):
-	''' sum together responses and take average '''
-	scores = {}; output = {}
-	groups = [ (k[0],list(g)) for k, g in groupby(matches) ]
-	for g in groups:
-	    if g[0] not in scores:
-		scores[g[0]] = {}
-	    for v in g[1]:
-		if v[1] not in scores[g[0]]:
-		    scores[g[0]][v[1]] = 0
-	        scores[g[0]][v[1]] += 1.0
-	for state in scores:
-	    cnt = sum(scores[state].values())
-	    output[state] = round(sum(x*y for x,y in scores[state].iteritems())*1.0/cnt,4) \
-				if cnt > 0 else 0.0
-	return [
-		{
-		 'state':str(STATES[s])
-		 ,'abbr':str(s)
-		 ,'score':v
-		} 
-		for s,v in output.iteritems()
-	]
-
 def geodata_sql(question):
 	if question == '1':
 		field = 'strong_emotions'
@@ -267,9 +230,12 @@ def geodata_format(results, q):
 		kout = {}
 		state = results['state']==s
 		key_agree = (results['key']=='agree') & (state)
+		key_disagree = (results['key']=='disagree') & (state)
 		kout['abbr'] = str(results.loc[state,'state'].values[0])
 		kout['state'] = str(STATES[kout['abbr']])
 		kout['score'] = np.sum(results.loc[key_agree,'count'])*1.0/np.sum(results.loc[state,'count'])
+		kout['disagree_score'] = np.sum(results.loc[key_disagree,'count'])*1.0/np.sum(results.loc[state,'count'])
+		kout['total'] = np.sum(results.loc[state,'count'])
 		for k in keys:
 			key_state = (results['key']==k) & (state)
 			if len(results.loc[key_state,'count'])>1: raise Exception('Check data')

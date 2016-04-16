@@ -72,3 +72,14 @@
   display: none;
 }
 
+.dot {
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  fill: rgb(0, 0, 0);
+  pointer-events: none;
+}
+
