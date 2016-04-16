@@ -235,7 +235,7 @@ def geodata_format(results, q):
 		kout['state'] = str(STATES[kout['abbr']])
 		kout['score'] = np.sum(results.loc[key_agree,'count'])*1.0/np.sum(results.loc[state,'count'])
 		kout['disagree_score'] = np.sum(results.loc[key_disagree,'count'])*1.0/np.sum(results.loc[state,'count'])
-		kout['total'] = np.sum(results.loc[state,'count'])
+		kout['total'] = int(np.sum(results.loc[state,'count']))
 		for k in keys:
 			key_state = (results['key']==k) & (state)
 			if len(results.loc[key_state,'count'])>1: raise Exception('Check data')
@@ -243,7 +243,7 @@ def geodata_format(results, q):
 				kout[k] = int(results.loc[key_state,'count'].iloc[0])
 			else:
 				kout[k] = 0
-			output.append(kout)
+		output.append(kout)
 	return output
 
 def get_geodata_scores(question):
