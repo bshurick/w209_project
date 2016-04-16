@@ -6,6 +6,7 @@ from surveys.models import Survey
 from itertools import groupby 
 import re
 import pandas as pd
+import numpy as np
 
 REGIONS = {'AK': 'West',
  'AL': 'South',
@@ -155,6 +156,14 @@ I10_DICT = {
     , 5:'Anti-spiritual'
 }
 
+QUESTION = {
+	'1':DPES11_DICT
+	,'2':DPES11_DICT
+	,'3':EPQ1_DICT
+	,'4':IS6_DICT
+	,'5':I10_DICT
+}
+
 REVERSE = {
 	-1:-1
 	, 7:1
@@ -182,7 +191,11 @@ KEY = {
    , 'Anti-spiritual':'disagree'
 }
 
-get_agreed = lambda x, d: 1 if re.match(r'agree',KEY.get(d.get(x,''),'')) else 0
+@np.vectorize
+def get_response_key(x, q):
+	key = QUESTION[q]
+	answer = key[int(float(x))]
+	return KEY[answer]
 
 def do_grouping(matches):
 	''' group together responses for each state '''
@@ -221,147 +234,62 @@ def do_calculation(matches):
 		for s,v in output.iteritems()
 	]
 
-def add_fillkey(output):
-	''' add a fillkey attribute for top response '''
-	for s in output:
-		m = max(output[s].values())
-		v = sorted([ k for k in output[s] if output[s][k]==m])
-		if 'stronglyAgree' in v:
-			output[s]['fillKey'] = 'stronglyAgree'
-		elif 'agree' in v:
-			output[s]['fillKey'] = 'agree'
-		elif 'somewhatAgree' in v:
-			output[s]['fillKey'] = 'somewhatAgree'
-		elif 'neitherAgreeNorDisagree' in v:
-			output[s]['fillKey'] = 'neitherAgreeNorDisagree'
-		elif 'somewhatDisagree' in v:
-			output[s]['fillKey'] = 'somewhatDisagree'
-		elif 'disagree' in v:
-			output[s]['fillKey'] = 'disagree'
-		elif 'stronglyDisagree' in v:
-			output[s]['fillKey'] = 'stronglyDisagree'
-		elif 'refused' in v:
-			output[s]['fillKey'] = 'refused'
-		else:
-			output[s]['fillKey'] = 'unknown'
-	return output
+def geodata_sql(question):
+	if question == '1':
+		field = 'strong_emotions'
+	elif question == '2':
+		field = 'empower_children'
+	elif question == '3':
+		field = 'individualistic_morals'
+	elif question == '4':
+		field = 'losing_friends'
+	elif question == '5':
+		field = 'spirituality'
+	sql = '''
+		select 
+		state
+		, {} field
+		, sum(weight) count 
+		from surveys_survey
+		group by 1,2
+		;
+	'''.format(field)
+	return sql
 
-def get_geodata(question):
-	output = {}
-	question = str(question)
-        if question == '1':
-                matches = sorted([
-                        (str(m.state)
-                        , KEY[DPES11_DICT[int(float(m.i_develop_strong_emotions_toward_people_i_can_rely_on))]])
-                        for m in Survey.objects.all()
-                ])
-        elif question == '2':
-                matches = sorted([
-                        (str(m.state)
-                        , KEY[DPES11_DICT[int(float(m.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams))]])
-                        for m in Survey.objects.all()
-                ])
-        elif question == '3':
-                matches = sorted([
-                        (str(m.state)
-                        , KEY[EPQ1_DICT[int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person))]])
-                        for m in Survey.objects.all()
-                ])
-        elif question == '4':
-                matches = sorted([
-                        (str(m.state)
-                        , KEY[IS6_DICT[int(float(m.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities))]])
-                        for m in Survey.objects.all()
-                ])
-        elif question == '5':
-                matches = sorted([
-                        (str(m.state)
-                        , KEY[I10_DICT[int(float(m.spiritually_i_consider_myself))]])
-                        for m in Survey.objects.all()
-                ])
-        else:
-                raise Exception('Question needs to be 1-5')
-        output = do_grouping(matches)
-        # output = add_fillkey(output)
+def geodata_format(results, q):
+	output = []
+	results['key'] = get_response_key(results['field'], q)
+	results = results[['key','state','count']].groupby(['key','state']).sum()	
+	results = results.reset_index(level=0).reset_index(level=0)
+	keys = set(results['key'])
+	states = set(map(lambda x: str(x), results['state'].values))
+	for s in states:
+		kout = {}
+		state = results['state']==s
+		key_agree = (results['key']=='agree') & (state)
+		kout['abbr'] = str(results.loc[state,'state'].values[0])
+		kout['state'] = str(STATES[kout['abbr']])
+		kout['score'] = np.sum(results.loc[key_agree,'count'])*1.0/np.sum(results.loc[state,'count'])
+		for k in keys:
+			key_state = (results['key']==k) & (state)
+			if len(results.loc[key_state,'count'])>1: raise Exception('Check data')
+			if np.sum(key_state)>0:
+				kout[k] = int(results.loc[key_state,'count'].iloc[0])
+			else:
+				kout[k] = 0
+			output.append(kout)
 	return output
 
 def get_geodata_scores(question):
 	output = {}
 	question = str(question)
-	if question == '1':
-		matches = sorted([
-			   (str(m.state)
-			    , get_agreed(int(float(m.i_develop_strong_emotions_toward_people_i_can_rely_on))	
-				, DPES11_DICT)
-			       # * float(m.weight) 
-			   )
-			   for m in Survey.objects.all() ])
-	elif question == '2':
-		matches = sorted([
-                           (str(m.state)
-                            , get_agreed(int(float(m.parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams)), DPES11_DICT)
-			      # * float(m.weight) 
-			   )
-                           for m in Survey.objects.all() ])
-	elif question == '3':
-		matches = sorted([
-                           (str(m.state)
-                            , get_agreed(int(float(m.moral_standards_should_be_seen_as_individualistic_what_one_person_considers_to_be_moral_may_be_judged_as_immoral_by_another_person)), EPQ1_DICT)
-			      # * float(m.weight) 
-			   )
-                           for m in Survey.objects.all() ])
-	elif question == '4':
-		matches = sorted([
-                           (str(m.state)
-                            , get_agreed(int(float(m.if_one_believes_something_is_right_one_must_stand_by_it_even_if_it_means_losing_friends_or_missing_out_on_profitable_opportunities)), IS6_DICT)
-			       # * float(m.weight) 
-			   )
-                           for m in Survey.objects.all() ])
-	elif question == '5':
-		matches = sorted([
-                           (str(m.state)
-                            , get_agreed(int(float(m.spiritually_i_consider_myself)), I10_DICT)
-			       # * float(m.weight) 
-			   )
-                           for m in Survey.objects.all() ])
-	else:
-		raise Exception('Question needs to be 1-5')
-	output = do_calculation(matches)
-	groupings = get_geodata(question)
-	for i, s in enumerate(output):
-		d = groupings[s['abbr']]
-		output[i].update(d)
+	matches = pd.read_sql(geodata_sql(question), connection)
+	output = geodata_format(matches, question)
 	return output
-
-def get_fillkey():
-	colors = {
-		'sa':'#2BC0E8'
-		, 'a':'#3780E8'
-		, 'swa':'#4573E8'
-		, 'nad':'#7893E8'
-		, 'swd':'#A57FE8'
-		, 'd':'#8D39E8'
-		, 'sd':'#F448FF'
-		, 'r':'#B6B6B4'
-		, 'def':'#B6B6B4'
-	}
-	FILLKEY = '''
-	  'stronglyAgree': '{sa}',
-	  'agree': '{a}',
-	  'somewhatAgree': '{swa}',
-	  'neitherAgreeNorDisagree': '{nad}',
-	  'somewhatDisagree': '{swd}',
-	  'disagree': '{d}',
-	  'stronglyDisagree': '{sd}',
-	  'refused ': '{r}',
-	  defaultFill: '{def}'
-	'''.format(**colors)
-	return FILLKEY
 
 def get_sortbar_by_regions(sql):
 	results = pd.read_sql(sql, connection)
         results['concat'] = results['region']+': '+results['gender']
-        #  {'Category':'West: Male','Weighted_Pct':'0.373072187'},
         output = [ {'Category':str(s),'Weighted_Pct':str(r)}
                     for s,r in zip(results['concat'],results['result']) ]
 	return output

@@ -62,12 +62,8 @@ var make_chart = function(scores, location) {
 	    for (var i=0; i < scores.length; i++) {
 		var dataState = scores[i].state;
 		var dataScore = parseFloat(scores[i].score);
-		var somewhatAgree = zeroifnull(scores[i].somewhatAgree);
 		var agree = zeroifnull(scores[i].agree);
-		var stronglyAgree = zeroifnull(scores[i].stronglyAgree);
 		var neitherAgreeNorDisagree = zeroifnull(scores[i].neitherAgreeNorDisagree);
-		var somewhatDisagree = zeroifnull(scores[i].somewhatDisagree);
-		var stronglyDisagree = zeroifnull(scores[i].stronglyDisagree);
 		var disagree = zeroifnull(scores[i].disagree);
 		var refused = zeroifnull(scores[i].refused);
 		
@@ -75,12 +71,8 @@ var make_chart = function(scores, location) {
 		    var jsonState = json.features[j].properties.NAME;
 		    if (dataState == jsonState) {
 			json.features[j].properties.score = dataScore;
-			json.features[j].properties.somewhatAgree = somewhatAgree;
 			json.features[j].properties.agree = agree;
-			json.features[j].properties.stronglyAgree = stronglyAgree;
 			json.features[j].properties.neitherAgreeNorDisagree = neitherAgreeNorDisagree;
-			json.features[j].properties.somewhatDisagree = somewhatDisagree;
-			json.features[j].properties.stronglyDisagree = stronglyDisagree;
 			json.features[j].properties.disagree = disagree;
 			json.features[j].properties.refused = refused;
 			if (dataState == 'Alaska') {
