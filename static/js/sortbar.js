@@ -61,7 +61,8 @@ var svg = d3.select(location).append("svg")
   });
 
   x.domain(data.map(function(d) { return d.Category; }));
-  y.domain([0, d3.max(data, function(d) { return d.Weighted_Pct; })]);
+  // y.domain([0, d3.max(data, function(d) { return d.Weighted_Pct; })]);
+  y.domain([0, 1]);
 
   svg.append("g")
       .attr("class", "x axis")
