@@ -59,17 +59,9 @@
   stroke-opacity: .7;
 }
 
-.x.axis path {
-  display: none;
-}
-
 .bar_chart2 {
   fill: rgb(49,163,84);
   fill-opacity: .9;
-}
-
-.x.axis path {
-  display: none;
 }
 
 .dot {
