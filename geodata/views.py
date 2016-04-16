@@ -233,9 +233,12 @@ def geodata_format(results, q, nfilter=0):
 		key_disagree = (results['key']=='disagree') & (state)
 		kout['abbr'] = str(results.loc[state,'state'].values[0])
 		kout['state'] = str(STATES[kout['abbr']])
-		kout['score'] = np.sum(results.loc[key_agree,'count'])*1.0/np.sum(results.loc[state,'count'])
-		kout['disagree_score'] = np.sum(results.loc[key_disagree,'count'])*1.0/np.sum(results.loc[state,'count'])
-		kout['total'] = int(np.sum(results.loc[state,'count']))
+		d = results.loc[key_disagree,'count'].apply(lambda x: round(x))
+		a = results.loc[key_agree,'count'].apply(lambda x: round(x))
+		t = results.loc[state,'count'].apply(lambda x: round(x))
+		kout['disagree_score'] = np.sum(d)*1.0/np.sum(t)
+		kout['score'] = np.sum(a)*1.0/np.sum(t)
+		kout['total'] = np.sum(t)
 		
 		# loop through keys
 		for k in keys:
