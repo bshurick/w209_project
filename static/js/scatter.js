@@ -29,9 +29,14 @@ var scatterplot = function(data, target) {
 	  .append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	var tooltip = d3.select("body").append("div")
+	var tooltip = d3.tip()
 	    .attr("class", "tooltip")
-	    .style("opacity", 0);
+	    .offset([-10,0])	
+		.html(function(d) {
+			return "<strong>" + d.state + "</strong><br/> (Agree: " + xValue(d) +
+                        "%, Disagree: " + yValue(d) + "%)<br/># Responses: " + totalValue(d);
+		});
+	 svg.call(tooltip);
 	
 	  // don't want dots overlapping axis, so add in buffer to data domain
 	  xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
@@ -70,21 +75,7 @@ var scatterplot = function(data, target) {
 	      .attr("cx", xMap)
 	      .attr("cy", yMap)
 	      .style("fill", function(d) { return color(cValue(d));}) 
-	      .on("mouseover", function(d) {
-		  tooltip.transition()
-		       .duration(200)
-		       .style("opacity", .9)
-		       .style("fill-opacity", .9);
-		  tooltip.html("<strong>" + d.state + "</strong><br/> (Agree: " + xValue(d)
-			+ "%, Disagree: " + yValue(d) + "%)<br/># Responses: " + totalValue(d))
-		       .style("left", (d3.event.pageX + 5) + "px")
-		       .style("top", (d3.event.pageY - 50) + "px");
-	      })
-	      .on("mouseout", function(d) {
-		  tooltip.transition()
-		       .duration(500)
-		       .style("opacity", 0)
-		       .style("fill-opacity", 0);
-	      });
+	      .on("mouseover", tooltip.show)
+	      .on("mouseout", tooltip.hide);
 	  
 }

@@ -76,10 +76,10 @@
 }
 
 .tooltip {
-  position: absolute;
-  width: 200px;
-  height: 50px;
-  fill: rgb(0, 0, 0);
-  pointer-events: none;
+  line-height: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
+  border-radius: 2px;
 }
 
