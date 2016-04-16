@@ -245,7 +245,7 @@ def geodata_format(results, q, nfilter=0):
 			key_state = (results['key']==k) & (state)
 			if len(results.loc[key_state,'count'])>1: raise Exception('Check data')
 			if np.sum(key_state)>0:
-				kout[k] = int(results.loc[key_state,'count'].iloc[0])
+				kout[k] = int(round(results.loc[key_state,'count'].iloc[0]))
 			else:
 				kout[k] = 0
 		
