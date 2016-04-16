@@ -28,14 +28,21 @@ def index(request):
 		video = videos[request.session.get('video')]
 	tmp = loader.get_template('index.html')
 	watched_video = request.session.get('watched_video',False)
+	nfilter=10
 	c = {
 		'video':video
 		,'watched_video':watched_video
+		,'nfilter':nfilter
 		,'q1_scores':get_geodata_scores(1)
 		,'q2_scores':get_geodata_scores(2)
 		,'q3_scores':get_geodata_scores(3)
 		,'q4_scores':get_geodata_scores(4)
 		,'q5_scores':get_geodata_scores(5)
+		,'q1_scores_filter':get_geodata_scores(1,nfilter)
+		,'q2_scores_filter':get_geodata_scores(2,nfilter)
+		,'q3_scores_filter':get_geodata_scores(3,nfilter)
+		,'q4_scores_filter':get_geodata_scores(4,nfilter)
+		,'q5_scores_filter':get_geodata_scores(5,nfilter)
 		,'q1_bar':get_q1_agree_byregion()
 		,'q2_bar':get_q2_agree_byregion()
 		,'q3_bar':get_q3_agree_byregion()

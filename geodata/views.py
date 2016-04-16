@@ -219,7 +219,7 @@ def geodata_sql(question):
 	'''.format(field)
 	return sql
 
-def geodata_format(results, q):
+def geodata_format(results, q, nfilter=0):
 	output = []
 	results['key'] = get_response_key(results['field'], q)
 	results = results[['key','state','count']].groupby(['key','state']).sum()	
@@ -236,6 +236,8 @@ def geodata_format(results, q):
 		kout['score'] = np.sum(results.loc[key_agree,'count'])*1.0/np.sum(results.loc[state,'count'])
 		kout['disagree_score'] = np.sum(results.loc[key_disagree,'count'])*1.0/np.sum(results.loc[state,'count'])
 		kout['total'] = int(np.sum(results.loc[state,'count']))
+		
+		# loop through keys
 		for k in keys:
 			key_state = (results['key']==k) & (state)
 			if len(results.loc[key_state,'count'])>1: raise Exception('Check data')
@@ -243,14 +245,17 @@ def geodata_format(results, q):
 				kout[k] = int(results.loc[key_state,'count'].iloc[0])
 			else:
 				kout[k] = 0
-		output.append(kout)
+		
+		# append state values
+		if kout['total']>nfilter:
+			output.append(kout)
 	return output
 
-def get_geodata_scores(question):
+def get_geodata_scores(question, nfilter=0):
 	output = {}
 	question = str(question)
 	matches = pd.read_sql(geodata_sql(question), connection)
-	output = geodata_format(matches, question)
+	output = geodata_format(matches, question, nfilter)
 	return output
 
 def get_sortbar_by_regions(sql):
