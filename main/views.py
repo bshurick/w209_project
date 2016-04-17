@@ -14,8 +14,8 @@ from geodata.views import \
 
 def index(request):
 	videos = {
-		'test':'https://www.youtube.com/embed/2DN0IRoMf4k'
-		,'control':'https://www.youtube.com/embed/V6-0kYhqoRo'
+		'control':'https://www.youtube.com/embed/2DN0IRoMf4k'
+		,'test':'https://www.youtube.com/embed/V6-0kYhqoRo'
 	}
 	if not request.session.get('video'):
 		r = int(random.random()*10000)
