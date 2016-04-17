@@ -16,7 +16,7 @@ function make_table(prop) {
 	string += '<p>Respondents in <strong style="color: red">disagreement: </strong><br/>'+prop.disagree +' out of ';
 	string += prop.total;
 	string += ', or <strong>'+ Math.round(prop.disagree*100 / prop.total) + '%</strong></p>';
-	string += '<p>Respondents who neither agree nor disagree: <br/>'+prop.neitherAgreeNorDisagree+' out of ';
+	string += '<p>Respondents who <strong>neither agree nor disagree: </strong><br/>'+prop.neitherAgreeNorDisagree+' out of ';
 	string += prop.total;
 	string += ', or <strong>'+ Math.round(prop.neitherAgreeNorDisagree*100 / prop.total) + '%</strong></p>';
 	string += '<p>Respondents who refused to answer: <br/>'+prop.refused+' out of ';
