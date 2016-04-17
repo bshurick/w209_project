@@ -350,7 +350,7 @@ def get_spirituality_by_region(sortbar=False):
 def get_q1_agree_byincome(sortbar=True):
 	sql = '''
 		select 
-		cast(coalesce(income,'-2') as integer) income
+		cast(coalesce(case when income='' then '-2' else income end,'-2') as integer) income
 		, sum(weight*case when cast(strong_emotions as integer) in (5,6,7)
                         then 1 else 0 end)/sum(weight) result
 		from surveys_survey
