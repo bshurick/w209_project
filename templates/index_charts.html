@@ -116,12 +116,12 @@ Compare your agreement/disagreement with other people in your state and other st
    </div>-->
    <div class='col-md-12 col-xs-12 col-lg-12'>
 	<h3>{{ scatter_title }} (>{{ nfilter }} responses)</h3>
- 	<small>"{{ q3_question }}"</small><br/><br/>
+ 	<small>"{{ q3_question }}" <br/>{{ scatter_subtext }}</small><br/><br/>
 	<div id='scatterplot_q3' style='position: relative; height: 350px; width:100%;'></svg>
    </div>
    <div class='col-md-12 col-xs-12 col-lg-12'>
 	<h3>{{ sortbar_title }}</h3>
- 	<small>"{{ q3_question }}" <br/>{{ scatter_subtext }}</small><br/><br/>
+ 	<small>"{{ q3_question }}"</small><br/><br/>
 	<input id='sortbar_q3_input' type="checkbox"> Sort values</input>
 	<svg class='bar_chart2' id='sortbar_q3' style='position: relative; height: 300px; width:100%;'></svg>
    </div>
