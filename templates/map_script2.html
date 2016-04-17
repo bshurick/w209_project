@@ -10,7 +10,6 @@ function zeroifnull(x) {
 
 function make_table(prop) {
 	var string = '<h3>' + prop.NAME + '<small> responses</small></h3>';
-	string += '<small>"I develop strong emotions toward people who I can rely on"</small><br/><br/>';
 	string += '<p>Respondents in <strong style="color: green">agreement: </strong><br/>'+prop.agree +' out of ';
 	string += prop.total;
 	string += ', or <strong>'+ Math.round(prop.agree*100 / prop.total) + '%</strong></p>';
