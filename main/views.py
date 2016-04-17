@@ -38,6 +38,7 @@ def index(request):
 	mapchart_title = 'Agreement, by state'
 	mapchart_title_subtext = 'Map of % in agreement to the question'
 	scatter_title = 'Percent agree vs. disagree, state scatterplot'
+	scatter_subtext = 'States in the upper-left quadrant more often disagree, while states in the lower-right quadrant more often agree with the question.'
 	sortbar_title = 'Percent agreed, gender and region'
 	c = {
 		'video':video
@@ -66,6 +67,7 @@ def index(request):
 		,'q5_sortbar':get_spirituality_by_region(sortbar=True)
 		,'mapchart_title':mapchart_title
 		,'scatter_title':scatter_title
+		,'scatter_subtext':scatter_subtext
 		,'sortbar_title':sortbar_title
 		,'q1_question':q1_question
 		,'q2_question':q2_question
