@@ -30,6 +30,11 @@ def index(request):
 	tmp = loader.get_template('index.html')
 	watched_video = request.session.get('watched_video',False)
 	nfilter=10
+	q1_question = 'I develop strong emotions toward people who I can rely on'
+	q2_question = 'Parents should empower children as much as possible so that they may follow their dreams'
+	q3_question = 'Moral standards should be seen as individualistic -- what one person considers to be moral may be judged as immoral by another person'
+	q4_question = 'If one believes something is right one must stand by it, even if it means losing friends or missing out on profitable opportunities'
+	q5_question = 'I consider myself spiritual, somewhat spiritual, or very spiritual'
 	mapchart_title = 'Agreement, by state'
 	mapchart_title_subtext = 'Map of % in agreement to the question'
 	scatter_title = 'Percent agree vs. disagree, state scatterplot'
@@ -62,6 +67,11 @@ def index(request):
 		,'mapchart_title':mapchart_title
 		,'scatter_title':scatter_title
 		,'sortbar_title':sortbar_title
+		,'q1_question':q1_question
+		,'q2_question':q2_question
+		,'q3_question':q3_question
+		,'q4_question':q4_question
+		,'q5_question':q5_question
 	}
 	return HttpResponse(tmp.render(c,request))
 
