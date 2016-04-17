@@ -298,7 +298,7 @@ def get_sortbar_by_regions(sql):
 
 def get_sortbar_by_income(sql):
 	results = pd.read_sql(sql, connection)
-	results['income_str'] = results['income'].apply(lambda x: INCOME[int(x) if x else -2])
+	results['income_str'] = results['income'].apply(lambda x: INCOME[int(x) if len(str(x))>0 and x else -2])
 	output = [ {'Category':str(s),'Weighted_Pct':str(r), 'Sorted':i}
                     for i,s,r in sorted(zip(results['income'],results['income_str'],results['result']), key=lambda x: x[0]) ]
 	return output
