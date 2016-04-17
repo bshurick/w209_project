@@ -290,6 +290,7 @@ def get_question_by_video(sql):
 	choices = ['Weekly','Monthly','Few Times Yearly','Never','Not Applicable']
 	results = pd.read_sql(sql, connection)
 	results['choices'] = results['call_parents'].apply(lambda x: VID[int(x)])
+	results['video_choice'] = results['video_choice'].apply(lambda x: x if len(str(x))>0 else 'None')
 	test = []
 	control = []
 	for c in choices:	
