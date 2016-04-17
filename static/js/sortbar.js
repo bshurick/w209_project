@@ -1,7 +1,7 @@
 
 // eventually read data automatically via .csv function
 
-var sortbar = function(data, location, button, rotated=false, styletarget='bar_chart2') {
+var sortbar = function(data, location, button, rotated, styletarget) {
 
   function change() {
     clearTimeout(sortTimeout);
