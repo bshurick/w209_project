@@ -75,3 +75,23 @@
   border-radius: 2px;
 }
 
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 3.5px;
+  opacity: 0.5;
+}
+
+.line:hover {
+  stroke-width: 7px;
+  stroke: yellow;
+  opacity: 1;
+}
+
+.x.axis path {
+  display: line;
+}
+
+.grid path {
+      stroke-width: 0;
+}

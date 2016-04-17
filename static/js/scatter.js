@@ -3,7 +3,7 @@ var scatterplot = function(data, target) {
 
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
     	width = 850 - margin.left - margin.right,
-    	height = 500 - margin.top - margin.bottom;
+    	height = 350 - margin.top - margin.bottom;
 	
 	// setup x 
 	var xValue = function(d) { return Math.round(d.score*100); }, // data -> value
