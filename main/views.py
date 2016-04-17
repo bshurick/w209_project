@@ -30,6 +30,10 @@ def index(request):
 	tmp = loader.get_template('index.html')
 	watched_video = request.session.get('watched_video',False)
 	nfilter=10
+	mapchart_title = 'Agreement, by state'
+	mapchart_title_subtext = 'Map of % in agreement to the question'
+	scatter_title = 'Percent agree vs. disagree, state scatterplot'
+	sortbar_title = 'Percent agreed, gender and region'
 	c = {
 		'video':video
 		,'watched_video':watched_video
@@ -55,6 +59,9 @@ def index(request):
 		,'q3_sortbar':get_q3_agree_byregion(sortbar=True)
 		,'q4_sortbar':get_q4_agree_byregion(sortbar=True)
 		,'q5_sortbar':get_spirituality_by_region(sortbar=True)
+		,'mapchart_title':mapchart_title
+		,'scatter_title':scatter_title
+		,'sortbar_title':sortbar_title
 	}
 	return HttpResponse(tmp.render(c,request))
 
