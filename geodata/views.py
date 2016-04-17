@@ -390,7 +390,6 @@ def get_video_responses():
 		, call_parents
 		, count(*) result 
 		from surveys_survey
-		where video_choice is not null
 		group by 1,2
 		order by 1,2 ;
 	'''
