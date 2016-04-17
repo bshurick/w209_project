@@ -156,6 +156,13 @@ I10_DICT = {
     , 5:'Anti-spiritual'
 }
 
+VID = {-1:'Not Answered'
+	, 1:'Weekly'
+	, 2:'Monthly'
+	, 3:'Few Times Yearly'
+	, 4:'Never'
+	, 5:'Not Applicable'}
+
 QUESTION = {
 	'1':DPES11_DICT
 	,'2':DPES11_DICT
@@ -279,6 +286,21 @@ def get_question_by_regions(sql):
 	out = { 'labels':regions, 'series':[{'label':'Female', 'values':female},{'label':'Male', 'values':male} ]}
 	return out
 
+def get_question_by_video(sql):
+	choices = ['Weekly','Monthly','Few Times Yearly','Never','Not Applicable']
+	results = pd.read_sql(sql, connection)
+	results['choices'] = results['call_parents'].apply(lambda x: VID[int(x)])
+	test = []
+	control = []
+	for c in choices:	
+	    test_result = results.loc[(results['choices']==c) & (results['video_choice']=='test'),'result']
+	    control_result = results.loc[(results['choices']==c) & (results['video_choice']=='control'),'result']
+	    test.append(test_result.iloc[0] if test_result.shape[0]>0 else 0)
+	    control.append(control_result.iloc[0] if control_result.shape[0]>0 else 0)
+	out = { 'labels':choices, 'series':[{'label':'Family Video', 'values':test}, \
+						     {'label':'Honda Video', 'values':control }]}
+	return out
+	
 def get_spirituality_by_region(sortbar=False):
 	sql = '''
 		select 
@@ -359,6 +381,19 @@ def get_q4_agree_byregion(sortbar=False):
 		return get_sortbar_by_regions(sql)
 	else:
 		return get_question_by_regions(sql)
+
+def get_video_responses():
+	sql = '''
+		select
+		video_choice
+		, call_parents
+		, count(*) result 
+		from surveys_survey
+		where video_choice is not null
+		group by 1,2
+		order by 1,2 ;
+	'''
+	return get_question_by_video(sql)
 
 def geodata(request):
 	question = request.GET.get('question')

@@ -9,7 +9,8 @@ from geodata.views import \
 	, get_q1_agree_byregion \
 	, get_q2_agree_byregion \
 	, get_q3_agree_byregion \
-	, get_q4_agree_byregion
+	, get_q4_agree_byregion \
+	, get_video_responses
 
 def index(request):
 	videos = {
@@ -32,6 +33,7 @@ def index(request):
 	c = {
 		'video':video
 		,'watched_video':watched_video
+		,'video_responses':get_video_responses()
 		,'nfilter':nfilter
 		,'q1_scores':get_geodata_scores(1)
 		,'q2_scores':get_geodata_scores(2)

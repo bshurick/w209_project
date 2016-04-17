@@ -6,7 +6,7 @@ var barchart = function(data, target) {
 	    barHeight        = 20,
 	    groupHeight      = barHeight * data.series.length,
 	    gapBetweenGroups = 10,
-	    spaceForLabels   = 100,
+	    spaceForLabels   = 125,
 	    spaceForLegend   = 100;
 
 	// Zip the series data together (first values, second values, etc.)

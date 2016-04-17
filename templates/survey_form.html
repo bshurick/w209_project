@@ -15,7 +15,7 @@
 <div class="row">
 <div class="col-xs-12 col-md-offset-2 col-md-8">
 
-<p class="lead">
+<p>
 Please fill out our survey to add your perspective.
 </p>
 
@@ -35,6 +35,12 @@ Please fill out our survey to add your perspective.
 		{{ form.gender.errors }}
 	</div>
   	
+	<div class="form-group">
+		<label for="{{ form.how_often_do_you_plan_to_reach_out_to_your_parents_in_the_next_12_months.id_for_label }}">How often do you plan to reach out to your parent(s) in the next 12 months?</label>
+		{{ form.how_often_do_you_plan_to_reach_out_to_your_parents_in_the_next_12_months }}
+		{{ form.how_often_do_you_plan_to_reach_out_to_your_parents_in_the_next_12_months.errors }}
+	</div>
+
 	<div class="form-group">
 		<label for="{{ form.i_develop_strong_emotions_toward_people_i_can_rely_on.id_for_label }}">I develop strong emotions toward people I can rely on: </label>
 		{{ form.i_develop_strong_emotions_toward_people_i_can_rely_on }}
