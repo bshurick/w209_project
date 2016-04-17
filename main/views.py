@@ -10,12 +10,7 @@ from geodata.views import \
 	, get_q2_agree_byregion \
 	, get_q3_agree_byregion \
 	, get_q4_agree_byregion \
-	, get_video_responses \
-	, get_q1_agree_byincome \
-	, get_q2_agree_byincome \
-	, get_q3_agree_byincome \
-	, get_q4_agree_byincome \
-	, get_q5_agree_byincome 
+	, get_video_responses
 
 def index(request):
 	videos = {
@@ -45,7 +40,6 @@ def index(request):
 	scatter_title = 'Percent agree vs. disagree, state scatterplot'
 	scatter_subtext = 'States in the upper-left quadrant more often disagree, while states in the lower-right quadrant more often agree with the question.'
 	sortbar_title = 'Percent agreed, gender and region'
-	sortbar_title_income = 'Percent agreed by income level'
 	c = {
 		'video':video
 		,'watched_video':watched_video
@@ -71,16 +65,10 @@ def index(request):
 		,'q3_sortbar':get_q3_agree_byregion(sortbar=True)
 		,'q4_sortbar':get_q4_agree_byregion(sortbar=True)
 		,'q5_sortbar':get_spirituality_by_region(sortbar=True)
-		,'q1_sortbar_income':get_q1_agree_byincome(sortbar=True)
-		,'q2_sortbar_income':get_q2_agree_byincome(sortbar=True)
-		,'q3_sortbar_income':get_q3_agree_byincome(sortbar=True)
-		,'q4_sortbar_income':get_q4_agree_byincome(sortbar=True)
-		,'q5_sortbar_income':get_q5_agree_byincome(sortbar=True)
 		,'mapchart_title':mapchart_title
 		,'scatter_title':scatter_title
 		,'scatter_subtext':scatter_subtext
 		,'sortbar_title':sortbar_title
-		,'sortbar_title_income':sortbar_title_income
 		,'q1_question':q1_question
 		,'q2_question':q2_question
 		,'q3_question':q3_question

@@ -41,7 +41,6 @@ class Survey(models.Model):
 	state = models.CharField(max_length=2, choices=STATES)
 	region = models.CharField(max_length=10, choices=REGIONS)
 	gender = models.CharField(max_length=6, choices=(('Male','Male'),('Female','Female')))
-	income = models.CharField(max_length=2, db_column='income', null=True, blank=True)
 	how_often_do_you_plan_to_reach_out_to_your_parents_in_the_next_12_months = models.CharField(max_length=2, choices=VID, db_column='call_parents', null=True, blank=True)
 	i_develop_strong_emotions_toward_people_i_can_rely_on = models.CharField(max_length=2, choices=Q1, db_column='strong_emotions')
 	parents_should_empower_children_as_much_as_possible_so_that_they_may_follow_their_dreams = models.CharField(max_length=2, choices=Q1, db_column='empower_children')
