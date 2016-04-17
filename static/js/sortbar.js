@@ -1,7 +1,7 @@
 
 // eventually read data automatically via .csv function
 
-var sortbar = function(data, location, button) {
+var sortbar = function(data, location, button, rotated=false, styletarget='bar_chart2') {
 
   function change() {
     clearTimeout(sortTimeout);
@@ -9,28 +9,46 @@ var sortbar = function(data, location, button) {
     // Copy-on-write since tweens are evaluated after a delay.
     var x0 = x.domain(data.sort(this.checked
         ? function(a, b) { return b.Weighted_Pct - a.Weighted_Pct; }
-        : function(a, b) { return d3.ascending(a.Category, b.Category); })
+        : function(a, b) { return d3.ascending(a.Sorted, b.Sorted); })
         .map(function(d) { return d.Category; }))
         .copy();
 
-    svg.selectAll('.bar_chart2')
+    svg.selectAll('.'+styletarget)
         .sort(function(a, b) { return x0(a.Category) - x0(b.Category); });
 
     var transition = svg.transition().duration(750),
         delay = function(d, i) { return i * 50; };
 
-    transition.selectAll('.bar_chart2')
+    transition.selectAll('.'+styletarget)
         .delay(delay)
         .attr("x", function(d) { return x0(d.Category); });
 
     transition.select(".x.axis")
         .call(xAxis)
+	.selectAll('text')
+            .style("text-anchor", function(d) {
+			if (rotated==true) { return "end"; }
+			else { return "middle"; }
+		})
+            .attr("dx", function(d) {
+			if (rotated==true) { return "-.8em"; }
+		})
+            .attr("dy", function(d) { 
+			if (rotated==true) { return ".15em"; }
+			else { return ".9em"; }
+		})
+              .attr("transform", function(d) {
+                        if (rotated==true) { return "rotate(-30)"; }
+                })
       .selectAll("g")
         .delay(delay);
   }
 
-var margin = {top: 20, right: 20, bottom: 20, left: 50},
-    width = 900- margin.left - margin.right,
+var margin = {top: 20, right: 20, bottom: 20, left: 50}
+if (rotated==true) {
+	margin.bottom = 100;
+}
+var width = 900- margin.left - margin.right,
     height = 350 - margin.top - margin.bottom;
 
 var formatPercent = d3.format(".0%");
@@ -67,7 +85,21 @@ var svg = d3.select(location).append("svg")
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+	.selectAll('text')
+	    .style("text-anchor", function(d) {
+			if (rotated==true) { return "end"; }
+		})
+	    .attr("dx", function(d) {
+			if (rotated==true) { return "-.8em"; }
+		})
+	    .attr("dy", function(d) { 
+			if (rotated==true) { return ".15em"; }
+			else { return ".9em"; }
+		})
+	      .attr("transform", function(d) { 
+			if (rotated==true) { return "rotate(-30)"; }
+		});
 
   svg.append("g")
       .attr("class", "y axis")
@@ -82,7 +114,7 @@ var svg = d3.select(location).append("svg")
   svg.selectAll(location)
       .data(data)
     .enter().append("rect")
-      .attr("class", "bar_chart2")
+      .attr("class", styletarget)
       .attr("x", function(d) { return x(d.Category); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.Weighted_Pct); })

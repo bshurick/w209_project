@@ -64,6 +64,11 @@
   fill-opacity: .9;
 }
 
+.bar_chart3 {
+  fill: rgb(84,49,163);
+  fill-opacity: .9;
+}
+
 .dot {
 }
 

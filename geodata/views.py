@@ -120,6 +120,27 @@ STATES = {u'AK': u'Alaska',
  u'WV': u'West Virginia',
  u'WY': u'Wyoming'}
 
+INCOME = {-2:'Not asked',-1:'REFUSED'
+            ,1 :'<$5,000'
+            ,2 :'$5,000 to $7,499'
+            ,3 :'$7,500 to $9,999'
+            ,4 :'$10,000 to $12,499'
+            ,5 :'$12,500 to $14,999'
+            ,6 :'$15,000 to $19,999'
+            ,7 :'$20,000 to $24,999'
+            ,8 :'$25,000 to $29,999'
+            ,9 :'$30,000 to $34,999'
+            ,10: '$35,000 to $39,999'
+            ,11: '$40,000 to $49,999'
+            ,12: '$50,000 to $59,999'
+            ,13: '$60,000 to $74,999'
+            ,14: '$75,000 to $84,999'
+            ,15: '$85,000 to $99,999'
+            ,16: '$100,000 to $124,999'
+            ,17: '$125,000 to $149,999'
+            ,18: '$150,000 to $174,999'
+            ,19: '>=$175,000'}
+
 DPES11_DICT = {-1:'Refused'
                 ,1: 'Strongly disagree'
                 ,2: 'Disagree'
@@ -271,8 +292,15 @@ def get_geodata_scores(question, nfilter=0):
 def get_sortbar_by_regions(sql):
 	results = pd.read_sql(sql, connection)
         results['concat'] = results['region']+': '+results['gender']
-        output = [ {'Category':str(s),'Weighted_Pct':str(r)}
+        output = [ {'Category':str(s),'Weighted_Pct':str(r), 'Sorted':str(s)}
                     for s,r in zip(results['concat'],results['result']) ]
+	return output
+
+def get_sortbar_by_income(sql):
+	results = pd.read_sql(sql, connection)
+	results['income_str'] = results['income'].apply(lambda x: INCOME[int(x) if x else -2])
+	output = [ {'Category':str(s),'Weighted_Pct':str(r), 'Sorted':i}
+                    for i,s,r in sorted(zip(results['income'],results['income_str'],results['result']), key=lambda x: x[0]) ]
 	return output
 
 def get_question_by_regions(sql):
@@ -289,7 +317,7 @@ def get_question_by_regions(sql):
 def get_question_by_video(sql):
 	choices = ['Weekly','Monthly','Few Times Yearly','Never','Not Applicable']
 	results = pd.read_sql(sql, connection)
-	results['choices'] = results['call_parents'].apply(lambda x: VID[int(x)])
+	results['choices'] = results['call_parents'].apply(lambda x: VID[int(x if x else -1)])
 	results['video_choice'] = results['video_choice'].apply(lambda x: x if len(str(x))>0 else 'None')
 	test = []
 	control = []
@@ -318,6 +346,70 @@ def get_spirituality_by_region(sortbar=False):
 		return get_sortbar_by_regions(sql)
 	else:
 		return get_question_by_regions(sql)
+
+def get_q1_agree_byincome(sortbar=True):
+	sql = '''
+		select 
+		cast(coalesce(income,'-2') as integer) income
+		, sum(weight*case when cast(strong_emotions as integer) in (5,6,7)
+                        then 1 else 0 end)/sum(weight) result
+		from surveys_survey
+		group by 1
+		order by 1	
+	'''	
+	return get_sortbar_by_income(sql)
+
+def get_q2_agree_byincome(sortbar=True):
+	sql = '''
+		select 
+		cast(coalesce(income,'-2') as integer) income
+		, sum(weight*case when 
+			cast(empower_children as integer) in (5,6,7)
+                        then 1 else 0 end)/sum(weight) result
+		from surveys_survey
+		group by 1
+		order by 1	
+	'''	
+	return get_sortbar_by_income(sql)
+
+def get_q3_agree_byincome(sortbar=True):
+	sql = '''
+		select 
+		cast(coalesce(income,'-2') as integer) income
+		, sum(weight*case when 
+			cast(individualistic_morals as integer) in (1,2,3)
+                        then 1 else 0 end)/sum(weight) result
+		from surveys_survey
+		group by 1
+		order by 1	
+	'''	
+	return get_sortbar_by_income(sql)
+
+def get_q4_agree_byincome(sortbar=True):
+	sql = '''
+		select 
+		cast(coalesce(income,'-2') as integer) income
+		, sum(weight*case when 
+			cast(losing_friends as integer) in (4,5)
+                        then 1 else 0 end)/sum(weight) result
+		from surveys_survey
+		group by 1
+		order by 1	
+	'''	
+	return get_sortbar_by_income(sql)
+
+def get_q5_agree_byincome(sortbar=True):
+	sql = '''
+		select 
+		cast(coalesce(income,'-2') as integer) income
+		, sum(weight*case when 
+			cast(spirituality as integer) in (1,2)
+                        then 1 else 0 end)/sum(weight) result
+		from surveys_survey
+		group by 1
+		order by 1	
+	'''	
+	return get_sortbar_by_income(sql)
 
 def get_q1_agree_byregion(sortbar=False):
 	sql = '''
