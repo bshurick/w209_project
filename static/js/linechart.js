@@ -9,7 +9,7 @@ var linechart = function(target) {
 
 	var formatPercent = d3.format(".0%");
 
-	var margin = {top: 20, right: 140, bottom: 30, left: 60},
+	var margin = {top: 20, right: 160, bottom: 30, left: 60},
 	    width = 850 - margin.left - margin.right,
 	    height = 500 - margin.top - margin.bottom;
 
