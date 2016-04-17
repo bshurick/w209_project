@@ -1,5 +1,13 @@
 
 $(document).ready(function() {
+	$('#survey_btn').hide();
+	$('#video_box').click(function() { 
+		if ($(this).prop('checked')==true) {
+			$('#survey_btn').show();	
+		} else if ($(this).prop('checked')==false) {
+			$('#survey_btn').hide();	
+		} 
+	});
 	$('#q1').show();
         $('#q2').hide();
         $('#q3').hide();

@@ -1,17 +1,7 @@
 
 <p class="lead">
-Participate in our research. 
+Before diving in, feel free to enjoy the brief video below to inform next steps.
 </p>
-<p>
-To participate in our morality research, watch 
-the below video and answer our survey questions. 
-</p>
-
-<p>Watch the video below, and then click 'Go to survey'
-to fill out a short 5-minute questionnaire about morality.
-Your responses will automatically be added to the visualizations
-on this page.</p>
-<p>We appreciate your participation!</p>
 
 <br/>
 <div class="row">
@@ -32,8 +22,24 @@ on this page.</p>
 
 {% else %}
 
-<br/>
-<a href="{% url 'surveys:survey' %}" class='btn btn-primary'>Go to survey</a>
+<div class='checkbox'>
+ <label><input type='checkbox' value ='' id='video_box'><strong>I have watched the video.</strong></label>
+</div>
+<div id="survey_btn">
+<p>Now, feel free to take our anonymous, 3-minute survey. Your responses will dynamically update data visualizations below.</p>
+
+<p>You can find your similarities and/or differences with not only recent respondents of our survey but respondents to other relevant surveys, which are also incorporated in data visualizations below.</p>
+
+<p>
+  <ol>
+    <li><a href="http://kenan.ethics.duke.edu/attitudes/resources/measuring-morality/GfK">Duke University's "Measuring Morality" survey conducted by GfK</a></li>
+    <li><a href="http://www.thearda.com/Archive/Files/Descriptions/GRELREST.asp">Pew Research Center's "Global Restrictions on Religion Data" survey</a></li>
+  </ol>
+</p>
+
+ <a href="{% url 'surveys:survey' %}" class='btn btn-primary'>Go to survey</a>
+
+</div>
 
 {% endif %}
 
