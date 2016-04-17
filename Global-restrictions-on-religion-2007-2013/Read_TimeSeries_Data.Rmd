@@ -1,0 +1,66 @@
+---
+output: word_document
+---
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+```{r}
+
+# Title: W209 Final Project
+# Author: "Derek S. Chan"
+# Date: "February 2016"
+# Output: word_document
+
+# set working directory (wd)
+# setwd("/Users/dschan/Desktop/iTRP_Tool")
+
+# call template libraries in alphabetical order
+
+library(AER)
+library(boot)
+library(car)
+library(compute.es)
+library(DataCombine)
+library(devtools)
+library(foreign)
+library(gdata)
+library(ggplot2)
+library(granova)
+library(lmtest)
+library(mlogit)
+library(multcomp)
+library(QuantPsyc)
+library(pastecs)
+library(plotly)
+library(psych)
+library(Rcmdr)
+library(stargazer)
+library(sandwich)
+library(WRS)
+
+mydata = read.spss("/Users/dschan/Desktop/Global-restrictions-on-religion-2007-2013/RestrictionsPublicDataset.sav", to.data.frame=TRUE)
+write.table(mydata, "mydataFromR.txt")
+getwd()
+
+head(mydata)
+
+#suppress scientific notation
+
+options(scipen=999)
+
+#read CSV file
+
+d <- read.csv("Nielsen_Master_collapsed.csv", header = T)
+
+head(d)
+
+# check summary statistics
+
+mean(d) 
+summary(d)
+
+d[Demo_Segment] = 
+  
+#d <- rbind(d,(Demo_Segment='Female 18-24')
+
+#--------------------------------------------------------
+```
