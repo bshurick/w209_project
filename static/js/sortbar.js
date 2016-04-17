@@ -49,7 +49,7 @@ if (rotated==true) {
 	margin.bottom = 100;
 }
 var width = 900- margin.left - margin.right,
-    height = 350 - margin.top - margin.bottom;
+    height = 300 - margin.top - margin.bottom;
 
 var formatPercent = d3.format(".0%");
 
