@@ -119,7 +119,7 @@ var make_chart = function(scores, location) {
 				.append('text')
 				.html(string);
 				legend_placeholder();
-	   			column("% of Agreed", color, legend_div());
+	   			column("% Agreed", color, legend_div());
 			} 
 			break;	
 		    }
@@ -161,7 +161,7 @@ var make_chart = function(scores, location) {
 		.attr("fill", fillfunc);
 
 	$('.btn').click(function() {
-		column("% of Agreed", color, legend_div());
+		column("% Agreed", color, legend_div());
 	});
 
 	}); // end json
