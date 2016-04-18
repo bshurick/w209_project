@@ -31,7 +31,12 @@ Before diving in, feel free to enjoy the brief video below to inform next steps.
  <label><input type='checkbox' value ='' id='video_box'><strong>I have watched the video.</strong></label>
 </div>
 <div id="survey_btn">
-<p>Now, feel free to take our anonymous, 3-minute survey. Your responses will dynamically update data visualizations below.</p>
+ <p>Now, feel free to take our anonymous, 3-minute survey. Your responses will dynamically update data visualizations below.</p>
+ <a href="{% url 'surveys:survey' %}" class='btn btn-primary'>Go to survey</a>
+</div>
+
+{% endif %}
+<br/>
 
 <p>You can find your similarities and/or differences with not only recent respondents of our survey but respondents to other relevant surveys, which are also incorporated in data visualizations below.</p>
 
@@ -41,12 +46,6 @@ Before diving in, feel free to enjoy the brief video below to inform next steps.
     <li><a href="http://www.thearda.com/Archive/Files/Descriptions/GRELREST.asp">Pew Research Center's "Global Restrictions on Religion Data" survey</a></li>
   </ol>
 </p>
-
- <a href="{% url 'surveys:survey' %}" class='btn btn-primary'>Go to survey</a>
-
-</div>
-
-{% endif %}
 
 </div> <!-- col -->
 </div> <!-- row -->
