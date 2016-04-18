@@ -39,20 +39,56 @@ var make_chart = function(scores, location) {
 	
 	var graticule = d3.geo.graticule()
 	    .step([5, 5]);
+	
       	svg.append('rect')
 		.datum(graticule)
 		.attr("class", "background")
 		.classed('img-fluid',true);
 	var g = svg.append('g');
-		 
+		
+	var range = ["rgb(237,248,233)", "rgb(186,228,179)",
+                               "rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"]; 
+	var domain = [
+                        d3.min(scores, function(d) { return d.score; }) ,
+                        d3.max(scores, function(d) { return d.score; })
+                ];
 	var color = d3.scale.quantize()
-			    .range(["rgb(237,248,233)", "rgb(186,228,179)",
-			     "rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"]);
+		.domain(domain)
+		.range(range);
 
-	color.domain([
-			d3.min(scores, function(d) { return d.score; }),
-			d3.max(scores, function(d) { return d.score; })
-		]);
+	var legend_placeholder = function() {
+		d3.select(location+'_textbox')
+			    .append("div")
+			    .attr("class", "col-md-3 col-md-offset-5")
+			    .attr('id',location.substring(1)+'_legend')
+			    .append('div');
+	}	 
+	
+	var legend_div = function() {
+		return d3.select(location+'_legend')
+		   .html('')
+		   .append('div');
+	}
+
+	function column(title, scale, div) {
+	  var legend = d3.legend.color()
+	    .labelFormat(d3.format(".0%"))
+	    .cells(6)
+	    .scale(scale);
+	
+	  div.append("h4").text(title);
+	    
+	  var legend_svg = div.append("svg");
+
+	  legend_svg.append("g")
+	    .attr("class", "legendQuant")
+	    .attr("transform", "translate(20,20)");
+
+	  legend_svg.select(".legendQuant")
+	    .call(legend);
+	};
+
+	color.domain(domain);
 
 	d3.json("{% static 'us-states.json' %}", function(json) {
 	    for (var i=0; i < scores.length; i++) {
@@ -77,8 +113,13 @@ var make_chart = function(scores, location) {
 				string = make_table(json.features[j].properties);
 		       		d3.select(location+'_textbox')
 				.html("")
-				.append("text")
+				.append("div")
+				.attr('id',location.substring(1)+'_textbox_txt')
+				.attr('class','col-md-4')
+				.append('text')
 				.html(string);
+				legend_placeholder();
+	   			column("% of Agreed", color, legend_div());
 			} 
 			break;	
 		    }
@@ -107,9 +148,9 @@ var make_chart = function(scores, location) {
 			  .attr('fill','orange'); 
 			var prop = d.properties;
 			string = make_table(prop);						
-		       d3.select(location+'_textbox')
-			.html("")
-			.append("text")
+		       d3.select(location+'_textbox_txt')
+			.html('')
+			.append('text')
 			.html(string);
 		})
 		.on('mouseout', function(d){
@@ -118,6 +159,10 @@ var make_chart = function(scores, location) {
 		})
 		.attr("opacity", 0.9)
 		.attr("fill", fillfunc);
+
+	$('.btn').click(function() {
+		column("% of Agreed", color, legend_div());
+	});
 
 	}); // end json
 }
