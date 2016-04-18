@@ -73,16 +73,17 @@ var make_chart = function(scores, location) {
 	function column(title, scale, div) {
 	  var legend = d3.legend.color()
 	    .labelFormat(d3.format(".0%"))
-	    .cells(6)
+	    .cells(4)
 	    .scale(scale);
 	
 	  div.append("h4").text(title);
 	    
-	  var legend_svg = div.append("svg");
+	  var legend_svg = div
+			.append("svg");
 
 	  legend_svg.append("g")
 	    .attr("class", "legendQuant")
-	    .attr("transform", "translate(20,20)");
+	    .attr("transform", "translate(2,2)");
 
 	  legend_svg.select(".legendQuant")
 	    .call(legend);
