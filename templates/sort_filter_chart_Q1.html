@@ -84,7 +84,7 @@
 		<div class="button" onclick="update_dataset(q1ChartData[1])">Education Level</div>
 		<div class="button" onclick="update_dataset(q1ChartData[2])">Income Bracket</div>
 		<div class="button" onclick="update_dataset(q1ChartData[3])">Parent Status</div>
-    <div id='gender_chart' style='width:100%; height: 270px;'></div>
+    		<div id='gender_chart' style='width:100%; height: 270px;'></div>
 		<script type="text/javascript">
 
 			function wrap(text, width) {
@@ -126,7 +126,8 @@
 						xAxis,
 						x,
 						yAxis,
-						y;
+						y,
+						rectG;
 
 				/*
 				Documentation: Sample Survey Questions
@@ -281,7 +282,7 @@
 					   });
 
 				 	// create group wrapper for rectangle text overlays
-				 	var rectG = svg.append("g")
+				 	rectG = svg.append("g")
 							.attr("class", "rect-text");
 
 					// create labels
