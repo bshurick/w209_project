@@ -2,6 +2,10 @@
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
 
+		
+
+
+
 		<script>
 
 				// define helper function to format with no decimal places
@@ -302,7 +306,7 @@
 					        .delay(delay)
 					        .attr("x", function(d) { return x0(d[0]); });
 
-							    var transition = svg.transition().duration(750),
+							    var transition = svgEducation.transition().duration(750),
 					        delay = function(d, i) { return i * 50; };
 
 					    transition.selectAll("text.label")
