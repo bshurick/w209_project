@@ -5,35 +5,6 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 </p>
 <br/>
 
-	<style type="text/css">
-
-					/* to style a class, use a . identifier */
-
-					.button {
-						background: white;
-						color: black;
-						padding: 5px;
-						margin: 5px;
-						border: blue;
-						border-style: solid;
-						border-width: 0.5px;
-						display: inline-block;
-						font: 13px sans-serif;
-					}
-
-					.x.axis path {
-				    display: none;
-					}
-
-					.axis text {
-				    font: 10px sans-serif;
-					}
-
-					.bar:hover {
-						fill: red;
-					}
-
-	</style>
 
 		<h4>Question 1: Percent who agreed with "I develop strong emotions toward people I can rely on"</h4>
 
@@ -85,10 +56,10 @@ Are you also interested to compare by U.S. region and demographic? Simply select
     
 		<label><input id="sort_gender" type="checkbox">Sort values</label>
 
-		<div class="button btn btn-primary" onclick="update_dataset(genderChartData[0])">Gender</div>
-		<div class="button btn btn-primary" onclick="update_dataset(genderChartData[1])">Education Level</div>
-		<div class="button btn btn-primary" onclick="update_dataset(genderChartData[2])">Income Bracket</div>
-		<div class="button btn btn-primary" onclick="update_dataset(genderChartData[3])">Parent Status</div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[0])">Gender</div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[1])">Education Level</div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[2])">Income Bracket</div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[3])">Parent Status</div>
     <div id='gender_chart' style='width:100%; height: 270px;'></div>
 		<script type="text/javascript">
 
