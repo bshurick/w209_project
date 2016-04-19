@@ -288,7 +288,7 @@
 					d3.select("#sort_education").on("change", change_education);
 
 				  var sortTimeout = setTimeout(function() {
-				     d3.select("input").property("checked", true).each(change_education);
+				     d3.select("#sort_education").property("checked", true).each(change_education);
 				  }, 2000);
 
 				  function change_education() {
