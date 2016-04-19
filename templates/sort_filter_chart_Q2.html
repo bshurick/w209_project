@@ -2,6 +2,10 @@
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
 
+		
+
+
+
 		<script>
 
 				// define helper function to format with no decimal places
@@ -35,11 +39,11 @@
 
 		<label><input id="sort_education" type="checkbox">Sort values</label>
 
-		<div class="button" onclick="update_education_dataset(datasets[0])">Gender</div>
-		<div class="button" onclick="update_education_dataset(datasets[1])">Education Level</div>
-		<div class="button" onclick="update_education_dataset(datasets[2])">Income Bracket</div>
-		<div class="button" onclick="update_education_dataset(datasets[3])">Parent Status</div>
-    		<div id='education_chart' style='width:100%;height:270px;'></div>
+		<div class="button" onclick="update_education_dataset(datasetEducation[0])">Gender</div>
+		<div class="button" onclick="update_education_dataset(datasetEducation[1])">Education Level</div>
+		<div class="button" onclick="update_education_dataset(datasetEducation[2])">Income Bracket</div>
+		<div class="button" onclick="update_education_dataset(datasetEducation[3])">Parent Status</div>
+    <div id='education_chart' style='width:100%;height:270px;'></div>
 		<script type="text/javascript">
 
 			function wrap(text, width) {
@@ -96,22 +100,22 @@
 				*/
 
 				// define empty variables
-				var datasets = [],
+				var datasetEducation = [],
 						activeDatasetEducation;
 
 				// invoke function that loads csv data
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_L9.csv', function(data) {
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_GENDER_L9.csv', function(data) {
 
 					// initialize the chart itself
 					build_education_chart(data, 'education_chart');
 
-				});
+				}, datasetEducation);
 
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null, datasetEducation);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null, datasetEducation);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null, datasetEducation);
 
-				console.log(datasets);
+				console.log(datasetEducation);
 
 				// define function that builds the chart
 				function build_education_chart(data, domElement) {
