@@ -126,9 +126,7 @@
 						xAxis,
 						x,
 						yAxis,
-						y,
-						rectG,
-						rectX = [];
+						y;
 
 				/*
 				Documentation: Sample Survey Questions
@@ -177,7 +175,7 @@
 
 				// define function that builds the chart
 				function build_chart(data, domElement) {
-					rectX = [];
+					var rectX = [];
 					activeDataset = data;
 					// console.log(data)
 
@@ -283,7 +281,7 @@
 					   });
 
 				 	// create group wrapper for rectangle text overlays
-				 	rectG = svg.append("g")
+				 	var rectG = svg.append("g")
 							.attr("class", "rect-text");
 
 					// create labels
