@@ -349,7 +349,7 @@
 					d3.select("sort_gender").on("change", change);
 
 				  var sortTimeout = setTimeout(function() {
-				     d3.select("input").property("checked", true).each(change);
+				     d3.select("sort_gender").property("checked", true).each(change);
 				  }, 2000);
 
 				  function change() {
