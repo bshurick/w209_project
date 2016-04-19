@@ -85,7 +85,8 @@
 						xAxis,
 						x,
 						yAxis,
-						y;
+						y,
+						rectGEducation;
 
 				/*
 				Documentation: Sample Survey Questions
@@ -223,11 +224,11 @@
 					   });
 
 				 	// create group wrapper for rectangle text overlays
-				 	var rectG = svg.append("g")
+				 	rectGEducation = svg.append("g")
 							.attr("class", "rect-text");
 
 					// create labels
-					rectG.selectAll("text")
+					rectGEducation.selectAll("text")
 					   .data(data)
 					   .enter()
 					   .append("text")
@@ -270,7 +271,7 @@
 							   });
 
 							// update all labels
-							rectG.selectAll("text")
+							rectGEducation.selectAll("text")
 							   .data(data)
 							   .text(function(d) {
 									return formatPercent(d[1]);
