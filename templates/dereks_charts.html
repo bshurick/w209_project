@@ -35,10 +35,9 @@
 
 	</style>
 
-		<h4>Percent Agreed: "If one believes something is right, one must stand by it, even if it means losing friends
-			  or missing out on profitable opportunities."</h4>
+		<h4>Percent Agreed: "I develop strong emotions toward people I can rely on"</h4>
 
-		<p>Click one of four buttons to change demographic breakout (default is Gender)</p>
+		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
 
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -151,16 +150,16 @@
 						activeDataset;
 
 				// invoke function that loads csv data
-				loadCsv('zPPREG4_PPGENDER_IS6.csv', function(data) {
+				loadCsv('https://github.com/bshurick/w209_project/blob/master/python_d3/zPPREG4_GENDER_DPES11.csv', function(data) {
 
 					// initialize the chart itself
 					build_chart(data);
 
 				});
 
-				loadCsv('zPPREG4_PPEDUCAT_IS6.csv', null);
-				loadCsv('zPPREG4_PPINCCAT_IS6.csv', null);
-				loadCsv('zPPREG4_core_par_IS6.csv', null);
+				loadCsv('https://github.com/bshurick/w209_project/blob/master/python_d3/zPPREG4_PPEDUCAT_DPES11.csv', null);
+				loadCsv('https://github.com/bshurick/w209_project/blob/master/python_d3/zPPREG4_PPINCCAT_DPES11.csv', null);
+				loadCsv('https://github.com/bshurick/w209_project/blob/master/python_d3/zPPREG4_core_part_DPES11.csv', null);
 
 				console.log(datasets);
 
