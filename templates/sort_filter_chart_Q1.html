@@ -84,8 +84,8 @@
 		<div class="button" onclick="update_dataset(datasets[1])">Education Level</div>
 		<div class="button" onclick="update_dataset(datasets[2])">Income Bracket</div>
 		<div class="button" onclick="update_dataset(datasets[3])">Parent Status</div>
-
-    		<div id='gender_chart'></div>
+	
+		<div id='gender_chart' style='width:100%; height: 500px;'></div>
     		
 		<script type="text/javascript">
 
@@ -229,7 +229,7 @@
 					y.domain([0, 1]);
 
 					// create SVG element
-					svg = d3.select(domElement)
+					svg = d3.select("#" + domElement)
 								.append("svg")
 								.attr("id", "chart")
 								.attr("width", w)
