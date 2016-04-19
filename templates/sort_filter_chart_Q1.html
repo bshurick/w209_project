@@ -78,7 +78,7 @@
 		class attribute for styling, and onlick for functionality
 		(e.g., calling the updated dataset function with approp dataset) -->
 
-		<label><input id="sort" type="checkbox">Sort values</label>
+		<label><input id="sort_gender" type="checkbox">Sort values</label>
 
 		<div class="button" onclick="update_dataset(datasets[0])">Gender</div>
 		<div class="button" onclick="update_dataset(datasets[1])">Education Level</div>
@@ -346,7 +346,7 @@
 							   });
 					}
 
-					d3.select("input").on("change", change);
+					d3.select("sort_gender").on("change", change);
 
 				  var sortTimeout = setTimeout(function() {
 				     d3.select("input").property("checked", true).each(change);
