@@ -78,9 +78,9 @@
 						svgEducation,
 						xScale,
 						yScale,
-						xAxis,
+						xAxisEducation,
 						x,
-						yAxis,
+						yAxisEducation,
 						y,
 						rectGEducation;
 
@@ -142,11 +142,11 @@
 					    .range([h, 0]);
 
 					// pass to axis to transform into visualization
-					xAxis = d3.svg.axis()
+					xAxisEducation = d3.svg.axis()
 					    .scale(x)
 					    .orient("bottom");
 
-					yAxis = d3.svg.axis()
+					yAxisEducation = d3.svg.axis()
 					    .scale(y)
 					    .orient("left")
 					    .tickFormat(formatPercent);
@@ -175,13 +175,13 @@
 					svgEducation.append("g")
 							.attr("class", "x axis")
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
-							.call(xAxis)
+							.call(xAxisEducation)
 							.selectAll(".tick text")
 		 					.call(wrap, x.rangeBand());
 
 					svgEducation.append("g")
 				      .attr("class", "y axis")
-							.call(yAxis)
+							.call(yAxisEducation)
 							/*
 							.append("text")
 				      //.attr("transform", "rotate(-90)")
@@ -316,7 +316,7 @@
 									})
 
 					    transition.select(".x.axis")
-					        .call(xAxis)
+					        .call(xAxisEducation)
 									.selectAll("g")
 									.delay(delay)
 									.selectAll(".tick text")
