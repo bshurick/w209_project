@@ -59,7 +59,7 @@ var make_chart = function(scores, location) {
 	var legend_placeholder = function() {
 		d3.select(location+'_textbox')
 			    .append("div")
-			    .attr("class", "col-md-3 col-md-offset-5")
+			    .attr("class", "col-md-3 col-md-offset-4")
 			    .attr('id',location.substring(1)+'_legend')
 			    .append('div');
 	}	 
@@ -116,7 +116,7 @@ var make_chart = function(scores, location) {
 				.html("")
 				.append("div")
 				.attr('id',location.substring(1)+'_textbox_txt')
-				.attr('class','col-md-4')
+				.attr('class','col-md-5')
 				.append('text')
 				.html(string);
 				legend_placeholder();
