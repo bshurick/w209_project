@@ -1,41 +1,4 @@
-<h4>Drill down further to see whether regional patterns exist, by interactively selecting different demographics of interest.</h4>
-
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<title>Interactive Charts</title>
-	<script type="text/javascript" src="d3.js"></script>
-	<style type="text/css">
-
-					/* to style a class, use a . identifier */
-
-					.button {
-						background: white;
-						color: black;
-						padding: 5px;
-						margin: 5px;
-						border: blue;
-						border-style: solid;
-						border-width: 0.5px;
-						display: inline-block;
-						font: 13px sans-serif;
-					}
-
-					.x.axis path {
-				    display: none;
-					}
-
-					.axis text {
-				    font: 10px sans-serif;
-					}
-
-					.bar:hover {
-						fill: red;
-					}
-
-	</style>
-
-		<h4>Percent Agreed: "I develop strong emotions toward people I can rely on"</h4>
+		<h4>Percent Agreed: "Moral standards should be seen as individualistic: what one person considers to be moral may be judged as immoral by another person."</h4>
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
 
@@ -55,10 +18,6 @@
 				var formatPercent = d3.format(".0%");
 
 		</script>
-
-</head>
-
-<body>
 
 		<script>
 
@@ -139,7 +98,7 @@
 				Documentation: Sample Survey Questions
 				DPES11. I develop strong emotions toward people I can rely on
 				EPQ1. Moral standards should be seen as individualistic: what one person considers to be moral
-				      may be judged as immoral by another person.
+						  may be judged as immoral by another person.
 				IS6. If one believes something is right, one must stand by it, even if it means losing friends
 				     or missing out on profitable opportunities
 				L9. Parents should empower children as much as possible so that they may follow their dreams
@@ -151,16 +110,16 @@
 						activeDataset;
 
 				// invoke function that loads csv data
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_GENDER_DPES11.csv', function(data) {
+				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_GENDER_EPQ1.csv', function(data) {
 
 					// initialize the chart itself
 					build_chart(data);
 
 				});
 
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_PPEDUCAT_DPES11.csv', null);
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_PPINCCAT_DPES11.csv', null);
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_core_par_DPES11.csv', null);
+				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_PPEDUCAT_EPQ1.csv', null);
+				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_PPINCCAT_EPQ1.csv', null);
+				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_core_par_EPQ1.csv', null);
 
 				console.log(datasets);
 
