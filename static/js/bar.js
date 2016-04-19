@@ -58,7 +58,7 @@ var barchart = function(data, target) {
 	bar.append("text")
 	    .attr("x", function(d) { return x(d) - 3; })
 	    .attr("y", barHeight / 2)
-	    .attr("fill", "red")
+	    .attr("fill", "orange")
 	    .attr("dy", ".35em")
 	    .text(function(d) { return formatPercent(d) });
 
