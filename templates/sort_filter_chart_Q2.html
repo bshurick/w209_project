@@ -1,10 +1,6 @@
-		<h4>Percent Agreed: "Parents should empower children as much as possible so that they may follow their dreams"</h4>
+		<h4>Question 2: Percent who agreed with "Parents should empower children as much as possible so that they may follow their dreams"</h4>
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
-
-		
-
-
 
 		<script>
 
@@ -37,13 +33,13 @@
 		class attribute for styling, and onlick for functionality
 		(e.g., calling the updated dataset function with approp dataset) -->
 
-		<label><input id="sort_education" type="checkbox">Sort values</label>
+		<label><input id="sort_q2" type="checkbox">Sort values</label>
 
-		<div class="button" onclick="update_education_dataset(datasetEducation[0])">Gender</div>
-		<div class="button" onclick="update_education_dataset(datasetEducation[1])">Education Level</div>
-		<div class="button" onclick="update_education_dataset(datasetEducation[2])">Income Bracket</div>
-		<div class="button" onclick="update_education_dataset(datasetEducation[3])">Parent Status</div>
-    <div id='education_chart' style='width:100%;height:270px;'></div>
+		<div class="button" onclick="update_q2_dataset(datasetq2[0])">Gender</div>
+		<div class="button" onclick="update_q2_dataset(datasetq2[1])">Education Level</div>
+		<div class="button" onclick="update_q2_dataset(datasetq2[2])">Income Bracket</div>
+		<div class="button" onclick="update_q2_dataset(datasetq2[3])">Parent Status</div>
+    <div id='q2_chart' style='width:100%;height:270px;'></div>
 		<script type="text/javascript">
 
 			function wrap(text, width) {
@@ -79,14 +75,14 @@
 				// typically, don't use global variables to avoid conflicts, etc.
 				// or want to have multiple SVGs
 				var formatPercent = d3.format(".0%"),
-						svgEducation,
+						svgq2,
 						xScale,
 						yScale,
-						xAxisEducation,
+						xAxisq2,
 						x,
-						yAxisEducation,
+						yAxisq2,
 						y,
-						rectGEducation;
+						rectGq2;
 
 				/*
 				Documentation: Sample Survey Questions
@@ -99,27 +95,27 @@
 				*/
 
 				// define empty variables
-				var datasetEducation = [],
-						activeDatasetEducation;
+				var datasetq2 = [],
+						activeDatasetq2;
 
 				// invoke function that loads csv data
 				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_L9.csv', function(data) {
 
 					// initialize the chart itself
-					build_education_chart(data, 'education_chart');
+					build_q2_chart(data, 'q2_chart');
 
-				}, datasetEducation);
+				}, datasetq2);
 
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null, datasetEducation);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null, datasetEducation);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null, datasetEducation);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null, datasetq2);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null, datasetq2);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null, datasetq2);
 
-				console.log(datasetEducation);
+				console.log(datasetq2);
 
 				// define function that builds the chart
-				function build_education_chart(data, domElement) {
+				function build_q2_chart(data, domElement) {
 					var rectX = [];
-					activeDatasetEducation = data;
+					activeDatasetq2 = data;
 					// console.log(data)
 
 					// if chart already exists, remove it
@@ -146,11 +142,11 @@
 					    .range([h, 0]);
 
 					// pass to axis to transform into visualization
-					xAxisEducation = d3.svg.axis()
+					xAxisq2 = d3.svg.axis()
 					    .scale(x)
 					    .orient("bottom");
 
-					yAxisEducation = d3.svg.axis()
+					yAxisq2 = d3.svg.axis()
 					    .scale(y)
 					    .orient("left")
 					    .tickFormat(formatPercent);
@@ -167,7 +163,7 @@
 					y.domain([0, 1]);
 
 					// create SVG element
-					svgEducation = d3.select("#" + domElement)
+					svgq2 = d3.select("#" + domElement)
 								.append("svg")
 								.attr("id", "chart")
 								.attr("width", w)
@@ -176,16 +172,16 @@
 								//.attr("transform", "translate(" + margin.left + "," + 0 + ")");
 
 					// append g (group of elements)
-					svgEducation.append("g")
+					svgq2.append("g")
 							.attr("class", "x axis")
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
-							.call(xAxisEducation)
+							.call(xAxisq2)
 							.selectAll(".tick text")
 		 					.call(wrap, x.rangeBand());
 
-					svgEducation.append("g")
+					svgq2.append("g")
 				      .attr("class", "y axis")
-							.call(yAxisEducation)
+							.call(yAxisq2)
 							/*
 							.append("text")
 				      //.attr("transform", "rotate(-90)")
@@ -199,7 +195,7 @@
 							*/
 
 					// create rects
-					svgEducation.selectAll("rect")
+					svgq2.selectAll("rect")
 					   .data(data)
 					   .enter()
 					   .append("rect")
@@ -224,11 +220,11 @@
 					   });
 
 				 	// create group wrapper for rectangle text overlays
-				 	rectGEducation = svgEducation.append("g")
+				 	rectGq2 = svgq2.append("g")
 							.attr("class", "rect-text");
 
 					// create labels
-					rectGEducation.selectAll("text")
+					rectGq2.selectAll("text")
 					   .data(data)
 					   .enter()
 					   .append("text")
@@ -250,15 +246,15 @@
 					}
 
 					// define function to update datasets
-					function update_education_dataset(data) {
-							activeDatasetEducation = data;
-							build_education_chart(data, 'education_chart');
+					function update_q2_dataset(data) {
+							activeDatasetq2 = data;
+							build_q2_chart(data, 'q2_chart');
 							// # means following text is id
-							d3.select("#sort_education").property("checked",false)
+							d3.select("#sort_q2").property("checked",false)
 							// on click, update with new data
 							// div.button informs D3 to select the div with the specific class button
 
-							svgEducation.selectAll("rect")
+							svgq2.selectAll("rect")
 							   .data(data)
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]);
@@ -271,7 +267,7 @@
 							   });
 
 							// update all labels
-							rectGEducation.selectAll("text")
+							rectGq2.selectAll("text")
 							   .data(data)
 							   .text(function(d) {
 									return formatPercent(d[1]);
@@ -284,29 +280,29 @@
 							   });
 					}
 
-					d3.select("#sort_education").on("change", change_education);
+					d3.select("#sort_q2").on("change", change_q2);
 
 				  var sortTimeout = setTimeout(function() {
-				     d3.select("#sort_education").property("checked", true).each(change_education);
+				     d3.select("#sort_q2").property("checked", true).each(change_q2);
 				  }, 2000);
 
-				  function change_education() {
+				  function change_q2() {
 
 					    clearTimeout(sortTimeout);
-				    	var x0 = x.domain(activeDatasetEducation.sort(this.checked
+				    	var x0 = x.domain(activeDatasetq2.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
 					        .copy();
 
-							var transition = svgEducation.transition().duration(750),
+							var transition = svgq2.transition().duration(750),
 					             delay = function(d, i) { return i * 50; };
 
 					    transition.selectAll("rect")
 					        .delay(delay)
 					        .attr("x", function(d) { return x0(d[0]); });
 
-							    var transition = svgEducation.transition().duration(750),
+							    var transition = svgq2.transition().duration(750),
 					        delay = function(d, i) { return i * 50; };
 
 					    transition.selectAll("text.label")
@@ -320,7 +316,7 @@
 									})
 
 					    transition.select(".x.axis")
-					        .call(xAxisEducation)
+					        .call(xAxisq2)
 									.selectAll("g")
 									.delay(delay)
 									.selectAll(".tick text")

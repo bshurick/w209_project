@@ -30,7 +30,7 @@
 
 	</style>
 
-		<h4>Question 1: Percent Agreed for "I develop strong emotions toward people I can rely on"</h4>
+		<h4>Question 1: Percent who agreed with "I develop strong emotions toward people I can rely on"</h4>
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
 
@@ -77,13 +77,13 @@
 		they have two attributes, one is class and the other is onclick.
 		class attribute for styling, and onlick for functionality
 		(e.g., calling the updated dataset function with approp dataset) -->
-    
-		<label><input id="sort_gender" type="checkbox">Sort values</label>
 
-		<div class="button" onclick="update_dataset(genderChartData[0])">Gender</div>
-		<div class="button" onclick="update_dataset(genderChartData[1])">Education Level</div>
-		<div class="button" onclick="update_dataset(genderChartData[2])">Income Bracket</div>
-		<div class="button" onclick="update_dataset(genderChartData[3])">Parent Status</div>
+		<label><input id="sort_q1" type="checkbox">Sort values</label>
+
+		<div class="button" onclick="update_dataset(q1ChartData[0])">Gender</div>
+		<div class="button" onclick="update_dataset(q1ChartData[1])">Education Level</div>
+		<div class="button" onclick="update_dataset(q1ChartData[2])">Income Bracket</div>
+		<div class="button" onclick="update_dataset(q1ChartData[3])">Parent Status</div>
     <div id='gender_chart' style='width:100%; height: 270px;'></div>
 		<script type="text/javascript">
 
@@ -140,22 +140,22 @@
 				*/
 
 				// define empty variables
-				var genderChartData = [],
+				var q1ChartData = [],
 						activeDataset;
 
 				// invoke function that loads csv data
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_DPES11.csv', function(data) {
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPq1_DPES11.csv', function(data) {
 
 					// initialize the chart itself
-					build_chart(data, 'gender_chart');
+					build_chart(data, 'q1_chart');
 
-				}, genderChartData);
+				}, q1ChartData);
 
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_DPES11.csv', null, genderChartData);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_DPES11.csv', null, genderChartData);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_DPES11.csv', null, genderChartData);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_DPES11.csv', null, q1ChartData);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_DPES11.csv', null, q1ChartData);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_DPES11.csv', null, q1ChartData);
 
-				console.log(genderChartData);
+				console.log(q1ChartData);
 
 				// create function to load csv data
 				// firstBuildCallback is a closure (or pre-defined function)
@@ -309,9 +309,9 @@
 					// define function to update datasets
 					function update_dataset(data) {
 							activeDataset = data;
-							build_chart(data, 'gender_chart');
+							build_chart(data, 'q1_chart');
 							// # means following text is id
-							d3.select("#sort_gender").property("checked",false)
+							d3.select("#sort_q1").property("checked",false)
 							// on click, update with new data
 							// div.button informs D3 to select the div with the specific class button
 
@@ -341,10 +341,10 @@
 							   });
 					}
 
-					d3.select("#sort_gender").on("change", change);
+					d3.select("#sort_q1").on("change", change);
 
 				  var sortTimeout = setTimeout(function() {
-				     d3.select("#sort_gender").property("checked", true).each(change);
+				     d3.select("#sort_q1").property("checked", true).each(change);
 				  }, 2000);
 
 				  function change() {

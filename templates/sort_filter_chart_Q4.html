@@ -1,16 +1,7 @@
-		<h4>Percent Agreed: "If one believes something is right, one must stand by it, even if it means losing friends
+		<h4>Question 4: Percent who agreed with "If one believes something is right, one must stand by it, even if it means losing friends
 				 or missing out on profitable opportunities"</h4>
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
-
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-
-		<!--- add jQuery (JS library), used for many things such as out-of-the-box solutions,
-		place the download in our project location -->
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-
-		<!--- jQuery UI is additional to jQuery (often critical for front-end web dev) -->
-		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 		<script>
 
@@ -43,13 +34,13 @@
 		class attribute for styling, and onlick for functionality
 		(e.g., calling the updated dataset function with approp dataset) -->
 
-		<label><input id="sort" type="checkbox">Sort values</label>
+		<label><input id="sort_q4" type="checkbox">Sort values</label>
 
-		<div class="button" onclick="update_dataset(datasets[0])">Gender</div>
-		<div class="button" onclick="update_dataset(datasets[1])">Education Level</div>
-		<div class="button" onclick="update_dataset(datasets[2])">Income Bracket</div>
-		<div class="button" onclick="update_dataset(datasets[3])">Parent Status</div>
-
+		<div class="button" onclick="update_q4_dataset(datasetq4[0])">Gender</div>
+		<div class="button" onclick="update_q4_dataset(datasetq4[1])">Education Level</div>
+		<div class="button" onclick="update_q4_dataset(datasetq4[2])">Income Bracket</div>
+		<div class="button" onclick="update_q4_dataset(datasetq4[3])">Parent Status</div>
+    <div id='q4_chart' style='width:100%;height:270px;'></div>
 		<script type="text/javascript">
 
 			function wrap(text, width) {
@@ -85,15 +76,14 @@
 				// typically, don't use global variables to avoid conflicts, etc.
 				// or want to have multiple SVGs
 				var formatPercent = d3.format(".0%"),
-						svg,
+						svgq4,
 						xScale,
 						yScale,
-						xAxis,
+						xAxisq4,
 						x,
-						yAxis,
+						yAxisq4,
 						y,
-						rectG,
-						rectX = [];
+						rectGq4;
 
 				/*
 				Documentation: Sample Survey Questions
@@ -107,51 +97,35 @@
 				*/
 
 				// define empty variables
-				var datasets = [],
-						activeDataset;
+				var datasetq4 = [],
+						activeDatasetq4;
 
 				// invoke function that loads csv data
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_GENDER_IS6.csv', function(data) {
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_IS6.csv', function(data) {
 
 					// initialize the chart itself
-					build_chart(data);
+					build_q4_chart(data, 'q4_chart');
 
-				});
+				}, datasetq4);
 
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_PPEDUCAT_IS6.csv', null);
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_PPINCCAT_IS6.csv', null);
-				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_core_par_IS6.csv', null);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_IS6.csv', null, datasetq4);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_IS6.csv', null, datasetq4);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_IS6.csv', null, datasetq4);
 
-				console.log(datasets);
-
-				// create function to load csv data
-				// firstBuildCallback is a closure (or pre-defined function)
-				function loadCsv(dataLocation, firstBuildCallback) {
-
-				  var dataset = []
-				  d3.csv(dataLocation, function(data) {
-				     dataset = data.map(function(d) { return [ d["Category"], +d["Weighted_Pct"] ]; });
-						 if(firstBuildCallback != null) {
-							 firstBuildCallback(dataset);
-						 }
-
-						 // push to the datasets array
-						 datasets.push(dataset);
-				  });
-
-				}
+				console.log(datasetq4);
 
 				// define function that builds the chart
-				function build_chart(data) {
-					rectX = [];
-					activeDataset = data;
+				function build_q4_chart(data, domElement) {
+					var rectX = [];
+					activeDatasetq4 = data;
 					// console.log(data)
 
 					// if chart already exists, remove it
 					// reason if that some datasets differ in number of columns
-					if(document.getElementById("chart")) {
-						var chartEl = document.getElementById("chart");
-						chartEl.parentNode.removeChild(chartEl);
+					if(document.getElementById(domElement)) {
+						var chartEl = document.getElementById(domElement);
+						//chartEl.parentNode.removeChild(chartEl);
+						$("#"+domElement + " svg").remove();
 					}
 
 					// define xScale and yScale
@@ -170,11 +144,11 @@
 					    .range([h, 0]);
 
 					// pass to axis to transform into visualization
-					xAxis = d3.svg.axis()
+					xAxisq4 = d3.svg.axis()
 					    .scale(x)
 					    .orient("bottom");
 
-					yAxis = d3.svg.axis()
+					yAxisq4 = d3.svg.axis()
 					    .scale(y)
 					    .orient("left")
 					    .tickFormat(formatPercent);
@@ -191,7 +165,7 @@
 					y.domain([0, 1]);
 
 					// create SVG element
-					svg = d3.select("body")
+					svgq4 = d3.select("#" + domElement)
 								.append("svg")
 								.attr("id", "chart")
 								.attr("width", w)
@@ -200,16 +174,16 @@
 								//.attr("transform", "translate(" + margin.left + "," + 0 + ")");
 
 					// append g (group of elements)
-					svg.append("g")
+					svgq4.append("g")
 							.attr("class", "x axis")
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
-							.call(xAxis)
+							.call(xAxisq4)
 							.selectAll(".tick text")
 		 					.call(wrap, x.rangeBand());
 
-					svg.append("g")
+					svgq4.append("g")
 				      .attr("class", "y axis")
-							.call(yAxis)
+							.call(yAxisq4)
 							/*
 							.append("text")
 				      //.attr("transform", "rotate(-90)")
@@ -223,7 +197,7 @@
 							*/
 
 					// create rects
-					svg.selectAll("rect")
+					svgq4.selectAll("rect")
 					   .data(data)
 					   .enter()
 					   .append("rect")
@@ -248,11 +222,11 @@
 					   });
 
 				 	// create group wrapper for rectangle text overlays
-				 	rectG = svg.append("g")
+				 	rectGq4 = svgq4.append("g")
 							.attr("class", "rect-text");
 
 					// create labels
-					rectG.selectAll("text")
+					rectGq4.selectAll("text")
 					   .data(data)
 					   .enter()
 					   .append("text")
@@ -274,15 +248,15 @@
 					}
 
 					// define function to update datasets
-					function update_dataset(data) {
-							activeDataset = data;
-							build_chart(data);
+					function update_q4_dataset(data) {
+							activeDatasetq4 = data;
+							build_q4_chart(data, 'q4_chart');
 							// # means following text is id
-							d3.select("#sort").property("checked",false)
+							d3.select("#sort_q4").property("checked",false)
 							// on click, update with new data
 							// div.button informs D3 to select the div with the specific class button
 
-							svg.selectAll("rect")
+							svgq4.selectAll("rect")
 							   .data(data)
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]);
@@ -295,7 +269,7 @@
 							   });
 
 							// update all labels
-							rectG.selectAll("text")
+							rectGq4.selectAll("text")
 							   .data(data)
 							   .text(function(d) {
 									return formatPercent(d[1]);
@@ -308,29 +282,29 @@
 							   });
 					}
 
-					d3.select("input").on("change", change);
+					d3.select("#sort_q4").on("change", change_q4);
 
 				  var sortTimeout = setTimeout(function() {
-				     d3.select("input").property("checked", true).each(change);
+				     d3.select("#sort_q4").property("checked", true).each(change_q4);
 				  }, 2000);
 
-				  function change() {
+				  function change_q4() {
 
 					    clearTimeout(sortTimeout);
-				    	var x0 = x.domain(activeDataset.sort(this.checked
+				    	var x0 = x.domain(activeDatasetq4.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
 					        .copy();
 
-							var transition = svg.transition().duration(750),
+							var transition = svgq4.transition().duration(750),
 					             delay = function(d, i) { return i * 50; };
 
 					    transition.selectAll("rect")
 					        .delay(delay)
 					        .attr("x", function(d) { return x0(d[0]); });
 
-							    var transition = svg.transition().duration(750),
+							    var transition = svgq4.transition().duration(750),
 					        delay = function(d, i) { return i * 50; };
 
 					    transition.selectAll("text.label")
@@ -344,7 +318,7 @@
 									})
 
 					    transition.select(".x.axis")
-					        .call(xAxis)
+					        .call(xAxisq4)
 									.selectAll("g")
 									.delay(delay)
 									.selectAll(".tick text")
