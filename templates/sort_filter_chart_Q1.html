@@ -1,9 +1,5 @@
 <h4>Drill down further to see whether regional patterns exist, by interactively selecting different demographics of interest.</h4>
 
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<title>Interactive Charts</title>
 	<style type="text/css">
 
 					/* to style a class, use a . identifier */
@@ -81,7 +77,7 @@
 		they have two attributes, one is class and the other is onclick.
 		class attribute for styling, and onlick for functionality
 		(e.g., calling the updated dataset function with approp dataset) -->
-
+    <div id='gender_chart'></div>
 		<label><input id="sort" type="checkbox">Sort values</label>
 
 		<div class="button" onclick="update_dataset(datasets[0])">Gender</div>
@@ -153,7 +149,7 @@
 				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_DPES11.csv', function(data) {
 
 					// initialize the chart itself
-					build_chart(data);
+					build_chart(data, 'gender_chart');
 
 				});
 
@@ -181,15 +177,15 @@
 				}
 
 				// define function that builds the chart
-				function build_chart(data) {
+				function build_chart(data, domElement) {
 					rectX = [];
 					activeDataset = data;
 					// console.log(data)
 
 					// if chart already exists, remove it
 					// reason if that some datasets differ in number of columns
-					if(document.getElementById("chart")) {
-						var chartEl = document.getElementById("chart");
+					if(document.getElementById(domElement)) {
+						var chartEl = document.getElementById(domElement);
 						chartEl.parentNode.removeChild(chartEl);
 					}
 
