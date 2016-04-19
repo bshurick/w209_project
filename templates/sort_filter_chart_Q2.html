@@ -1,12 +1,9 @@
-		<h4>Percent Agreed: "Parents should empower children as much as possible so that they may follow their dreams"</h4>
+				<h4>Percent Agreed: "Parents should empower children as much as possible so that they may follow their dreams"</h4>
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
 
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-		<!--- add jQuery (JS library), used for many things such as out-of-the-box solutions,
-		place the download in our project location -->
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
 		<!--- jQuery UI is additional to jQuery (often critical for front-end web dev) -->
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -44,11 +41,11 @@
 
 		<label><input id="sort" type="checkbox">Sort values</label>
 
-		<div class="button" onclick="update_dataset(datasets[0])">Gender</div>
-		<div class="button" onclick="update_dataset(datasets[1])">Education Level</div>
-		<div class="button" onclick="update_dataset(datasets[2])">Income Bracket</div>
-		<div class="button" onclick="update_dataset(datasets[3])">Parent Status</div>
-
+		<div class="button" onclick="update_education_dataset(datasets[0])">Gender</div>
+		<div class="button" onclick="update_education_dataset(datasets[1])">Education Level</div>
+		<div class="button" onclick="update_education_dataset(datasets[2])">Income Bracket</div>
+		<div class="button" onclick="update_education_dataset(datasets[3])">Parent Status</div>
+    <div id='education_chart' style='width:100%;height:200px;'></div>
 		<script type="text/javascript">
 
 			function wrap(text, width) {
@@ -112,7 +109,7 @@
 				loadCsv('https://raw.github.com/bshurick/w209_project/python_d3/zPPREG4_GENDER_L9.csv', function(data) {
 
 					// initialize the chart itself
-					build_chart(data);
+					build_education_chart(data, 'education_chart');
 
 				});
 
@@ -122,34 +119,18 @@
 
 				console.log(datasets);
 
-				// create function to load csv data
-				// firstBuildCallback is a closure (or pre-defined function)
-				function loadCsv(dataLocation, firstBuildCallback) {
-
-				  var dataset = []
-				  d3.csv(dataLocation, function(data) {
-				     dataset = data.map(function(d) { return [ d["Category"], +d["Weighted_Pct"] ]; });
-						 if(firstBuildCallback != null) {
-							 firstBuildCallback(dataset);
-						 }
-
-						 // push to the datasets array
-						 datasets.push(dataset);
-				  });
-
-				}
-
 				// define function that builds the chart
-				function build_chart(data) {
+				function build_education_chart(data, domElement) {
 					rectX = [];
 					activeDataset = data;
 					// console.log(data)
 
 					// if chart already exists, remove it
 					// reason if that some datasets differ in number of columns
-					if(document.getElementById("chart")) {
-						var chartEl = document.getElementById("chart");
-						chartEl.parentNode.removeChild(chartEl);
+					if(document.getElementById(domElement)) {
+						var chartEl = document.getElementById(domElement);
+						//chartEl.parentNode.removeChild(chartEl);
+						$("#"+domElement + " svg").remove();
 					}
 
 					// define xScale and yScale
@@ -189,7 +170,7 @@
 					y.domain([0, 1]);
 
 					// create SVG element
-					svg = d3.select("body")
+					svg = d3.select("#" + domElement)
 								.append("svg")
 								.attr("id", "chart")
 								.attr("width", w)
@@ -272,9 +253,9 @@
 					}
 
 					// define function to update datasets
-					function update_dataset(data) {
+					function update_education_dataset(data) {
 							activeDataset = data;
-							build_chart(data);
+							build_education_chart(data, 'education_chart');
 							// # means following text is id
 							d3.select("#sort").property("checked",false)
 							// on click, update with new data
