@@ -240,7 +240,7 @@ def geodata_sql(question):
 		select 
 		state
 		, {} field
-		, sum(weight) count 
+		, sum(case when weight is null then 1 else weight end) count 
 		from surveys_survey
 		group by 1,2
 		;
@@ -316,14 +316,22 @@ def get_question_by_regions(sql):
 
 def get_question_by_video(sql):
 	choices = ['Weekly','Monthly','Few Times Yearly','Never','Not Applicable']
+	@np.vectorize
+	def getvideobase(r, c):
+       	    if c in choices:
+                return r
+       	    else:
+                return 0
 	results = pd.read_sql(sql, connection)
 	results['choices'] = results['call_parents'].apply(lambda x: VID[int(x if x else -1)])
 	results['video_choice'] = results['video_choice'].apply(lambda x: x if len(str(x))>0 else 'None')
+	results['base'] = getvideobase(results['result'], results['choices'])
+	results['pct'] = results['result'] / np.sum(results['base'])
 	test = []
 	control = []
 	for c in choices:	
-	    test_result = results.loc[(results['choices']==c) & (results['video_choice']=='test'),'result']
-	    control_result = results.loc[(results['choices']==c) & (results['video_choice']=='control'),'result']
+	    test_result = results.loc[(results['choices']==c) & (results['video_choice']=='test'),'pct']
+	    control_result = results.loc[(results['choices']==c) & (results['video_choice']=='control'),'pct']
 	    test.append(test_result.iloc[0] if test_result.shape[0]>0 else 0)
 	    control.append(control_result.iloc[0] if control_result.shape[0]>0 else 0)
 	out = { 'labels':choices, 'series':[{'label':'Family Video', 'values':test}, \
