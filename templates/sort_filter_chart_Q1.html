@@ -312,9 +312,9 @@
 					}
 
 					// define function to update datasets
-					function update_dataset(data, "gender_chart") {
+					function update_dataset(data) {
 							activeDataset = data;
-							build_chart(data);
+							build_chart(data, "gender_chart");
 							// # means following text is id
 							d3.select("#sort").property("checked",false)
 							// on click, update with new data
