@@ -126,7 +126,8 @@
 						xAxis,
 						x,
 						yAxis,
-						y;
+						y,
+						rectG;
 
 				/*
 				Documentation: Sample Survey Questions
@@ -281,7 +282,7 @@
 					   });
 
 				 	// create group wrapper for rectangle text overlays
-				 	var rectG = svg.append("g")
+				 	rectG = svg.append("g")
 							.attr("class", "rect-text");
 
 					// create labels
