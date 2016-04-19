@@ -84,9 +84,9 @@
 		<div class="button" onclick="update_dataset(datasets[1])">Education Level</div>
 		<div class="button" onclick="update_dataset(datasets[2])">Income Bracket</div>
 		<div class="button" onclick="update_dataset(datasets[3])">Parent Status</div>
-		
-		<div id='gender_chart'></div>
 
+    		<div id='gender_chart'></div>
+    		
 		<script type="text/javascript">
 
 			function wrap(text, width) {
@@ -188,7 +188,8 @@
 					// reason if that some datasets differ in number of columns
 					if(document.getElementById(domElement)) {
 						var chartEl = document.getElementById(domElement);
-						chartEl.parentNode.removeChild(chartEl);
+						//chartEl.parentNode.removeChild(chartEl);
+						$("#"+domElement + " svg").remove();
 					}
 
 					// define xScale and yScale
@@ -228,7 +229,7 @@
 					y.domain([0, 1]);
 
 					// create SVG element
-					svg = d3.select("body")
+					svg = d3.select(domElement)
 								.append("svg")
 								.attr("id", "chart")
 								.attr("width", w)
