@@ -79,15 +79,13 @@
 				// typically, don't use global variables to avoid conflicts, etc.
 				// or want to have multiple SVGs
 				var formatPercent = d3.format(".0%"),
-						svg,
+						svgEducation,
 						xScale,
 						yScale,
 						xAxis,
 						x,
 						yAxis,
-						y,
-						rectG,
-						rectX = [];
+						y;
 
 				/*
 				Documentation: Sample Survey Questions
@@ -119,7 +117,7 @@
 
 				// define function that builds the chart
 				function build_education_chart(data, domElement) {
-					rectX = [];
+					var rectX = [];
 					activeDatasetEducation = data;
 					// console.log(data)
 
@@ -168,7 +166,7 @@
 					y.domain([0, 1]);
 
 					// create SVG element
-					svg = d3.select("#" + domElement)
+					svgEducation = d3.select("#" + domElement)
 								.append("svg")
 								.attr("id", "chart")
 								.attr("width", w)
@@ -177,14 +175,14 @@
 								//.attr("transform", "translate(" + margin.left + "," + 0 + ")");
 
 					// append g (group of elements)
-					svg.append("g")
+					.append("g")
 							.attr("class", "x axis")
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
 							.call(xAxis)
 							.selectAll(".tick text")
 		 					.call(wrap, x.rangeBand());
 
-					svg.append("g")
+					svgEducation.append("g")
 				      .attr("class", "y axis")
 							.call(yAxis)
 							/*
@@ -200,7 +198,7 @@
 							*/
 
 					// create rects
-					svg.selectAll("rect")
+					svgEducation.selectAll("rect")
 					   .data(data)
 					   .enter()
 					   .append("rect")
@@ -225,7 +223,7 @@
 					   });
 
 				 	// create group wrapper for rectangle text overlays
-				 	rectG = svg.append("g")
+				 	var rectG = svg.append("g")
 							.attr("class", "rect-text");
 
 					// create labels
@@ -259,7 +257,7 @@
 							// on click, update with new data
 							// div.button informs D3 to select the div with the specific class button
 
-							svg.selectAll("rect")
+							svgEducation.selectAll("rect")
 							   .data(data)
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]);
@@ -300,7 +298,7 @@
 					        .map(function(d) { return d[0]; }))
 					        .copy();
 
-							var transition = svg.transition().duration(750),
+							var transition = svgEducation.transition().duration(750),
 					             delay = function(d, i) { return i * 50; };
 
 					    transition.selectAll("rect")
