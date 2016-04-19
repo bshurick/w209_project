@@ -1,4 +1,4 @@
-				<h4>Percent Agreed: "Parents should empower children as much as possible so that they may follow their dreams"</h4>
+		<h4>Percent Agreed: "Parents should empower children as much as possible so that they may follow their dreams"</h4>
 
 		<p>Click one of four buttons below to change demographic breakout (default is Gender)</p>
 
@@ -39,7 +39,7 @@
 		class attribute for styling, and onlick for functionality
 		(e.g., calling the updated dataset function with approp dataset) -->
 
-		<label><input id="sort" type="checkbox">Sort values</label>
+		<label><input id="sort_education" type="checkbox">Sort values</label>
 
 		<div class="button" onclick="update_education_dataset(datasets[0])">Gender</div>
 		<div class="button" onclick="update_education_dataset(datasets[1])">Education Level</div>
@@ -103,26 +103,26 @@
 
 				// define empty variables
 				var datasets = [],
-						activeDataset;
+						activeDatasetEducation;
 
 				// invoke function that loads csv data
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_L9.csv', function(data) {
+				loadCsv('https://raw.github.com/bshurick/w209_project/master/python_d3/zPPREG4_GENDER_L9.csv', function(data) {
 
 					// initialize the chart itself
 					build_education_chart(data, 'education_chart');
 
 				});
 
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null);
+				loadCsv('https://raw.github.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null);
+				loadCsv('https://raw.github.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null);
+				loadCsv('https://raw.github.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null);
 
 				console.log(datasets);
 
 				// define function that builds the chart
 				function build_education_chart(data, domElement) {
 					rectX = [];
-					activeDataset = data;
+					activeDatasetEducation = data;
 					// console.log(data)
 
 					// if chart already exists, remove it
@@ -254,7 +254,7 @@
 
 					// define function to update datasets
 					function update_education_dataset(data) {
-							activeDataset = data;
+							activeDatasetEducation = data;
 							build_education_chart(data, 'education_chart');
 							// # means following text is id
 							d3.select("#sort").property("checked",false)
@@ -287,16 +287,16 @@
 							   });
 					}
 
-					d3.select("input").on("change", change);
+					d3.select("#sort_education").on("change", change_education);
 
 				  var sortTimeout = setTimeout(function() {
-				     d3.select("input").property("checked", true).each(change);
+				     d3.select("input").property("checked", true).each(change_education);
 				  }, 2000);
 
-				  function change() {
+				  function change_education() {
 
 					    clearTimeout(sortTimeout);
-				    	var x0 = x.domain(activeDataset.sort(this.checked
+				    	var x0 = x.domain(activeDatasetEducation.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
