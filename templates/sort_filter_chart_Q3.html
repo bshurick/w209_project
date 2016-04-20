@@ -283,13 +283,13 @@
 
 					d3.select("#sort_q3").on("change", change_q3);
 
-				  var sortTimeout = setTimeout(function() {
+				  var sortTimeout_q3 = setTimeout(function() {
 				     d3.select("#sort_q3").property("checked", true).each(change_q3);
 				  }, 2000);
 
 				  function change_q3() {
 
-					    clearTimeout(sortTimeout);
+					    clearTimeout(sortTimeout_q3);
 				    	var x0 = x.domain(activeDatasetq3.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
