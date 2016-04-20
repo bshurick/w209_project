@@ -296,17 +296,17 @@
 					        .map(function(d) { return d[0]; }))
 					        .copy();
 
-							var transition = svgq3.transition().duration(750),
+							var transitionq3 = svgq3.transition().duration(750),
 					             delay = function(d, i) { return i * 50; };
 
-					    transition.selectAll("rect")
+					    transitionq3.selectAll("rect")
 					        .delay(delay)
 					        .attr("x", function(d) { return x0(d[0]); });
 
-							    var transition = svgq3.transition().duration(750),
+							    var transitionq3 = svgq3.transition().duration(750),
 					        delay = function(d, i) { return i * 50; };
 
-					    transition.selectAll("text.label")
+					    transitionq3.selectAll("text.label")
 					        .delay(delay)
 					        //.attr("x", function(d) { return x0(d[0]) + 50; });
 									.attr("x", function(d, i) {
@@ -316,7 +316,7 @@
 										 return (h - margin.top) - yScale(d[1]) + 14;
 									})
 
-					    transition.select(".x.axis")
+					    transitionq3.select(".x.axis")
 					        .call(xAxisq3)
 									.selectAll("g")
 									.delay(delay)
