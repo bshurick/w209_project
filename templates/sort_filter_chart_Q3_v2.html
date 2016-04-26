@@ -293,7 +293,7 @@
 				  function change_q3() {
 
 					    clearTimeout(sortTimeoutq3);
-				    	var x0 = xq3.domain(activeDatasetq3.sort(this.checked
+				    	    var x0 = xq3.domain(activeDatasetq3.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
