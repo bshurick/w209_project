@@ -115,18 +115,7 @@
 				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_EPQ1.csv', null, datasetq3, 3);
 
 				console.log(datasetq3);
-				// recreate function to load csv data
-				// firstBuildCallback is a closure (or pre-defined function)
-				function loadCsv(dataLocation, firstBuildCallback, currentChartData, index) {
-					d3.csv(dataLocation, function(data) {
-						 dataset = data.map(function(d) { return [ d["Category"], +d["Weighted_Pct"] ]; });
-						 if(firstBuildCallback != null) {
-							 firstBuildCallback(dataset);
-						 }
-						 // push to the datasets array
-						 currentChartData[index] = dataset;
-					});
-				}
+			
 				// define function that builds the chart
 				function build_q3_chart(data, domElement) {
 					var rectX = [];
