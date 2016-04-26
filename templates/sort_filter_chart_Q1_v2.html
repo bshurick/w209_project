@@ -108,17 +108,17 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 					// initialize the chart itself
 					build_chart(data, 'gender_chart');
 
-				}, genderChartData);
+				}, genderChartData,0);
 
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_DPES11.csv', null, genderChartData);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_DPES11.csv', null, genderChartData);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_DPES11.csv', null, genderChartData);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_DPES11.csv', null, genderChartData,1);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_DPES11.csv', null, genderChartData,2);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_DPES11.csv', null, genderChartData,3);
 
 				console.log(genderChartData);
 
 				// create function to load csv data
 				// firstBuildCallback is a closure (or pre-defined function)
-				function loadCsv(dataLocation, firstBuildCallback, currentChartData) {
+				function loadCsv(dataLocation, firstBuildCallback, currentChartData, index) {
 
 				  d3.csv(dataLocation, function(data) {
 				     dataset = data.map(function(d) { return [ d["Category"], +d["Weighted_Pct"] ]; });
@@ -127,7 +127,7 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 						 }
 
 						 // push to the datasets array
-						 currentChartData.push(dataset);
+						 currentChartData[index](dataset);
 				  });
 
 				}
@@ -322,18 +322,18 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 					        .delay(delay)
 					        .attr("x", function(d) { return x0(d[0]); });
 
-							    var transition = svg.transition().duration(750),
+						var transition = svg.transition().duration(750),
 					        delay = function(d, i) { return i * 50; };
 
 					    transition.selectAll("text.label")
 					        .delay(delay)
 					        //.attr("x", function(d) { return x0(d[0]) + 50; });
-									.attr("x", function(d, i) {
-										 return xQ1(d[0]) + xQ1.rangeBand() / 2;
-									})
-									.attr("y", function(d) {
-										 return (h - margin.top) - yScale(d[1]) + 14;
-									})
+							.attr("x", function(d, i) {
+								 return xQ1(d[0]) + xQ1.rangeBand() / 2;
+							})
+							.attr("y", function(d) {
+								 return (h - margin.top) - yScale(d[1]) + 14;
+							})
 
 					    transition.select(".x.axis")
 					        .call(xAxis)
