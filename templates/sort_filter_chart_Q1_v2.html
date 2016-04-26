@@ -127,7 +127,7 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 						 }
 
 						 // push to the datasets array
-						 currentChartData[index] = dataset;
+						 currentChartData[index](dataset);
 				  });
 
 				}
@@ -298,6 +298,7 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]) + 14;
 							   });
+							d3.select("#sort_gender").each(change);
 					}
 
 					d3.select("#sort_gender").on("change", change);
