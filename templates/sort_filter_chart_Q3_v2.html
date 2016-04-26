@@ -106,9 +106,9 @@
 				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_EPQ1.csv', function(data) {
 
 					// initialize the chart itself
-					build_q3_chart(data, 'q3_chart', 0);
+					build_q3_chart(data, 'q3_chart');
 
-				}, datasetq3);
+				}, datasetq3, 0);
 
 				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_EPQ1.csv', null, datasetq3, 1);
 				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_EPQ1.csv', null, datasetq3, 2);
