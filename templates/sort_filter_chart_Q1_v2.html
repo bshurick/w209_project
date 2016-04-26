@@ -163,11 +163,11 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 
 					// pass to axis to transform into visualization
 					xAxis = d3.svg.axis()
-					    .scale(x)
+					    .scale(xQ1)
 					    .orient("bottom");
 
 					yAxis = d3.svg.axis()
-					    .scale(y)
+					    .scale(yQ1)
 					    .orient("left")
 					    .tickFormat(formatPercent);
 
@@ -221,8 +221,8 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 					   .append("rect")
 					   .attr("x", function(d, i) {
 								// return xScale(i);
-								rectX.push(x(d[0]));
-								return x(d[0]);
+								rectX.push(xQ1(d[0]));
+								return xQ1(d[0]);
 					   })
 					   .attr("y", function(d) {
 							 	console.log(d);
@@ -255,7 +255,7 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 					   .attr("text-anchor", "middle")
 						 .attr("dx", 1)
 					   .attr("x", function(d, i) {
-								return x(d[0]) + xQ1.rangeBand() / 2;
+								return xQ1(d[0]) + xQ1.rangeBand() / 2;
 					   })
 					   .attr("y", function(d) {
 							 	return (h - margin.top) - yScale(d[1]) + 14;
@@ -293,7 +293,7 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 									return formatPercent(d[1]);
 							   })
 							   .attr("x", function(d, i) {
-									return x(d[0]) + xQ1.rangeBand() / 2;
+									return xQ1(d[0]) + xQ1.rangeBand() / 2;
 							   })
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]) + 14;
@@ -329,7 +329,7 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 					        .delay(delay)
 					        //.attr("x", function(d) { return x0(d[0]) + 50; });
 									.attr("x", function(d, i) {
-										 return x(d[0]) + xQ1.rangeBand() / 2;
+										 return xQ1(d[0]) + xQ1.rangeBand() / 2;
 									})
 									.attr("y", function(d) {
 										 return (h - margin.top) - yScale(d[1]) + 14;
@@ -341,10 +341,6 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 									.delay(delay)
 									.selectAll(".tick text")
 									.call(wrap, xQ1.rangeBand());
-
-				  }
-
-		</script>
 
 				  }
 
