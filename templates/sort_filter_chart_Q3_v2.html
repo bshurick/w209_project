@@ -139,10 +139,10 @@
 									.range([0, h]);
 
 					// create scale
-					x = d3.scale.ordinal()
+					xq3 = d3.scale.ordinal()
 					    .rangeRoundBands([0, w], .1, .1);
 
-					y = d3.scale.linear()
+					yq3 = d3.scale.linear()
 					    .range([h, 0]);
 
 					// pass to axis to transform into visualization
