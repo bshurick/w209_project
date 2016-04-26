@@ -155,10 +155,10 @@ Are you also interested to compare by U.S. region and demographic? Simply select
 									.range([0, h]);
 
 					// create scale
-					x = d3.scale.ordinal()
+					xQ1 = d3.scale.ordinal()
 					    .rangeRoundBands([0, w], .1, .1);
 
-					y = d3.scale.linear()
+					yQ1 = d3.scale.linear()
 					    .range([h, 0]);
 
 					// pass to axis to transform into visualization
