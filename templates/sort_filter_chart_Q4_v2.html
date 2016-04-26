@@ -1,4 +1,4 @@
-		
+
 
 <br/>
 <h4>Question 4: Percent who agreed with "If one believes something is right, one must stand by it, even if it means losing friends
@@ -83,9 +83,9 @@
 						xScale,
 						yScale,
 						xAxisq4,
-						x,
+						xq4,
 						yAxisq4,
-						y,
+						yq4,
 						rectGq4;
 
 				/*
@@ -109,11 +109,11 @@
 					// initialize the chart itself
 					build_q4_chart(data, 'q4_chart');
 
-				}, datasetq4);
+				}, datasetq4, 0);
 
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_IS6.csv', null, datasetq4);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_IS6.csv', null, datasetq4);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_IS6.csv', null, datasetq4);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_IS6.csv', null, datasetq4, 1);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_IS6.csv', null, datasetq4, 2);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_IS6.csv', null, datasetq4, 3);
 
 				console.log(datasetq4);
 
@@ -140,19 +140,19 @@
 									.range([0, h]);
 
 					// create scale
-					x = d3.scale.ordinal()
+					xq4 = d3.scale.ordinal()
 					    .rangeRoundBands([0, w], .1, .1);
 
-					y = d3.scale.linear()
+					yq4 = d3.scale.linear()
 					    .range([h, 0]);
 
 					// pass to axis to transform into visualization
 					xAxisq4 = d3.svg.axis()
-					    .scale(x)
+					    .scale(xq4)
 					    .orient("bottom");
 
 					yAxisq4 = d3.svg.axis()
-					    .scale(y)
+					    .scale(yq4)
 					    .orient("left")
 					    .tickFormat(formatPercent);
 
@@ -164,8 +164,8 @@
 					// data is an array of rows with two columns, and map function result is an array of category values
 					// and we give that array to x as the domain
 
-					x.domain(data.map(function(d) { return d[0]; }));
-					y.domain([0, 1]);
+					xq4.domain(data.map(function(d) { return d[0]; }));
+					yq4.domain([0, 1]);
 
 					// create SVG element
 					svgq4 = d3.select("#" + domElement)
@@ -182,7 +182,7 @@
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
 							.call(xAxisq4)
 							.selectAll(".tick text")
-		 					.call(wrap, x.rangeBand());
+		 					.call(wrap, xq4.rangeBand());
 
 					svgq4.append("g")
 				      .attr("class", "y axis")
@@ -206,15 +206,15 @@
 					   .append("rect")
 					   .attr("x", function(d, i) {
 								// return xScale(i);
-								rectX.push(x(d[0]));
-								return x(d[0]);
+								rectX.push(xq4(d[0]));
+								return xq4(d[0]);
 					   })
 					   .attr("y", function(d) {
 							 	console.log(d);
 								return (h - margin.top) - yScale(d[1]);
 					   })
 					   .attr("width", function(){
-							 rectW = x.rangeBand();
+							 rectW = xq4.rangeBand();
 							 return rectW;
 						 })
 					   .attr("height", function(d) {
@@ -240,7 +240,7 @@
 					   .attr("text-anchor", "middle")
 						 .attr("dx", 1)
 					   .attr("x", function(d, i) {
-								return x(d[0]) + x.rangeBand() / 2;
+								return xq4(d[0]) + xq4.rangeBand() / 2;
 					   })
 					   .attr("y", function(d) {
 							 	return (h - margin.top) - yScale(d[1]) + 14;
@@ -278,7 +278,7 @@
 									return formatPercent(d[1]);
 							   })
 							   .attr("x", function(d, i) {
-									return x(d[0]) + x.rangeBand() / 2;
+									return xq4(d[0]) + xq4.rangeBand() / 2;
 							   })
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]) + 14;
@@ -294,7 +294,7 @@
 				  function change_q4() {
 
 					    clearTimeout(sortTimeoutq4);
-				    	var x0 = x.domain(activeDatasetq4.sort(this.checked
+				    	var x0 = xq4.domain(activeDatasetq4.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
@@ -314,7 +314,7 @@
 					        .delay(delay)
 					        //.attr("x", function(d) { return x0(d[0]) + 50; });
 									.attr("x", function(d, i) {
-										 return x(d[0]) + x.rangeBand() / 2;
+										 return xq4(d[0]) + xq4.rangeBand() / 2;
 									})
 									.attr("y", function(d) {
 										 return (h - margin.top) - yScale(d[1]) + 14;
@@ -325,7 +325,7 @@
 									.selectAll("g")
 									.delay(delay)
 									.selectAll(".tick text")
-									.call(wrap, x.rangeBand());
+									.call(wrap, xq4.rangeBand());
 
 				  }
 
