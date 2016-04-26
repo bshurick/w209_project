@@ -1,24 +1,14 @@
-		
-
 <br/>
-<h4>Question 2: Percent who agreed with "Parents should empower children as much as possible so that they may follow their dreams"</h4>
+    <h4>Question 2: Percent who agreed with "Parents should empower children as much as possible so that they may follow their dreams"</h4>
+
 
 		<p>Click one of four buttons below to activate demographic breakout, then feel free to sort results</p>
 
-		<script>
 
+		<script>
 				// define helper function to format with no decimal places
 				// d3.format is a function inside d3, formatPercent is now a function, if given a number, it will return a formatted string
 				var formatPercent = d3.format(".0%");
-
-		</script>
-
-		<script>
-
-				// define helper function to format with no decimal places
-				// d3.format is a function inside d3, formatPercent is now a function, if given a number, it will return a formatted string
-				var formatPercent = d3.format(".0%");
-
 		</script>
 
 		<!---build div tags or elements, use as buttons (controllers to update dataset),
@@ -36,15 +26,15 @@
 		class attribute for styling, and onlick for functionality
 		(e.g., calling the updated dataset function with approp dataset) -->
 
-		<label><input id="sort_q2" type="checkbox">Sort values</label>
+		<label><input id="sort_gender" type="checkbox">Sort values</label>
 
-		<div class="button btn btn-default" onclick="update_q2_dataset(datasetq2[0])">Gender</div>
-		<div class="button btn btn-default" onclick="update_q2_dataset(datasetq2[1])">Education Level</div>
-		<div class="button btn btn-default" onclick="update_q2_dataset(datasetq2[2])">Income Bracket</div>
-		<div class="button btn btn-default" onclick="update_q2_dataset(datasetq2[3])">Parent Status</div>
-    <div id='q2_chart' style='width:100%;height:270px;'></div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[0])">Gender</div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[1])">Education Level</div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[2])">Income Bracket</div>
+		<div class="button btn btn-default" onclick="update_dataset(genderChartData[3])">Parent Status</div>
+
+    <div id='gender_chart' style='width:100%; height: 270px;'></div>
 		<script type="text/javascript">
-
 			function wrap(text, width) {
 				  text.each(function() {
 				    var text = d3.select(this),
@@ -68,59 +58,61 @@
 				    }
 				  })
 				};
-
 				//Width and height
 				var margin = {top: 40, right: 40, bottom: 40, left: 40},
 				    w = 1000 - margin.left - margin.right,
 				    h = 350 - margin.top - margin.bottom;
-
 				// define global variables so that they are available to all functions
 				// typically, don't use global variables to avoid conflicts, etc.
 				// or want to have multiple SVGs
 				var formatPercent = d3.format(".0%"),
-						svgq2,
+						svg,
 						xScale,
 						yScale,
-						xAxisq2,
-						x,
-						yAxisq2,
-						y,
-						rectGq2;
-
+						xAxis,
+						xq2,
+						yAxis,
+						yq2,
+						rectG;
 				/*
 				Documentation: Sample Survey Questions
 				DPES11. I develop strong emotions toward people I can rely on
 				EPQ1. Moral standards should be seen as individualistic: what one person considers to be moral
+				      may be judged as immoral by another person.
 				IS6. If one believes something is right, one must stand by it, even if it means losing friends
 				     or missing out on profitable opportunities
 				L9. Parents should empower children as much as possible so that they may follow their dreams
 				I10. Spiritually, I consider myself
 				*/
-
 				// define empty variables
-				var datasetq2 = [],
-						activeDatasetq2;
-
+				var genderChartData = [],
+						activeDataset;
 				// invoke function that loads csv data
 				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPGENDER_L9.csv', function(data) {
-
 					// initialize the chart itself
-					build_q2_chart(data, 'q2_chart');
-
-				}, datasetq2);
-
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null, datasetq2);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null, datasetq2);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null, datasetq2);
-
-				console.log(datasetq2);
-
+					build_chart(data, 'gender_chart');
+				}, genderChartData,0);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_L9.csv', null, genderChartData,1);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_L9.csv', null, genderChartData,2);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_L9.csv', null, genderChartData,3);
+				console.log(genderChartData);
+				// create function to load csv data
+				// firstBuildCallback is a closure (or pre-defined function)
+				function loadCsv(dataLocation, firstBuildCallback, currentChartData, index) {
+				  d3.csv(dataLocation, function(data) {
+				     dataset = data.map(function(d) { return [ d["Category"], +d["Weighted_Pct"] ]; });
+						 if(firstBuildCallback != null) {
+							 firstBuildCallback(dataset);
+						 }
+						 // push to the datasets array
+						 currentChartData[index] = dataset;
+				  });
+				}
 				// define function that builds the chart
-				function build_q2_chart(data, domElement) {
+				function build_chart(data, domElement) {
 					var rectX = [];
-					activeDatasetq2 = data;
+					activeDataset = data;
 					// console.log(data)
-
 					// if chart already exists, remove it
 					// reason if that some datasets differ in number of columns
 					if(document.getElementById(domElement)) {
@@ -128,7 +120,6 @@
 						//chartEl.parentNode.removeChild(chartEl);
 						$("#"+domElement + " svg").remove();
 					}
-
 					// define xScale and yScale
 					xScale = d3.scale.ordinal()
 									.domain(d3.range(data.length))
@@ -136,24 +127,19 @@
 					yScale = d3.scale.linear()
 									.domain([0, 1])
 									.range([0, h]);
-
 					// create scale
-					x = d3.scale.ordinal()
+					xq2 = d3.scale.ordinal()
 					    .rangeRoundBands([0, w], .1, .1);
-
-					y = d3.scale.linear()
+					yq2 = d3.scale.linear()
 					    .range([h, 0]);
-
 					// pass to axis to transform into visualization
-					xAxisq2 = d3.svg.axis()
-					    .scale(x)
+					xAxis = d3.svg.axis()
+					    .scale(xq2)
 					    .orient("bottom");
-
-					yAxisq2 = d3.svg.axis()
-					    .scale(y)
+					yAxis = d3.svg.axis()
+					    .scale(yq2)
 					    .orient("left")
 					    .tickFormat(formatPercent);
-
 					// now finish set up of the scales
 					// now we tell what the input looks like
 					// for each element, take the category value, and specify we want all of these in the domain
@@ -161,30 +147,26 @@
 					// takes one row of csv data, and returns value of category column
 					// data is an array of rows with two columns, and map function result is an array of category values
 					// and we give that array to x as the domain
-
-					x.domain(data.map(function(d) { return d[0]; }));
-					y.domain([0, 1]);
-
+					xq2.domain(data.map(function(d) { return d[0]; }));
+					yq2.domain([0, 1]);
 					// create SVG element
-					svgq2 = d3.select("#" + domElement)
+					svg = d3.select("#" + domElement)
 								.append("svg")
 								.attr("id", "chart")
 								.attr("width", w)
 								.attr("height", h);
 								//.append("g")
 								//.attr("transform", "translate(" + margin.left + "," + 0 + ")");
-
 					// append g (group of elements)
-					svgq2.append("g")
+					svg.append("g")
 							.attr("class", "x axis")
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
-							.call(xAxisq2)
+							.call(xAxis)
 							.selectAll(".tick text")
-		 					.call(wrap, x.rangeBand());
-
-					svgq2.append("g")
+		 					.call(wrap, xq2.rangeBand());
+					svg.append("g")
 				      .attr("class", "y axis")
-							.call(yAxisq2)
+							.call(yAxis)
 							/*
 							.append("text")
 				      //.attr("transform", "rotate(-90)")
@@ -196,38 +178,35 @@
 				      .style("text-anchor", "top")
 				      .text("% Spiritual or Very Spiritual");
 							*/
-
 					// create rects
-					svgq2.selectAll("rect")
+					svg.selectAll("rect")
 					   .data(data)
 					   .enter()
 					   .append("rect")
 					   .attr("x", function(d, i) {
 								// return xScale(i);
-								rectX.push(x(d[0]));
-								return x(d[0]);
+								rectX.push(xq2(d[0]));
+								return xq2(d[0]);
 					   })
 					   .attr("y", function(d) {
 							 	console.log(d);
 								return (h - margin.top) - yScale(d[1]);
 					   })
 					   .attr("width", function(){
-							 rectW = x.rangeBand();
+							 rectW = xq2.rangeBand();
 							 return rectW;
 						 })
 					   .attr("height", function(d) {
 								return yScale(d[1]);
 					   })
 					   .attr("fill", function(d) {
-								return "#31a354";
+								return "#5431a3";
 					   });
-
 				 	// create group wrapper for rectangle text overlays
-				 	rectGq2 = svgq2.append("g")
+				 	rectG = svg.append("g")
 							.attr("class", "rect-text");
-
 					// create labels
-					rectGq2.selectAll("text")
+					rectG.selectAll("text")
 					   .data(data)
 					   .enter()
 					   .append("text")
@@ -238,7 +217,7 @@
 					   .attr("text-anchor", "middle")
 						 .attr("dx", 1)
 					   .attr("x", function(d, i) {
-								return x(d[0]) + x.rangeBand() / 2;
+								return xq2(d[0]) + xq2.rangeBand() / 2;
 					   })
 					   .attr("y", function(d) {
 							 	return (h - margin.top) - yScale(d[1]) + 14;
@@ -247,17 +226,15 @@
 					   .attr("font-size", "11px")
 					   .attr("fill", "white");
 					}
-
 					// define function to update datasets
-					function update_q2_dataset(data) {
-							activeDatasetq2 = data;
-							build_q2_chart(data, 'q2_chart');
+					function update_dataset(data) {
+							activeDataset = data;
+							build_chart(data, 'gender_chart');
 							// # means following text is id
-							d3.select("#sort_q2").property("checked",false)
+							//d3.select("#sort_gender").property("checked",false)
 							// on click, update with new data
 							// div.button informs D3 to select the div with the specific class button
-
-							svgq2.selectAll("rect")
+							svg.selectAll("rect")
 							   .data(data)
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]);
@@ -266,65 +243,54 @@
 									return yScale(d[1]);
 							   })
 							   .attr("fill", function(d) {
-									return "#31a354";
+									return "#5431a3";
 							   });
-
 							// update all labels
-							rectGq2.selectAll("text")
+							rectG.selectAll("text")
 							   .data(data)
 							   .text(function(d) {
 									return formatPercent(d[1]);
 							   })
 							   .attr("x", function(d, i) {
-									return x(d[0]) + x.rangeBand() / 2;
+									return xq2(d[0]) + xq2.rangeBand() / 2;
 							   })
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]) + 14;
 							   });
+							d3.select("#sort_gender").each(change);
 					}
-
-					d3.select("#sort_q2").on("change", change_q2);
-
+					d3.select("#sort_gender").on("change", change);
 				  var sortTimeout = setTimeout(function() {
-				     d3.select("#sort_q2").property("checked", true).each(change_q2);
+				     //d3.select("#sort_gender").property("checked", true).each(change);
 				  }, 2000);
-
-				  function change_q2() {
-
+				  function change() {
 					    clearTimeout(sortTimeout);
-				    	var x0 = x.domain(activeDatasetq2.sort(this.checked
+				    	var x0 = xq2.domain(activeDataset.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
 					        .copy();
-
-							var transition = svgq2.transition().duration(750),
+							var transition = svg.transition().duration(750),
 					             delay = function(d, i) { return i * 50; };
-
 					    transition.selectAll("rect")
 					        .delay(delay)
 					        .attr("x", function(d) { return x0(d[0]); });
-
-							    var transition = svgq2.transition().duration(750),
+						var transition = svg.transition().duration(750),
 					        delay = function(d, i) { return i * 50; };
-
 					    transition.selectAll("text.label")
 					        .delay(delay)
 					        //.attr("x", function(d) { return x0(d[0]) + 50; });
-									.attr("x", function(d, i) {
-										 return x(d[0]) + x.rangeBand() / 2;
-									})
-									.attr("y", function(d) {
-										 return (h - margin.top) - yScale(d[1]) + 14;
-									})
-
+							.attr("x", function(d, i) {
+								 return xq2(d[0]) + xq2.rangeBand() / 2;
+							})
+							.attr("y", function(d) {
+								 return (h - margin.top) - yScale(d[1]) + 14;
+							})
 					    transition.select(".x.axis")
-					        .call(xAxisq2)
+					        .call(xAxis)
 									.selectAll("g")
 									.delay(delay)
 									.selectAll(".tick text")
-									.call(wrap, x.rangeBand());
-
+									.call(wrap, xq2.rangeBand());
 				  }
-
 		</script>
