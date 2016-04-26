@@ -64,16 +64,16 @@
 				    h = 350 - margin.top - margin.bottom;
 				// define global variables so that they are available to all functions
 				// typically, don't use global variables to avoid conflicts, etc.
-				// or want to have multiple SVGs
+				// or want to have multiple svgq3s
 				var formatPercent = d3.format(".0%"),
-						svg,
+						svgq3,
 						xScale,
 						yScale,
-						xAxis,
+						xAxisq3,
 						xq3,
-						yAxis,
+						yAxisq3,
 						yq3,
-						rectG;
+						rectGq3;
 				/*
 				Documentation: Sample Survey Questions
 				DPES11. I develop strong emotions toward people I can rely on
@@ -118,7 +118,7 @@
 					if(document.getElementById(domElement)) {
 						var chartEl = document.getElementById(domElement);
 						//chartEl.parentNode.removeChild(chartEl);
-						$("#"+domElement + " svg").remove();
+						$("#"+domElement + " svgq3").remove();
 					}
 					// define xScale and yScale
 					xScale = d3.scale.ordinal()
@@ -133,10 +133,10 @@
 					yq3 = d3.scale.linear()
 					    .range([h, 0]);
 					// pass to axis to transform into visualization
-					xAxis = d3.svg.axis()
+					xAxisq3 = d3.svgq3.axis()
 					    .scale(xq3)
 					    .orient("bottom");
-					yAxis = d3.svg.axis()
+					yAxisq3 = d3.svgq3.axis()
 					    .scale(yq3)
 					    .orient("left")
 					    .tickFormat(formatPercent);
@@ -149,24 +149,24 @@
 					// and we give that array to x as the domain
 					xq3.domain(data.map(function(d) { return d[0]; }));
 					yq3.domain([0, 1]);
-					// create SVG element
-					svg = d3.select("#" + domElement)
-								.append("svg")
+					// create svgq3 element
+					svgq3 = d3.select("#" + domElement)
+								.append("svgq3")
 								.attr("id", "chart")
 								.attr("width", w)
 								.attr("height", h);
 								//.append("g")
 								//.attr("transform", "translate(" + margin.left + "," + 0 + ")");
 					// append g (group of elements)
-					svg.append("g")
+					svgq3.append("g")
 							.attr("class", "x axis")
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
-							.call(xAxis)
+							.call(xAxisq3)
 							.selectAll(".tick text")
 		 					.call(wrap, xq3.rangeBand());
-					svg.append("g")
+					svgq3.append("g")
 				      .attr("class", "y axis")
-							.call(yAxis)
+							.call(yAxisq3)
 							/*
 							.append("text")
 				      //.attr("transform", "rotate(-90)")
@@ -179,7 +179,7 @@
 				      .text("% Spiritual or Very Spiritual");
 							*/
 					// create rects
-					svg.selectAll("rect")
+					svgq3.selectAll("rect")
 					   .data(data)
 					   .enter()
 					   .append("rect")
@@ -203,10 +203,10 @@
 								return "#5431a3";
 					   });
 				 	// create group wrapper for rectangle text overlays
-				 	rectG = svg.append("g")
+				 	rectGq3 = svgq3.append("g")
 							.attr("class", "rect-text");
 					// create labels
-					rectG.selectAll("text")
+					rectGq3.selectAll("text")
 					   .data(data)
 					   .enter()
 					   .append("text")
@@ -234,7 +234,7 @@
 							//d3.select("#sort_q3").property("checked",false)
 							// on click, update with new data
 							// div.button informs D3 to select the div with the specific class button
-							svg.selectAll("rect")
+							svgq3.selectAll("rect")
 							   .data(data)
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]);
@@ -246,7 +246,7 @@
 									return "#5431a3";
 							   });
 							// update all labels
-							rectG.selectAll("text")
+							rectGq3.selectAll("text")
 							   .data(data)
 							   .text(function(d) {
 									return formatPercent(d[1]);
@@ -270,12 +270,12 @@
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
 					        .copy();
-							var transition = svg.transition().duration(750),
+							var transition = svgq3.transition().duration(750),
 					             delay = function(d, i) { return i * 50; };
 					    transition.selectAll("rect")
 					        .delay(delay)
 					        .attr("x", function(d) { return x0(d[0]); });
-						var transition = svg.transition().duration(750),
+						var transition = svgq3.transition().duration(750),
 					        delay = function(d, i) { return i * 50; };
 					    transition.selectAll("text.label")
 					        .delay(delay)
@@ -287,7 +287,7 @@
 								 return (h - margin.top) - yScale(d[1]) + 14;
 							})
 					    transition.select(".x.axis")
-					        .call(xAxis)
+					        .call(xAxisq3)
 									.selectAll("g")
 									.delay(delay)
 									.selectAll(".tick text")
