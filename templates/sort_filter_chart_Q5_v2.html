@@ -1,5 +1,5 @@
 
-<br/>		
+<br/>
 <h4>Question 5: Percent who consider themself spiritual or very spirtual</h4>
 
 		<p>Click one of four buttons below to activate demographic breakout, then feel free to sort results</p>
@@ -81,9 +81,9 @@
 						xScale,
 						yScale,
 						xAxisq5,
-						x,
+						xq5,
 						yAxisq5,
-						y,
+						yq5,
 						rectGq5;
 
 				/*
@@ -107,11 +107,11 @@
 					// initialize the chart itself
 					build_q5_chart(data, 'q5_chart');
 
-				}, datasetq5);
+				}, datasetq5, 0);
 
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_I10.csv', null, datasetq5);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_I10.csv', null, datasetq5);
-				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_I10.csv', null, datasetq5);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPEDUCAT_I10.csv', null, datasetq5, 1);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_PPINCCAT_I10.csv', null, datasetq5, 2);
+				loadCsv('https://raw.githubusercontent.com/bshurick/w209_project/master/python_d3/zPPREG4_core_par_I10.csv', null, datasetq5, 3);
 
 				console.log(datasetq5);
 
@@ -138,19 +138,19 @@
 									.range([0, h]);
 
 					// create scale
-					x = d3.scale.ordinal()
+					xq5 = d3.scale.ordinal()
 					    .rangeRoundBands([0, w], .1, .1);
 
-					y = d3.scale.linear()
+					yq5 = d3.scale.linear()
 					    .range([h, 0]);
 
 					// pass to axis to transform into visualization
 					xAxisq5 = d3.svg.axis()
-					    .scale(x)
+					    .scale(xq5)
 					    .orient("bottom");
 
 					yAxisq5 = d3.svg.axis()
-					    .scale(y)
+					    .scale(yq5)
 					    .orient("left")
 					    .tickFormat(formatPercent);
 
@@ -162,8 +162,8 @@
 					// data is an array of rows with two columns, and map function result is an array of category values
 					// and we give that array to x as the domain
 
-					x.domain(data.map(function(d) { return d[0]; }));
-					y.domain([0, 1]);
+					xq5.domain(data.map(function(d) { return d[0]; }));
+					yq5.domain([0, 1]);
 
 					// create SVG element
 					svgq5 = d3.select("#" + domElement)
@@ -180,7 +180,7 @@
 							.attr("transform", "translate(0," + (h - margin.top) + ")")
 							.call(xAxisq5)
 							.selectAll(".tick text")
-		 					.call(wrap, x.rangeBand());
+		 					.call(wrap, xq5.rangeBand());
 
 					svgq5.append("g")
 				      .attr("class", "y axis")
@@ -204,15 +204,15 @@
 					   .append("rect")
 					   .attr("x", function(d, i) {
 								// return xScale(i);
-								rectX.push(x(d[0]));
-								return x(d[0]);
+								rectX.push(xq5(d[0]));
+								return xq5(d[0]);
 					   })
 					   .attr("y", function(d) {
 							 	console.log(d);
 								return (h - margin.top) - yScale(d[1]);
 					   })
 					   .attr("width", function(){
-							 rectW = x.rangeBand();
+							 rectW = xq5.rangeBand();
 							 return rectW;
 						 })
 					   .attr("height", function(d) {
@@ -238,7 +238,7 @@
 					   .attr("text-anchor", "middle")
 						 .attr("dx", 1)
 					   .attr("x", function(d, i) {
-								return x(d[0]) + x.rangeBand() / 2;
+								return xq5(d[0]) + xq5.rangeBand() / 2;
 					   })
 					   .attr("y", function(d) {
 							 	return (h - margin.top) - yScale(d[1]) + 14;
@@ -276,7 +276,7 @@
 									return formatPercent(d[1]);
 							   })
 							   .attr("x", function(d, i) {
-									return x(d[0]) + x.rangeBand() / 2;
+									return xq5(d[0]) + xq5.rangeBand() / 2;
 							   })
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]) + 14;
@@ -292,7 +292,7 @@
 				  function change_q5() {
 
 					    clearTimeout(sortTimeoutq5);
-				    	var x0 = x.domain(activeDatasetq5.sort(this.checked
+				    	var x0 = xq5.domain(activeDatasetq5.sort(this.checked
 					        ? function(a, b) { console.log(a, b); return b[1] - a[1]; }
 					        : function(a, b) { return d3.ascending(a[0], b[0]); })
 					        .map(function(d) { return d[0]; }))
@@ -312,7 +312,7 @@
 					        .delay(delay)
 					        //.attr("x", function(d) { return x0(d[0]) + 50; });
 									.attr("x", function(d, i) {
-										 return x(d[0]) + x.rangeBand() / 2;
+										 return xq5(d[0]) + xq5.rangeBand() / 2;
 									})
 									.attr("y", function(d) {
 										 return (h - margin.top) - yScale(d[1]) + 14;
@@ -323,7 +323,7 @@
 									.selectAll("g")
 									.delay(delay)
 									.selectAll(".tick text")
-									.call(wrap, x.rangeBand());
+									.call(wrap, xq5.rangeBand());
 
 				  }
 
