@@ -254,7 +254,7 @@
 							activeDatasetq3 = data;
 							build_q3_chart(data, 'q3_chart');
 							// # means following text is id
-							//d3.select("#sort_q3").property("checked",false)
+							d3.select("#sort_q3").property("checked",false)
 							// on click, update with new data
 							// div.button informs D3 to select the div with the specific class button
 
@@ -282,13 +282,12 @@
 							   .attr("y", function(d) {
 									return (h - margin.top) - yScale(d[1]) + 14;
 							   });
-							d3.select("#sort_q3").each(change);
 					}
 
 					d3.select("#sort_q3").on("change", change_q3);
 
 				  var sortTimeoutq3 = setTimeout(function() {
-				     //d3.select("#sort_q3").property("checked", true).each(change_q3);
+				     d3.select("#sort_q3").property("checked", true).each(change_q3);
 				  }, 2000);
 
 				  function change_q3() {
